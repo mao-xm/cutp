@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/good/Home'
-import my_integral from '@/components/integral/my_integral'
-import in_index from '@/components/integral/in_index'
+import Home from '@/views/good/Home'
+import my_integral from '@/views/integral/my_integral'
+import in_index from '@/views/integral/in_index'
 Vue.use(Router)
 
 export default new Router({

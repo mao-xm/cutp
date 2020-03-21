@@ -13,17 +13,16 @@ module.exports = {
     //为了让后端能够访问到前端的资源，需要配置跨域支持。
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://api.gomai.com',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+         '^/api': ''
         }
-      }
+     }
     },
-
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8081, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

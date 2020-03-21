@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>首页</h1>
-     <router-view></router-view>
+    <router-link :to="{path:'/in_index'}">积分商城</router-link>
+    <router-view></router-view>
   </div>
 </template>
 <script>

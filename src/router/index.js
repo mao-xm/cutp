@@ -4,6 +4,7 @@ import Home from '@/views/good/Home'
 import my_integral from '@/views/integral/my_integral'
 import integral_good from '@/views/integral/integral_good'
 import in_index from '@/views/integral/in_index'
+import soft_pf from '@/views/pf/soft_pf'
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +19,10 @@ export default new Router({
       redirect: '/Home',
       component: Home 
     },
+    {
+      path: '/soft_pf',
+      name: 'soft_pf',
+      component: soft_pf},
     {
       path: '/in_index', 
       name: 'in_index',

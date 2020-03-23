@@ -3,19 +3,19 @@
      <!-- router:是否使用vue_router模式，启动该模式会在激活导航时以index作为path进行路由跳转-->
      <!--style="padding-left:58px;font-size:10px;height:20px;" -->
      <!-- style="width:1150px;float:right;height:20px; -->
-     <img src="../assets/logo.png" width="70px" height="70px" id="img">
+     <img src="../assets/logo.png" width="50px" height="50px" id="img">
      <el-menu
       :default-active="path"
       router
       mode="horizontal"
-      background-color="#E3E4E5"
+      background-color="white"
       text-color="#222"
       active-text-color="red"
       class="el-menu1"
     > 
       <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" class="el-menu2"
        >
-       <span class="ap">{{ item.navItem }}</span>
+       <span class="sp">{{item.navItem}}</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -33,7 +33,7 @@ export default {
           {name: '/in_index', navItem: '积分商城'},
           {name: '/', navItem: '社区'},
           {name: '/', navItem: '个人中心'},
-          {name: '/', navItem: '反馈'}
+          {name: '/soft_pf', navItem: '反馈'}
         ],
        url: '../assets/logo.png',
        path:''
@@ -44,6 +44,7 @@ export default {
 <style>
  #img{
   float:left;
+  margin-left:30px;
 }
 /*#box{
   background-color:#E3E4E5;
@@ -52,13 +53,23 @@ export default {
    background-color: white !important;
 } */
 .el-menu1{
-width:1150px;float:right;height:20px !important;
-}
+float:right;height:30px !important;}
 .el-menu2{
-padding-left:58px;font-size:10px;height:20px !important;
+font-size:10px;height:30px !important;
+line-height:30px !important;width:130px;
+text-align:center;
 }
-.ap{
-  margin-top:-20px;
+/* .el-menu1:hover{
+   color:#dd3035 !important;
+  /color:#dd3035; 
+} */
+.el-menu2:hover{
+  background-color: white !important;
+  /* color:#dd3035; */
 }
 
+
+/* .ap{
+
+}  */
 </style>

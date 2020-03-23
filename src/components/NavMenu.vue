@@ -15,6 +15,7 @@
     > 
       <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" class="el-menu2"
        >
+       <i :class="item.icon"></i>
        <span class="sp">{{item.navItem}}</span>
       </el-menu-item>
     </el-menu>
@@ -25,15 +26,15 @@ export default {
   data () {
       return {
         navList: [
-          {name: '/', navItem: '登录|注册'},
-          {name: '/', navItem: '首页'},
-          {name: '/', navItem: '我的购买'},
-          {name: '/', navItem: '我的卖出'},
-          {name: '/', navItem: '消息'},
-          {name: '/in_index', navItem: '积分商城'},
-          {name: '/', navItem: '社区'},
-          {name: '/', navItem: '个人中心'},
-          {name: '/soft_pf', navItem: '反馈'}
+          {name: '/', navItem: '登录|注册',icon:'iconfont icon-denglu'},
+          {name: '/', navItem: '首页',icon:'iconfont icon-shouye'},
+          {name: '/', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
+          {name: '/', navItem: '我的卖出',icon:'iconfont icon-maichu'},
+          {name: '/', navItem: '消息',icon:'iconfont icon-icon--'},
+          {name: '/in_index', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
+          {name: '/', navItem: '社区',icon:'iconfont icon-shequ'},
+          {name: '/', navItem: '个人中心',icon:'iconfont icon-icon-'},
+          {name: '/soft_pf', navItem: '反馈',icon:'iconfont icon-fankui'}
         ],
        url: '../assets/logo.png',
        path:''

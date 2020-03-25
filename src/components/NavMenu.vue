@@ -46,6 +46,7 @@ export default {
  #img{
   float:left;
   margin-left:30px;
+  
 }
 /*#box{
   background-color:#E3E4E5;
@@ -54,10 +55,10 @@ export default {
    background-color: white !important;
 } */
 .el-menu1{
-float:right;height:30px !important;}
+height:30px !important;float:right;width:1150px;}
 .el-menu2{
 font-size:10px;height:30px !important;
-line-height:30px !important;width:130px;
+line-height:30px !important;width:127px;
 text-align:center;
 }
 /* .el-menu1:hover{
@@ -67,6 +68,12 @@ text-align:center;
 .el-menu2:hover{
   background-color: white !important;
   /* color:#dd3035; */
+}
+#box{
+  float:left;
+  width:100%;
+  height:50px;
+  position:relative;
 }
 
 

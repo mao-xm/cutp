@@ -3,7 +3,7 @@
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
             <el-tab-pane label="已发布宝贝" name="first"><myPublished></myPublished></el-tab-pane>
             <el-tab-pane label="发布" name="second"><publishing></publishing></el-tab-pane>
-            <el-tab-pane label="下架宝贝" name="third">下架宝贝</el-tab-pane>
+            <el-tab-pane label="下架宝贝" name="third"><unshelved></unshelved></el-tab-pane>
        </el-tabs>
     
     </div>

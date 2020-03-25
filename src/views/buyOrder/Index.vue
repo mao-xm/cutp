@@ -8,7 +8,7 @@
       </div>
       <el-tabs v-model="activeName" @tab-click="handleClick" active-text-color="red">
         <el-tab-pane label="全部" name="all">全部</el-tab-pane>
-        <el-tab-pane label="待付款" name="waitPay">待付款</el-tab-pane>
+        <el-tab-pane label="待付款" name="waitPay">待付</el-tab-pane>
         <el-tab-pane label="待发货" name="waitShip">待发货</el-tab-pane>
         <el-tab-pane label="待收货" name="waitReceive">待收货</el-tab-pane>
         <el-tab-pane label="待评价" name="waitEvaluation">待评价</el-tab-pane>

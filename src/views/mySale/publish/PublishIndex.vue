@@ -11,9 +11,10 @@
 <script>
 import myPublished from '@/views/mySale/publish/mypublished/MyPublishedIndex'
 import publishing from '@/views/mySale/publish/publishing/publishingIndex'
+import unshelved from '@/views/mySale/publish/unshelved/unshelvedIndex'
 export default {
     components:{
-        myPublished,publishing
+        myPublished,publishing,unshelved
     }
 }
 </script>

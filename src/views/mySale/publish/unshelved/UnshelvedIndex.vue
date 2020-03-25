@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    
+    name:'unshelved'
 }
 </script>
 <style scoped>

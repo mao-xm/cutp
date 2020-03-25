@@ -10,7 +10,7 @@
       mode="horizontal"
       background-color="white"
       text-color="#222"
-      active-text-color="red"
+      active-text-color="#dd3035"
       class="el-menu1"
     > 
       <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name" class="el-menu2"
@@ -29,7 +29,7 @@ export default {
           {name: '/', navItem: '登录|注册',icon:'iconfont icon-denglu'},
           {name: '/', navItem: '首页',icon:'iconfont icon-shouye'},
           {name: '/', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
-          {name: '/', navItem: '我的卖出',icon:'iconfont icon-maichu'},
+          {name: '/mySale', navItem: '我的卖出',icon:'iconfont icon-maichu'},
           {name: '/', navItem: '消息',icon:'iconfont icon-icon--'},
           {name: '/in_index', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
           {name: '/', navItem: '社区',icon:'iconfont icon-shequ'},

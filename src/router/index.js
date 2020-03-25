@@ -6,6 +6,9 @@ import integral_good from '@/views/integral/integral_good'
 import in_index from '@/views/integral/in_index'
 import soft_pf from '@/views/pf/soft_pf'
 import al_exchange from '@/views/integral/al_exchange'
+import mySale from '@/views/mySale/Index'
+import publishIndex from '@/views/mySale/publish/PublishIndex'
+
 Vue.use(Router)
 
 export default new Router({
@@ -61,8 +64,5 @@ export default new Router({
             path: '/integral_good', 
             name: 'integral_good',
             component: integral_good 
-           }]
-          }
-  ],
-  mode:"history"//把 Vue 中配置的路由从默认的 hash 模式切换为 histroy 模式
-})
+           } ]}
+          ]})

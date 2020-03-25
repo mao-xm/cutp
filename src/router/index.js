@@ -9,7 +9,7 @@ import al_exchange from '@/views/integral/al_exchange'
 import mySale from '@/views/mySale/Index'
 import publishIndex from '@/views/mySale/publish/PublishIndex'
 import buyOrder from '@/views/buyOrder/Index'
-import saleOrderIndex from '@/views/mySale/SaleOrder/Index'
+import saleOrderIndex from '@/views/mySale/saleOrder/Index'
 Vue.use(Router)
 
 export default new Router({

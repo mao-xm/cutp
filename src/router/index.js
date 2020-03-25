@@ -12,6 +12,7 @@ import publishIndex from '@/views/mySale/publish/PublishIndex'
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes: [
     {
       path: '/Home',

@@ -1,13 +1,11 @@
 <template>
   <div id="home">
-    
+   
       <el-carousel :interval="5000" arrow="" height="400px" width="1200px">
         <el-carousel-item v-for="item in picList" :key="item" >
            <img :src="item.idView" class="home-pic">
         </el-carousel-item>
-      </el-carousel>
-    <!-- <router-link :to="{path:'/in_index'}">积分商城</router-link> -->
-    <!-- <router-view></router-view> -->
+      </el-carousel> 
     
   </div>
 </template>

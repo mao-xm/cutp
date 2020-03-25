@@ -67,7 +67,7 @@ export default new Router({
             component: publishIndex 
           },
           {
-            path: '/mySaleleOrderIndex', 
+            path: '/mySale/saleOrderIndex', 
             name: 'saleOrderIndex',
             component: saleOrderIndex 
            }]}

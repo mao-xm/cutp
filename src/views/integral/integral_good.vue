@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="integral-goods">
     <h1>积分商品</h1>
     <div>
        用户id:<input v-model="ca1_id" type="text" placeholder="请输入用户id">
@@ -53,4 +53,8 @@ export default {
 }
 </script>
 <style>
+#integral-goods{
+  position:absolute;
+  left:200px;
+}
 </style>

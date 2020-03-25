@@ -3,28 +3,22 @@
 
         <el-row class="mySale-row">
             <el-col  class="mySale-colone">
-                <el-menu
+                <el-menu router="true"
                     default-active="2"
-                    class="mySale-menu"
-                    @open="handleOpen"
-                    @close="handleClose">
-                
-                    <el-menu-item index="1">
+                    class="mySale-menu">
+                    <el-menu-item index="/mySale/publishIndex">
                         <i class="el-icon-menu"></i>
-                         <router-link to="/mySale/publishIndex" tag="span" > 我的发布</router-link>
+                        <span>我的发布</span>
                     </el-menu-item>
-                    <el-menu-item index="2">
+                    <el-menu-item index="/mySale/saleOrderIndex">
                         <i class="el-icon-document"></i>
-                        <span slot="title">卖出宝贝</span>
+                        <span>卖出宝贝</span>
                     </el-menu-item>
-                
                 </el-menu>
             </el-col>
             <el-col  class="mySale-coltwo">
                 <el-card class="mySale-card">
-                
                    <router-view></router-view>
-            
                 </el-card>
             </el-col>
         </el-row>

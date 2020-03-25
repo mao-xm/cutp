@@ -24,9 +24,10 @@ export default {
     height: 100%;
    
 }
-.el-tabs__item{
-    height:30px;
-    line-height: 30px;
-    font-size:10px
+.el-tabs__item {
+    color: red !important;
+    height:30px !important;
+    line-height: 30px !important;
+    font-size:10px !important;
 }
 </style>

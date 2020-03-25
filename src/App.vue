@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavMenu v-if="aa"></NavMenu>
+    <NavMenu v-if="aa" class="navmenu"></NavMenu>
     <router-view/>
   </div>
 </template>
@@ -14,4 +14,15 @@ export default {
 }}
 </script>
 <style>
+#app{
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.navmenu{
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+
 </style>

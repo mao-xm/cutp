@@ -26,14 +26,14 @@ export default {
   data () {
       return {
         navList: [
-          {name: '/', navItem: '登录|注册',icon:'iconfont icon-denglu'},
-          {name: '/', navItem: '首页',icon:'iconfont icon-shouye'},
-          {name: '/', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
+          {name: '', navItem: '登录|注册',icon:'iconfont icon-denglu'},
+          {name: '/Home', navItem: '首页',icon:'iconfont icon-shouye'},
+          {name: '/buyOrder', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
           {name: '/mySale', navItem: '我的卖出',icon:'iconfont icon-maichu'},
-          {name: '/', navItem: '消息',icon:'iconfont icon-icon--'},
+          {name: '', navItem: '消息',icon:'iconfont icon-icon--'},
           {name: '/in_index', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
-          {name: '/', navItem: '社区',icon:'iconfont icon-shequ'},
-          {name: '/', navItem: '个人中心',icon:'iconfont icon-icon-'},
+          {name: '', navItem: '社区',icon:'iconfont icon-shequ'},
+          {name: '', navItem: '个人中心',icon:'iconfont icon-icon-'},
           {name: '/soft_pf', navItem: '反馈',icon:'iconfont icon-fankui'}
         ],
        url: '../assets/logo.png',
@@ -55,7 +55,7 @@ export default {
    background-color: white !important;
 } */
 .el-menu1{
-height:30px !important;float:right;width:1150px;}
+height:30px !important;float:right;width:1143px;}
 .el-menu2{
 font-size:10px;height:30px !important;
 line-height:30px !important;width:127px;
@@ -68,12 +68,6 @@ text-align:center;
 .el-menu2:hover{
   background-color: white !important;
   /* color:#dd3035; */
-}
-#box{
-  float:left;
-  width:100%;
-  height:50px;
-  position:relative;
 }
 
 

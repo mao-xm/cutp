@@ -8,7 +8,8 @@ import soft_pf from '@/views/pf/soft_pf'
 import al_exchange from '@/views/integral/al_exchange'
 import mySale from '@/views/mySale/Index'
 import publishIndex from '@/views/mySale/publish/PublishIndex'
-
+import buyOrder from '@/views/buyOrder/Index'
+import saleOrderIndex from '@/views/mySale/SaleOrder/Index'
 Vue.use(Router)
 
 export default new Router({
@@ -28,6 +29,10 @@ export default new Router({
       path: '/soft_pf',
       name: 'soft_pf',
       component: soft_pf},
+      {
+        path: '/buyOrder',
+        name: 'buyOrder',
+        component: buyOrder},
     {
       path: '/in_index', 
       name: 'in_index',
@@ -62,8 +67,8 @@ export default new Router({
             component: publishIndex 
           },
           {
-            path: '/integral_good', 
-            name: 'integral_good',
-            component: integral_good 
-           } ]}
+            path: '/mySaleleOrderIndex', 
+            name: 'saleOrderIndex',
+            component: saleOrderIndex 
+           }]}
           ]})

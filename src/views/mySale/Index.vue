@@ -72,7 +72,7 @@ export default {
 }
 .mySale-card{
     width: 96%;
-    height: 450px;
+    height: 550px;
     margin: 20px auto;
 }
 .el-menu{

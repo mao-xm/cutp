@@ -10,6 +10,7 @@ import mySale from '@/views/mySale/Index'
 import publishIndex from '@/views/mySale/publish/PublishIndex'
 import buyOrder from '@/views/buyOrder/Index'
 import saleOrderIndex from '@/views/mySale/saleOrder/Index'
+import test from '@/views/test/UploadTest'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +26,10 @@ export default new Router({
       redirect: '/Home',
       component: Home 
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: test},
     {
       path: '/soft_pf',
       name: 'soft_pf',

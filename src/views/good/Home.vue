@@ -22,6 +22,7 @@ export default {
           {id:4,idView:require('../../assets/goods/toyfive.jpg')}
         ]
         }
+        
    }
 }
 </script>

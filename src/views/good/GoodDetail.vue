@@ -1,6 +1,6 @@
 <template>
     <div id="goodDetail">
-        商品详情页
+        商品详情页!
     </div>
 </template>
 <script>

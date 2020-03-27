@@ -1,5 +1,6 @@
 <template>
     <div id="publishing">
+      
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="商品名称" prop="name">
                 <el-input v-model="ruleForm.name"></el-input>

@@ -1,7 +1,7 @@
 <template>
   <div id="home">
    
-      <el-carousel :interval="5000" arrow="" height="400px" width="1200px">
+      <el-carousel :interval="5000" arrow="" height="400px" width="1100px">
         <el-carousel-item v-for="item in picList" :key="item" >
            <img :src="item.idView" class="home-pic">
         </el-carousel-item>
@@ -15,9 +15,11 @@ export default {
    data () {
       return {
         picList: [
-          {id:0,idView:require('../../assets/goods/house.jpg')},
-          {id:1,idView:require('../../assets/goods/kouhon.png')},
-          {id:2,idView:require('../../assets/goods/dressnew.jpg')}
+          {id:0,idView:require('../../assets/goods/housefour.jpg')},
+          {id:1,idView:require('../../assets/goods/kouhong.jpg')},
+          {id:2,idView:require('../../assets/goods/PcBg1.jpg')},
+          {id:3,idView:require('../../assets/goods/toytwo.jpg')},
+          {id:4,idView:require('../../assets/goods/toyfive.jpg')}
         ]
         }
    }
@@ -27,9 +29,10 @@ export default {
 
 #home{
   height: 500px;
-  width: 1200px;
+  width: 1100px;
   margin-top: 10px;
    position: relative;
+   margin-left: 90px;
 }
 .home-pic{
     /* max-width: 100%;

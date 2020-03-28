@@ -42,6 +42,7 @@ export default new Router({
       path: '/in_index', 
       name: 'in_index',
       component: in_index ,
+      redirect:'my_integral',
       children:[
         {
           path: '/my_integral', 

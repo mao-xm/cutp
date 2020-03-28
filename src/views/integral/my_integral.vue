@@ -9,6 +9,7 @@
         </div>
       </div>
     </el-col> 
+    <div id="total">103887</div>
      </el-row>
    <el-tabs v-model="activeName" @tab-click="handleClick" class="el-t">
     <el-tab-pane label="全部" name="first"><myIntegralFirst></myIntegralFirst></el-tab-pane>
@@ -50,5 +51,13 @@ export default {
   height:1000px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
-
+.demo-avatar demo-basic{
+  float: left;
+}
+#total{
+  float: left;
+}
+.el-col-12{
+  width:54px;
+}
 </style>

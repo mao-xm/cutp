@@ -11,17 +11,25 @@ import publishIndex from '@/views/mySale/publish/PublishIndex'
 import buyOrder from '@/views/buyOrder/Index'
 import saleOrderIndex from '@/views/mySale/saleOrder/Index'
 import test from '@/views/test/UploadTest'
+import generateOrder from '@/views/buyOrder/generateOrder/Index'
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+
     {
       path: '/Home',
       name: 'Home',
       component: Home},
       // 重定向,进入首页默认显示Home组件的内容
+      // 订单生成页
     {
+      path: '/generateOrder', 
+      name: 'generateOrder',
+      component: generateOrder 
+    },
+      {
       path: '/', 
       redirect: '/Home',
       component: Home 

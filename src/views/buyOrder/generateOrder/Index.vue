@@ -11,8 +11,9 @@
                 <el-form :inline="true" :model="order" class="generate-order-address-form">
                     <el-form-item>
                         <el-radio-group v-model="order.uaId" size="medium" fill="#dd3035" text-color="#DD3035" >
-                            <el-radio :label="1" class="generate-order-address-radio">湖南省 衡阳市 雁峰区 黄茶岭街道 衡阳师范学院西校区 （刘家美 收）17347018542</el-radio>
-                            <el-radio :label="2" class="generate-order-address-radio">湖南省 衡阳市 雁峰区 黄茶岭街道 衡阳师范学院西校区 （刘家美 收）17347018542</el-radio>
+                            <el-radio v-for="item in addressList"  :label="item.uaId"  :key="item.uaId" class="generate-order-address-radio">{{item.uaAddress}} （{{item.uaSigner}} 收）{{item.uaPhone}}</el-radio>
+                            <!-- <el-radio :label="1" class="generate-order-address-radio">湖南省 衡阳市 雁峰区 黄茶岭街道 衡阳师范学院西校区 （刘家美 收）17347018542</el-radio>
+                            <el-radio :label="2" class="generate-order-address-radio">湖南省 衡阳市 雁峰区 黄茶岭街道 衡阳师范学院西校区 （刘家美 收）17347018542</el-radio> -->
                         </el-radio-group>
                         <el-button type="danger">新增收货地址</el-button>
                     </el-form-item>
@@ -27,6 +28,7 @@
     </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
     // 订单生成页
     data () {
@@ -39,7 +41,27 @@ export default {
             },
             order: {
                 uaId: ''
-            }
+            },
+            addressList:[],
+            uId:1
+        }
+    },
+    created(){
+        this.getAddressData();
+    },
+    methods : {
+        /**
+         * 获取地址信息
+         */
+        async getAddressData() {
+            myAxios
+                .get(`/order/oAddress/queryUserAddressByUId/${this.uId}`)
+                .then(res => {
+                    console.log(res,'aa')
+                    this.addressList = res
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
         }
     }
 }

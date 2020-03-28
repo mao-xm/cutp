@@ -32,7 +32,7 @@ export default {
     },
     methods: {
       handleClick(tab, event) {
-        console.log(tab, event);
+        //console.log(tab, event);
       }
     },
     components:{
@@ -60,4 +60,14 @@ export default {
 .el-col-12{
   width:54px;
 }
+.el-tabs__item.is-active{
+  color:#dd3035 !important;
+}
+.el-tabs__item:hover{
+  color:#dd3035 !important;
+}
+.el-tabs__active-bar{
+  background-color:#dd3035;
+}
+
 </style>

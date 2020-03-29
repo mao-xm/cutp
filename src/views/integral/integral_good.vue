@@ -4,6 +4,8 @@
         placeholder="请输入内容"
         prefix-icon="el-icon-search"
         v-model="input1"
+        @focus="fo"
+        @blur="bl"
      >
      </el-input>
       <el-button >搜索</el-button>
@@ -24,6 +26,14 @@ export default {
       }
   },
   methods:{
+    fo(){
+      var input=document.getElementsByTagName("input")[0];
+      input.style.cssText="border:1px solid #dd3035"
+    },
+    bl(){
+      var input=document.getElementsByTagName("input")[0];
+      input.style.cssText="border:1px solid #C0C4CC"
+    }
     //test(){
     // this.$axios({
     //     url: "http://api.gomai.com/api/goods/category1/list?ca1_id=1",  // 后台接口
@@ -73,5 +83,15 @@ export default {
 }
 .el-input{
   width:400px;
+  left:250px;
+}
+.el-button:focus, .el-button:hover {
+  color:#dd3035;
+  border-color:#dd3035;
+  background-color: white;
+}
+.el-button{
+  position:relative;
+  left:250px;
 }
 </style>

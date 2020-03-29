@@ -1,6 +1,6 @@
 <template>
     <div id="al_exchange">
-        <h1>已兑换的商品</h1>
+        <h1></h1>
     </div>
 </template>
 <script>

@@ -22,12 +22,13 @@ export default {
 #publishIndex{
     width: 100%;
     height: 100%;
-   
+   padding-bottom: 20px;
 }
-.el-tabs__item {
+ #publishIndex /deep/.el-tabs__item {
     color: red !important;
     height:30px !important;
     line-height: 30px !important;
-    font-size:10px !important;
+    font-size:11px !important;
+
 }
 </style>

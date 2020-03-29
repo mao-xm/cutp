@@ -3,13 +3,13 @@
       
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="商品名称" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+                <el-input placeholder="请输入商品名称" v-model="ruleForm.name" clearable></el-input>
             </el-form-item>
              <el-form-item label="商品详情" prop="detail">
-                <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                <el-input type="textarea" v-model="ruleForm.desc" label-width="100px"></el-input>
             </el-form-item>
              <el-form-item label="商品价格" prop="price">
-                <el-input v-model="input" ></el-input>
+                <el-input v-model="input" label-width="100px"></el-input>
             </el-form-item>     
              <el-form-item label="商品类别" prop="type">
                 <el-cascader :options="options" clearable></el-cascader>
@@ -26,10 +26,11 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
             </el-form-item>  
-            <el-form-item>
+            <el-form-item class="bottom">
                 <el-button type="primary" @click="submitForm('ruleForm')">发布</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
+        
       </el-form>
     </div>
 </template>
@@ -81,5 +82,18 @@ export default {
 }
 </script>
 <style scoped>
-
+#publishing{
+     width: 100%;
+    height: 1200px;
+    margin-bottom: 20px;
+}
+.el-input__inner{
+  width:40% !important;
+}
+.el-textarea__inner {
+  width:40%;
+}
+.bottom{
+  margin-bottom: 20px;
+}
 </style>

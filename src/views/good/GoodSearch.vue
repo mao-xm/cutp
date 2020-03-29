@@ -1,7 +1,5 @@
 <template>
-    <div id="goodDetail">
-        商品详情页!
-        
+    <div id="goodSearch">
     </div>
 </template>
 <script>

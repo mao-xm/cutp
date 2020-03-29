@@ -1,5 +1,6 @@
 <template>
     <div id="goodSearch">
+        商品搜索页
     </div>
 </template>
 <script>

@@ -12,8 +12,6 @@
                     <el-form-item>
                         <el-radio-group v-model="order.uaId" size="medium" fill="#dd3035" text-color="#DD3035" >
                             <el-radio v-for="item in addressList"  :label="item.uaId"  :key="item.uaId" class="generate-order-address-radio">{{item.uaAddress}} （{{item.uaSigner}} 收）{{item.uaPhone}}</el-radio>
-                            <!-- <el-radio :label="1" class="generate-order-address-radio">湖南省 衡阳市 雁峰区 黄茶岭街道 衡阳师范学院西校区 （刘家美 收）17347018542</el-radio>
-                            <el-radio :label="2" class="generate-order-address-radio">湖南省 衡阳市 雁峰区 黄茶岭街道 衡阳师范学院西校区 （刘家美 收）17347018542</el-radio> -->
                         </el-radio-group>
                         <el-button type="danger">新增收货地址</el-button>
                     </el-form-item>
@@ -34,10 +32,7 @@ export default {
     data () {
         return {
             goods: {
-                gId: 1,
-                gName: '鞋子',
-                gPrice: 50,
-                gImg: 'http://117.78.0.140/group1/M00/00/00/wKgAuF59jGaAblVdAACbpOfDso8177.jpg'
+                gId: 1
             },
             order: {
                 uaId: ''
@@ -48,6 +43,7 @@ export default {
     },
     created(){
         this.getAddressData();
+        this.goods = this.$route.query
     },
     methods : {
         /**

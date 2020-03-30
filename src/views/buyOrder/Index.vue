@@ -13,15 +13,50 @@
         <el-tab-pane label="待收货" name="waitReceive">待收货</el-tab-pane>
         <el-tab-pane label="待评价" name="waitEvaluation">待评价</el-tab-pane>
       </el-tabs>
+      <el-button type="danger" @click="verifyGoodsByGId()">提交订单</el-button>
     </el-card>
 
   </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
   data() {
     return {
-      activeName: 'all'
+      activeName: 'all',
+      goods:{
+        gId:1
+      }
+    }
+  },
+  methods:{
+    /**
+     * 获取商品信息
+     */
+    async verifyGoodsByGId() {
+        myAxios
+            .get(`/order/oGoods/verifyGoodsByGId/${this.goods.gId}`)
+            .then(res => {
+                console.log(res,'aa')
+                this.goods = res
+                console.log(this.goods.goodsMedias)
+                if(this.goods.goodsMedias){
+                    console.log(this.goods.goodsMedias)
+                    for (let item of this.goods.goodsMedias) {
+                        console.log(item)
+                        if(item.gmType == 0){
+                            console.log(item)
+                            this.$set(this.goods,'gImg',item.gmUrl)
+                            // this.goods.gImg = item.gmUrl
+                            break
+                        }
+                    }
+                }
+                const query = this.goods
+                this.$router.push({path:'/generateOrder',query})
+            }).catch(err => {
+                console.log(err,'bb');
+                });
     }
   }
 }

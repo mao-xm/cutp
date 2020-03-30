@@ -1,11 +1,16 @@
 <template>
     <div id="myPublished">
-        已发布
+        <publishedInf></publishedInf>
     </div>
 </template>
 <script>
+import publishedInf from '@/views/mySale/publish/mypublished/MyPublishedinf'
+
 export default {
-    name:'myPublished'
+    name:'myPublished',
+     components:{
+        publishedInf
+    }
     
 }
 </script>

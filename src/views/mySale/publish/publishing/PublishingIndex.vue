@@ -91,7 +91,7 @@ export default {
   width:40% !important;
 }
 .el-textarea__inner {
-  width:40%;
+  width:60% !important;
 }
 .bottom{
   margin-bottom: 20px;

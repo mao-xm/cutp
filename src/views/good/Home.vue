@@ -6,7 +6,10 @@
            <img :src="item.idView" class="home-pic">
         </el-carousel-item>
       </el-carousel> 
-    
+    <el-input placeholder="请输入内容"  clearable v-model="goodSearch" >
+      <i slot="prefix" class="el-input__icon el-icon-search" ></i>
+    </el-input>
+    <el-button type="danger" round size="small" class="home-search">搜索</el-button>
   </div>
 </template>
 <script>
@@ -14,6 +17,7 @@ export default {
   name: 'Home',
    data () {
       return {
+        goodSearch:'',
         picList: [
           {id:0,idView:require('../../assets/goods/housefour.jpg')},
           {id:1,idView:require('../../assets/goods/kouhong.jpg')},
@@ -55,5 +59,8 @@ export default {
   
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+  }
+  #home /deep/ .el-input__inner{
+    width: 40% !important;
   }
 </style>

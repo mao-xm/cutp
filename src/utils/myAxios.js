@@ -13,21 +13,21 @@ const service = axios.create({
 service.interceptors.response.use(
   res => {
     console.log(res,'dd')
-    let result = res || null;
+    let result = res.data || null;
     if (!result) {
       return Promise.reject();
     }
-    if (result.status == 200 || result == "") {
+    if (result.code == 0 || result == "") {
       return result.data;
-    } else if (result.status == 401 || result.status == 402 || result.status == 403 || result.status == 10101 || result.status == 10102) {
+    } else if (result.code == -1) {
       v.$notify.error({
         title: '错误',
-        message: result.status+ result.statusText || '请求错误'
+        message: '请求错误'
       });
     } else {
       v.$notify.error({
         title: '错误',
-        message: result.status+ result.statusText || '请求错误'
+        message: result.message || '请求错误'
       });
       return Promise.reject(result);
     }
@@ -36,7 +36,7 @@ service.interceptors.response.use(
     console.log('err' + error) // for debug   
     v.$notify.error({
       title: '错误',
-      message:'请求错误'
+      message: '请求错误'
     });
     console.log("请求错误");
     return Promise.reject(error)

@@ -1,11 +1,17 @@
 <template>
     <div id="unshelved">
-        已下架宝贝
+        <unshelvedInf v-for="item in 2" :key="item"></unshelvedInf>
     </div>
 </template>
 <script>
+import unshelvedInf from '@/views/mySale/publish/unshelved/UnshelvedInf'
+
 export default {
-    name:'unshelved'
+    name:'unshelved',
+     components:{
+        unshelvedInf
+    }
+    
 }
 </script>
 <style scoped>

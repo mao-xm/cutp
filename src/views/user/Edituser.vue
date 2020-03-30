@@ -1,7 +1,7 @@
 <template>
     <div id="edituser">
         <el-card class="edituser-card">
-          哦
+          哦!
         </el-card>
     </div>
 </template>

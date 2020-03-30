@@ -1,6 +1,6 @@
 <template>
     <div>
-        支出
+        <h1>支出</h1>
     </div>
 </template>
 <script>

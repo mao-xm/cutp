@@ -72,7 +72,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 #integral-goods{
   position:absolute;
   left:200px;

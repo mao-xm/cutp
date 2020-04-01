@@ -24,6 +24,7 @@ export default {
 #publishedInf{
     width:70%;
     margin-left: 150px;
+    margin-top: 5px;
 }
 .publishedInf-goods{
     width:100%;

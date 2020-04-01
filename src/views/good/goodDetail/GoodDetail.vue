@@ -41,7 +41,7 @@ export default {
 }
 </script>
 <style scoped>
-#goodDetail-user{
+.goodDetail-user{
     width: 100%;
     height: 40px;
     position: relative;

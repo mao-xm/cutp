@@ -25,6 +25,7 @@ export default {
 #unshelvedInf{
     width:70%;
     margin-left: 150px;
+    margin-top: 5px;
 }
 .unshelvedInf-goods{
     width:100%;

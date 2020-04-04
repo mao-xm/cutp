@@ -13,11 +13,16 @@
       <span id="spa">3737</span>
     </div>
      </el-row>
-   <el-tabs v-model="activeName" @tab-click="handleClick" class="el-t">
+      <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+      <el-tab-pane label="全部" name="first"><myIntegralFirst></myIntegralFirst></el-tab-pane>
+      <el-tab-pane label="收入" name="second"><myIntegralSecond></myIntegralSecond></el-tab-pane>
+      <el-tab-pane label="支出" name="fourth"><myIntegralThird></myIntegralThird></el-tab-pane>
+  </el-tabs>
+   <!-- <el-tabs v-model="activeName" @tab-click="handleClick" class="el-t">
     <el-tab-pane label="全部" name="first"><myIntegralFirst></myIntegralFirst></el-tab-pane>
     <el-tab-pane label="收入" name="second"><myIntegralSecond></myIntegralSecond></el-tab-pane>
     <el-tab-pane label="支出" name="third"><myIntegralThird></myIntegralThird></el-tab-pane>
-  </el-tabs>
+  </el-tabs> -->
   </div>
 </template>
 <script>
@@ -29,7 +34,8 @@ export default {
    data() {
       return {
         activeName: 'first',
-        circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+        circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+
       };
     },
     methods: {
@@ -50,16 +56,21 @@ export default {
   top:70px;
   left:200px;
   width:1000px;
-  height:1000px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .demo-avatar demo-basic{
   float: left;
+  
+}
+.el-col-12{
+  width:80px !important;
+  margin-left:30px !important;
+  margin-top:20px !important;
 }
 #total{
   float: left;
-  margin-left:30px;
-  margin-top:20px;
+  margin-left:10px;
+  margin-top:40px;
 }
 .el-col-12{
   width:54px;
@@ -75,8 +86,10 @@ export default {
 }
 .el-tabs__header{
   top:40px;
+  /* margin-left:200px; */
 }
 .el-tabs__item{
+  
   width:150px;
   text-align: center;
 }

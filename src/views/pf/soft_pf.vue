@@ -5,8 +5,7 @@
        type="textarea"
        :rows="10"
        placeholder="某个功能无法使用、页面无法访问、或其他产品建议(5字以上)"
-       v-model="textarea"
-       @focus="focus">
+       v-model="textarea">  
     </el-input>
     <el-upload
       class="avatar-uploader"
@@ -18,7 +17,7 @@
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>
     <div id="button">
-     <el-button>提交</el-button>
+     <el-button type="danger" round>提交</el-button>
     </div>
   </div>
 </template>
@@ -32,10 +31,6 @@ export default {
      
     },
   methods:{
-    focus(){
-      var aa=document.getElementsByClassName("input")[0];
-      aa.style.cssText="border-color:dd3035;"
-    },
       handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
@@ -98,7 +93,8 @@ export default {
     width:600px;
     margin-left:200px;
   } 
-   #button{
+
+#button{
     width:70px;
     height:40px;
     float:left;
@@ -111,4 +107,16 @@ export default {
   #div1{
     margin-left:200px;
   }
+  .el-button--danger{
+    color:black;
+    background-color: #dd3035;
+    border-color:#dd3035;
+
+  }
+.el-textarea__inner:hover{
+   border-color:#dd3035 !important;
+  } 
+.el-textarea__inner:focus{
+  border-color:#dd3035 !important;
+} 
 </style>

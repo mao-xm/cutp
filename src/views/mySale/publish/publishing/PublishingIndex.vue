@@ -6,18 +6,19 @@
                 <el-input placeholder="请输入商品名称" v-model="ruleForm.name" clearable></el-input>
             </el-form-item>
              <el-form-item label="商品详情" prop="detail">
-                <el-input type="textarea" v-model="ruleForm.desc" label-width="100px"></el-input>
+                <el-input type="textarea" placeholder="请输入商品详情" v-model="ruleForm.detail" label-width="100px"></el-input>
             </el-form-item>
              <el-form-item label="商品价格" prop="price">
-                <el-input v-model="input" label-width="100px"></el-input>
+                <el-input v-model="ruleForm.price" placeholder="请输入商品价格" label-width="100px"></el-input>
             </el-form-item>     
              <el-form-item label="商品类别" prop="type">
-                <el-cascader :options="options" clearable></el-cascader>
+                <el-cascader :options="options" placeholder="请选择商品类别" v-model="ruleForm.type" clearable></el-cascader>
             </el-form-item>   
              <el-form-item label="图片/视频" prop="pic">
                 <el-upload
                   action=" "
                   list-type="picture-card"
+                  v-model="ruleForm.pic"
                   :on-preview="handlePictureCardPreview"
                   :on-remove="handleRemove">
                      <i class="el-icon-plus"></i>
@@ -67,7 +68,7 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            alert('submit!'+ruleForm);
           } else {
             console.log('error submit!!');
             return false;
@@ -85,9 +86,15 @@ export default {
 #publishing{
      width: 100%;
     height: 1200px;
+    margin-top: 45px;
     margin-bottom: 20px;
 }
-.el-input__inner{
+#publishing{
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+.demo-ruleForm /deep/.el-input__inner{
   width:40% !important;
 }
 .el-textarea__inner {
@@ -95,5 +102,9 @@ export default {
 }
 .bottom{
   margin-bottom: 20px;
+}
+.el-button--primary{
+  background-color:#F56C6C;
+  border-color:#F56C6C;
 }
 </style>

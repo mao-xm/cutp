@@ -1,5 +1,5 @@
 <template>
-    <div id="goodSearchInf"  @click="clickGoodInf">
+    <div id="goodSearchInf"  @click="clickGoodInf()">
        <el-card class="goodSearchInf-card">
             <img src="http://www.xinhuanet.com/photo/2020-03/29/1125784084_15854580346431n.jpg" class="goodSearchInf-card-img"/>
             <div class="goodSearchInf-card-name">商品名 </div>
@@ -14,6 +14,9 @@ export default {
         clickGoodInf(){
             console.log("lll");
             alert("拉拉");
+            this.$router.push({name:'goodDetail' });
+            //,params:{typeid}
+           
         }
     },
 }

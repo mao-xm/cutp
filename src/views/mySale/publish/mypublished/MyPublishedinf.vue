@@ -12,6 +12,10 @@
                 </div>
             </div>
          </el-card>
+         <div id="publishedInf-page">
+            <el-pagination background layout="prev, pager, next" :total="100">
+            </el-pagination>
+         </div>
     </div>
 </template>
 <script>
@@ -25,6 +29,9 @@ export default {
     width:70%;
     margin-left: 150px;
     margin-top: 5px;
+}
+.publishedInf-card{
+    float: left;
 }
 .publishedInf-goods{
     width:100%;
@@ -66,5 +73,13 @@ export default {
 }
 .publishedInf-button-check{
     margin-left: 30px;
+}
+#publishedInf-page /deep/.el-pagination.is-background .el-pager li:not(.disabled).active{
+    background-color:#F56C6C;
+}
+#publishedInf-page{
+    position:fixed;/*固定位置*/
+	z-index:99;/*设置优先级显示，保证不会被覆盖*/	
+    right:30px; bottom:30px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div id="myPublished">
-        <publishedInf></publishedInf>
+        <publishedInf v-for="item in 5" :key="item"></publishedInf>
     </div>
 </template>
 <script>

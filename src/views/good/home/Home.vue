@@ -1,11 +1,12 @@
 <template>
   <div id="home">
-   
+      <!-- 轮播图 -->
       <el-carousel :interval="5000" arrow="" height="400px" width="1100px">
         <el-carousel-item v-for="item in picList" :key="item" >
-           <img :src="item.idView" class="home-pic">
+           <img :src="item.idView" class="home-pic" @click="clickHomePic(item.id,item.typeName)">
         </el-carousel-item>
       </el-carousel> 
+      <!-- 商品类别+搜索 -->
       <div id="home-search-goodtype">
           <el-card class="home-search-goodtype-card">
               <el-row class="home-search">
@@ -13,14 +14,17 @@
                           prefix-icon="el-icon-search" 
                           clearable v-model="goodSearchInput"
                           class="home-search-input">
+                          {{goodSearchInput}}
                 </el-input>
-                <el-button type="danger" round size="small" class="home-search-button">搜索</el-button>
+                <el-button type="danger" round size="small" class="home-search-button" 
+                     @click="clickSearchButton(goodSearchInput)">搜索</el-button>
              </el-row>
                 <div id="home-goodtype">
                   <homeTypeInf></homeTypeInf> 
                 </div>
           </el-card>
       </div>
+      <!-- 今日推荐 -->
       <div id="home-daily-recommend">
          <el-card class="home--daily-recommend-card">
             <div id="home-daily-recommend-title">
@@ -30,8 +34,10 @@
             <div id="home-daily-recommend-good">
                 <goodSearchInf v-for="item in 8" :key="item" ></goodSearchInf>
             </div>
+          
          </el-card>
       </div>
+      <!-- 底部 -->
       <div id="home-bottom">
         
       </div>
@@ -44,17 +50,30 @@ export default {
   name: 'Home',
    data () {
       return {
-        goodSearch:'',
+        goodSearchInput:'',
         picList: [
-          {id:0,idView:require('../../../assets/goods/housefour.jpg')},
-          {id:1,idView:require('../../../assets/goods/kouhong.jpg')},
-          {id:2,idView:require('../../../assets/goods/PcBg1.jpg')},
-          {id:3,idView:require('../../../assets/goods/toytwo.jpg')},
-          {id:4,idView:require('../../../assets/goods/toyfive.jpg')}
-        ]
+          {id:11,typeName:"家居",idView:require('../../../assets/goods/housefour.jpg')},
+          {id:8,typeName:"美妆",idView:require('../../../assets/goods/kouhong.jpg')},
+          {id:1,typeName:"女装",idView:require('../../../assets/goods/PcBg1.jpg')},
+          {id:12,typeName:"玩具",idView:require('../../../assets/goods/toytwo.jpg')},
+          {id:14,typeName:"园艺",idView:require('../../../assets/goods/toyfive.jpg')}
+          ]
         }
         
    },
+  methods: {
+    // 点击轮播图跳入按图片类别搜索的结果页面
+        clickHomePic(typeid,typeName){
+            alert("点击轮播图"+typeid,typeName);
+            console.log(typeid);
+             this.$router.push({name:'goodSearch',params:{typeid,typeName}});
+        },
+        clickSearchButton(search){
+           alert("点击搜索"+search);
+           this.$router.push({name:'goodSearch',params:{search}});
+        }
+
+    },
    components:{
        homeTypeInf,goodSearchInf
     }
@@ -144,7 +163,9 @@ export default {
     width: 100%;
     height: 100%;
     margin-top: 20px;
+    /* padding-bottom: 20px; */
 }
+
 #home-bottom{
   /* margin-top: 30px; */
   width: 100%;

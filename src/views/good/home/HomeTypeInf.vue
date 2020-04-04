@@ -12,7 +12,7 @@
 
         <div v-for="(item,i) in typeList" :key="i"  id="homeTypeInf-type">
             <div id="homeTypeInf-type-icon">
-               <i :class="item.icon" id="homeTypeInf-icon"></i>
+               <i :class="item.icon" id="homeTypeInf-icon" @click="clickTypeIcon(item.id,item.typeItem)"></i>
             </div>
             <div id="homeTypeInf-type-name">
                <span class="homeTypeInf-typeName">{{item.typeItem}}</span>
@@ -48,7 +48,17 @@ export default {
             {id:'18',typeItem: '学习用品',icon:'iconfontType icon-shu'}
          ],
       }
-   }
+   },
+   methods: {
+    // 点击轮播图跳入按图片类别搜索的结果页面
+        clickTypeIcon(typeid,typeName){
+            alert("点击类别图标"+typeid+typeName);
+            console.log(typeid);
+             this.$router.push({name:'goodSearch',params:{typeid,typeName}});
+        },
+       
+
+    },
 }
 </script>
 <style scoped>

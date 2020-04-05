@@ -13,7 +13,7 @@
             </div>
          </el-card>
          <div id="publishedInf-page">
-            <el-pagination background layout="prev, pager, next" :total="100">
+            <el-pagination background layout="prev, pager, next" :total="100" page-size="3">
             </el-pagination>
          </div>
     </div>

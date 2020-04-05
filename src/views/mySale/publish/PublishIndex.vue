@@ -34,4 +34,7 @@ export default {
 #publishIndex /deep/.el-tabs__item.is-active{
     color:#dd3035 !important;
 }
+.el-tabs__header{
+    top:0px;
+}
 </style>

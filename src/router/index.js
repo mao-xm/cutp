@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/good/Home'
+import Home from '@/views/good/Home/Home'
 import my_integral from '@/views/integral/my_integral'
 import integral_good from '@/views/integral/integral_good'
 import in_index from '@/views/integral/in_index'
@@ -11,12 +11,18 @@ import publishIndex from '@/views/mySale/publish/PublishIndex'
 import buyOrder from '@/views/buyOrder/Index'
 import saleOrderIndex from '@/views/mySale/saleOrder/Index'
 import test from '@/views/test/UploadTest'
-import generateOrder from '@/views/buyOrder/generateOrder/Index'
+import  goodDetail from '@/views/good/GoodDetail/GoodDetail'
+import goodSearch from '@/views/good/goodSearch/GoodSearch'
+
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path: '/goodDetail',
+      name: 'goodDetail',
+      component: goodDetail},
 
     {
       path: '/Home',
@@ -24,11 +30,11 @@ export default new Router({
       component: Home},
       // 重定向,进入首页默认显示Home组件的内容
       // 订单生成页
-    {
-      path: '/generateOrder', 
-      name: 'generateOrder',
-      component: generateOrder 
-    },
+    // {
+    //   path: '/generateOrder', 
+    //   name: 'generateOrder',
+    //   component: generateOrder 
+    // },
       {
       path: '/', 
       redirect: '/Home',
@@ -46,6 +52,10 @@ export default new Router({
         path: '/buyOrder',
         name: 'buyOrder',
         component: buyOrder},
+        {
+          path: '/goodSearch',
+          name: 'goodSearch',
+          component: goodSearch},
     {
       path: '/in_index', 
       name: 'in_index',
@@ -75,6 +85,11 @@ export default new Router({
       name: 'mySale',
       component: mySale,
       children:[
+        {
+          path: '/', 
+          redirect: '/mySale/publishIndex',
+          component: publishIndex 
+        },
           {
             path: '/mySale/publishIndex', 
             name: 'publishIndex',

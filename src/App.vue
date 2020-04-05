@@ -15,8 +15,8 @@ export default {
 </script>
 <style>
 #app{
-  height: 100%;
-  width: 100%;
+  height:1264px;
+  width:1264px;
   position: relative;
 }
 .navmenu{

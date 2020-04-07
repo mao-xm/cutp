@@ -8,7 +8,7 @@
         @blur="bl"
      >
      </el-input>
-      <el-button >搜索</el-button>
+      <el-button type="danger" round>搜索</el-button>
     <!-- <h1>积分商品</h1>
     <div>
        用户id:<input v-model="ca1_id" type="text" placeholder="请输入用户id">
@@ -72,7 +72,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 #integral-goods{
   position:absolute;
   left:200px;
@@ -85,11 +85,17 @@ export default {
   width:400px;
   left:250px;
 }
-.el-button:focus, .el-button:hover {
+/* .el-button:focus, .el-button:hover {
   color:#dd3035;
   border-color:#dd3035;
   background-color: white;
-}
+} */
+.el-button--danger{
+    color:black;
+    background-color: #dd3035;
+    border-color:#dd3035;
+
+  }
 .el-button{
   position:relative;
   left:250px;

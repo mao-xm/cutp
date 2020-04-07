@@ -7,7 +7,18 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 创建axios实例
 const service = axios.create({
   baseURL: "http://api.gomai.com/api", // api的base_url    
+  // baseURL: "http://localhost:10010/api",
   timeout: 30000 // 请求超时时间
+})
+service.interceptors.request.use(config => {
+  config.headers = {
+    'Content-Type': 'application/json',
+  }
+  return config
+}, error => {
+  // Do something with request error
+  console.log(error) // for debug
+  return Promise.reject(error);
 })
 // respone拦截器
 service.interceptors.response.use(

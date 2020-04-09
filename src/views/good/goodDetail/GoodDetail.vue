@@ -21,12 +21,13 @@
 
             <div class="goodDetail-button">
                  <el-button type="danger" size="small" class="goodDetail-button-talk">联系卖家</el-button>
-                 <el-button type="danger" size="small" class="goodDetail-button-buy"> 立即购买</el-button>
+                 <el-button type="danger" size="small" class="goodDetail-button-buy" @click="verifyGoodsByGId()"> 立即购买</el-button>
             </div>
        </el-card>
     </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
     name: 'goodDetail',
    data () {
@@ -40,9 +41,41 @@ export default {
           {id:1,idView:require('../../../assets/goods/kouhong.jpg')},
           {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
 
-        ]
+        ],
+        goods:{
+            gId:1
         }
-   }
+      }
+   },
+   methods:{
+        /**
+        * 获取商品信息
+        */
+        async verifyGoodsByGId() {
+            myAxios
+                .get(`/order/oGoods/verifyGoodsByGId/${this.goods.gId}`)
+                .then(res => {
+                    console.log(res,'aa')
+                    this.goods = res
+                    console.log(this.goods.goodsMedias)
+                    if(this.goods.goodsMedias){
+                        console.log(this.goods.goodsMedias)
+                        for (let item of this.goods.goodsMedias) {
+                            console.log(item)
+                            if(item.gmType == 0){
+                                console.log(item)
+                                this.$set(this.goods,'gImg',item.gmUrl)
+                                break
+                            }
+                        }
+                    }
+                    const query = this.goods
+                    this.$router.push({path:'/generateOrder',query})
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+        }
+    }
 }
 </script>
 <style scoped>

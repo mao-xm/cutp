@@ -66,7 +66,8 @@ export default {
 }
 .mySale-card{
     width: 96%;
-    height:730px;
+
+    /* height:730px; */
     margin: 20px auto;
 }
 .el-menu{

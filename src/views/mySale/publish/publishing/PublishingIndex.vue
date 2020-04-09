@@ -36,6 +36,8 @@
     </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
+
 export default {
      name:'publishing',
       data() {
@@ -45,8 +47,10 @@ export default {
           detail: '',
           price: '',
           type:'',
-          pic:''
+          pic:'',
+        //  aa:[],
         },
+        options:[],
         rules: {
           name: [
             { required: true, message: '请输入商品名称', trigger: 'blur' },
@@ -77,7 +81,28 @@ export default {
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      }
+      },
+
+      async getAddressData() {
+        var that=this;
+            myAxios
+                 .get(`/goods/category2/findAllGoodsCategry`)
+               // .get('http://localhost:10010/api/goods/category2/findAllGoodsCategry')
+                .then(res => {
+                     //console.log(res)
+                    // var aa=res;
+                    // console.log(aa);
+                     that.options=res;
+                     console.log(that.options);
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+        }
+  
+    
+    },
+    created(){
+          this.getAddressData();
     }
   
 }

@@ -32,9 +32,9 @@ export default {
    data () {
       return {
         picList: [
-          {id:0,idView:require('../../assets/goods/housefour.jpg')},
-          {id:1,idView:require('../../assets/goods/kouhong.jpg')},
-          {id:2,idView:require('../../assets/goods/PcBg1.jpg')}
+        //   {id:0,idView:require('../../assets/goods/housefour.jpg')},
+        //   {id:1,idView:require('../../assets/goods/kouhong.jpg')},
+        //   {id:2,idView:require('../../assets/goods/PcBg1.jpg')}
         ]
         }
    }

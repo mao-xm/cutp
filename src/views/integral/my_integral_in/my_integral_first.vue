@@ -1,7 +1,6 @@
 <template>
     <div id="mif">
         <ul>
-            
             <li v-for="(ie,i) in Ainner" :key="i">
             <inner :gName="ie.gName" :ieChangeIntegral="ie.ieChangeIntegral"
             :reason="ie.reason" :ieCreateTime="ie.ieCreateTime" :url="ie.url"></inner>
@@ -23,7 +22,8 @@
             :page-size="pageSize"
             @current-change="handleCurrentChange" 
             @size-change="handleSizeChange"
-            style="margin:0px auto;" >
+           class="pagination" >
+         
         </el-pagination>
     </div>
    
@@ -74,7 +74,7 @@ export default {
         pageSize: 1,
         currentPage:1,
         total1:4,
-        disp:false
+        disp:true
         }
     },
     watch:{
@@ -82,12 +82,6 @@ export default {
 
     },
      methods:{
-         changedata(){
-            var begin=((this.currentPage-1)*4)*(this.pageSize);
-            var end=(this.currentPage*4)*(this.pageSize);
-            this.Ainner= this.Ainner.slice(begin,end);
-            this.Outter= this.Outter.slice(begin,end);
-         },
         handleCurrentChange:function(cpage){
             console.log(this.$data.total);
             this.$data.Ainner=[
@@ -130,16 +124,8 @@ export default {
          
             var end=(this.$data.currentPage*4)*(this.$data.pageSize);
              
-            this.$data.Ainner= this.Ainner.slice(begin,end);
-            this.$data.Outter= this.$data.Outter.slice(begin,end);
-              console.log( this.$data.Ainner);
-            if(this.$data.Ainner.length==this.$data.total1&(this.$data.Ainner.length/8)!==0){
-               this.$data.disp=true;
-               
-            }
-            else{
-                this.$data.disp=false;
-            }
+             this.$data.Ainner= this.Ainner.slice(begin,end);
+             this.$data.Outter= this.$data.Outter.slice(begin,end);
         },
         handleSizeChange:function(psize){
           this.$data.pageSize = psize;
@@ -164,5 +150,8 @@ export default {
 ul li{
     list-style: none;
     display:inline-block;
+}
+.pagination{
+    margin-left:350px;
 }
 </style>

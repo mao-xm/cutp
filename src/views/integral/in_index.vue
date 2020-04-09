@@ -16,10 +16,6 @@
         <i class="el-icon-menu"></i>
         <span slot="title">积分商品</span>
       </el-menu-item>
-      <el-menu-item index="al_exchange">
-        <i class="el-icon-menu"></i>
-        <span slot="title">已兑换</span>
-      </el-menu-item>
     </el-menu>
     <router-view></router-view> 
 </div>
@@ -35,7 +31,7 @@ export default {
   width:180px;
   float:left;
   border-right:none;
-  top:120px;
+  top:180px;
   position:fixed;
 }
 #integral{

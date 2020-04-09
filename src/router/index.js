@@ -5,7 +5,6 @@ import my_integral from '@/views/integral/my_integral'
 import integral_good from '@/views/integral/integral_good'
 import in_index from '@/views/integral/in_index'
 import soft_pf from '@/views/pf/soft_pf'
-import al_exchange from '@/views/integral/al_exchange'
 import mySale from '@/views/mySale/Index'
 import publishIndex from '@/views/mySale/publish/PublishIndex'
 import buyOrder from '@/views/buyOrder/Index'
@@ -13,6 +12,8 @@ import saleOrderIndex from '@/views/mySale/saleOrder/Index'
 import test from '@/views/test/UploadTest'
 import  goodDetail from '@/views/good/GoodDetail/GoodDetail'
 import goodSearch from '@/views/good/goodSearch/GoodSearch'
+import igDetail from '@/views/integral/integral_good_in/ig_detail'
+import reportPf from '@/views/pf/report_pf'
 
 Vue.use(Router)
 
@@ -23,7 +24,11 @@ export default new Router({
       path: '/goodDetail',
       name: 'goodDetail',
       component: goodDetail},
-
+    {
+      path: '/reportPf',
+      name: 'reportPf',
+      component: reportPf
+    },
     {
       path: '/Home',
       name: 'Home',
@@ -39,6 +44,11 @@ export default new Router({
       path: '/', 
       redirect: '/Home',
       component: Home 
+    },
+    {
+      path: '/igDetail', 
+      name: '/igDetail',
+      component: igDetail
     },
     {
       path: '/test',
@@ -71,11 +81,6 @@ export default new Router({
           path: '/integral_good', 
           name: 'integral_good',
           component: integral_good 
-        },
-        {
-          path: '/al_exchange', 
-          name: 'al_exchange',
-          component: al_exchange 
         }
 
       ]

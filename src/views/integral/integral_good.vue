@@ -9,6 +9,11 @@
      >
      </el-input>
       <el-button type="danger" round>搜索</el-button>
+      <div class="lb">优惠卷：</div>
+      <ul>
+          <li v-for="(ig,i) in igArry" :key="i"><igCard :igName='ig.igName'
+           :igIntegral='ig.igIntegral' :url='ig.url' :igId='ig.igId'></igCard></li>
+      </ul>
     <!-- <h1>积分商品</h1>
     <div>
        用户id:<input v-model="ca1_id" type="text" placeholder="请输入用户id">
@@ -17,12 +22,22 @@
   </div>
 </template>
 <script>
+import igCard from'@/views/integral/integral_good_in/ig_card'
 export default {
   name: 'integral_good.vue',
+  components:{
+    igCard:igCard
+  },
   data(){
     return {
       // ca1_id:''
        input1: '',
+       igArry:[
+         {igId:1,igName:'爱康国宾优惠劵',igIntegral:50,url:'../../../static/ig/yhj.png'},
+         {igName:'天猫超市优惠劵',igIntegral:40,url:'../../../static/ig/yhj.png'},
+         {igName:'淘宝店铺优惠劵',igIntegral:56,url:'../../../static/ig/yhj.png'},
+         {igName:'爱康国宾优惠劵',igIntegral:35,url:'../../../static/ig/yhj.png'}
+       ]
       }
   },
   methods:{
@@ -34,6 +49,8 @@ export default {
       var input=document.getElementsByTagName("input")[0];
       input.style.cssText="border:1px solid #C0C4CC"
     }
+   
+
     //test(){
     // this.$axios({
     //     url: "http://api.gomai.com/api/goods/category1/list?ca1_id=1",  // 后台接口
@@ -73,6 +90,22 @@ export default {
 }
 </script>
 <style scoped>
+.lb{
+  margin-top:30px;
+  margin-left:65px;
+  font-size:20px;
+}
+ul{
+  display:inline-block;
+  position:absolute;
+  top:90px;
+  left:0px;
+
+} 
+ul li{
+    list-style: none;
+    display:inline-block;
+}
 #integral-goods{
   position:absolute;
   left:200px;

@@ -14,6 +14,7 @@ import  goodDetail from '@/views/good/GoodDetail/GoodDetail'
 import goodSearch from '@/views/good/goodSearch/GoodSearch'
 import igDetail from '@/views/integral/integral_good_in/ig_detail'
 import reportPf from '@/views/pf/report_pf'
+import generateOrder from'@/views/buyOrder/generateOrder/Index'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/goodDetail',
       name: 'goodDetail',
       component: goodDetail},
+      {
+      path:'/generateOrder',
+      name: 'generateOrder',
+      component: generateOrder
+      },
     {
       path: '/reportPf',
       name: 'reportPf',

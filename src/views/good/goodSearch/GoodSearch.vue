@@ -10,6 +10,7 @@
                             prefix-icon="el-icon-search" 
                             clearable v-model="goodSearchInput"
                             class="goodSearch-search-input">
+                            {{goodSearchInput}}
                     </el-input>
                     <el-button type="danger" round size="small" class="goodSearch-search-button">搜索</el-button>
                 </el-row>
@@ -26,7 +27,7 @@ export default {
      name: 'goodSearch',
    data () {
         return {
-            goodSearchInput:'',
+            goodSearchInput:this.$route.params.search||this.$route.params.typeName,
         }
    },
     // methods: {

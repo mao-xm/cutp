@@ -32,20 +32,32 @@ export default {
    data () {
       return {
         picList: [
+<<<<<<< HEAD
         //   {id:0,idView:require('../../assets/goods/housefour.jpg')},
         //   {id:1,idView:require('../../assets/goods/kouhong.jpg')},
         //   {id:2,idView:require('../../assets/goods/PcBg1.jpg')}
+=======
+          {id:0,idView:require('../../../assets/goods/housefour.jpg')},
+          {id:1,idView:require('../../../assets/goods/kouhong.jpg')},
+          {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
+>>>>>>> 30eebf3d313d6a531f668876753a49b3794a5ded
         ]
         }
    }
 }
 </script>
 <style scoped>
+.goodDetail-card{
+    width: 90%;
+    margin-left: 60px;
+    margin-top: 30px;
+}
 .goodDetail-user{
     width: 100%;
     height: 40px;
     position: relative;
      vertical-align: middle;
+     margin-left: 30px;
 }
 .goodDetail-user{
     vertical-align:bottom/middle;

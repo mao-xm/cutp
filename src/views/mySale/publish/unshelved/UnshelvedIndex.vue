@@ -1,6 +1,6 @@
 <template>
     <div id="unshelved">
-        <unshelvedInf v-for="item in 2" :key="item"></unshelvedInf>
+        <unshelvedInf v-for="item in 5" :key="item"></unshelvedInf>
     </div>
 </template>
 <script>

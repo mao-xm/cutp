@@ -57,7 +57,8 @@ service.interceptors.response.use(
  */
 export default {
   get(url, params) {
-    return service.get(url, params)
+    console.log(params)
+    return service.get(url, {params:params})
   },
 
   post(url, params) {

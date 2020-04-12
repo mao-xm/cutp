@@ -43,7 +43,7 @@ export default {
 
         ],
         goods:{
-            gId:1
+            gId:3
         }
       }
    },

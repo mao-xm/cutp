@@ -6,58 +6,89 @@
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </div>
-      <el-tabs v-model="activeName" @tab-click="handleClick" active-text-color="red">
-        <el-tab-pane label="全部" name="all">全部</el-tab-pane>
-        <el-tab-pane label="待付款" name="waitPay">待付款</el-tab-pane>
-        <el-tab-pane label="待发货" name="waitShip">待发货</el-tab-pane>
-        <el-tab-pane label="待收货" name="waitReceive">待收货</el-tab-pane>
-        <el-tab-pane label="待评价" name="waitEvaluation">待评价</el-tab-pane>
+      <el-tabs v-model="type" @tab-click="changeTab" active-text-color="red" type="card">
+        <el-tab-pane label="全部" name="0"></el-tab-pane>
+        <el-tab-pane label="待付款" name="1">待付款</el-tab-pane>
+        <el-tab-pane label="待发货" name="2">待发货</el-tab-pane>
+        <el-tab-pane label="待收货" name="3">待收货</el-tab-pane>
+        <el-tab-pane label="待评价" name="4">待评价</el-tab-pane>
+        <div class="buyOrder-card-order-items">
+          <div v-for="item in rows" class="buyOrder-card-order-item">
+              <buyPayOrderItem v-if="item.oStatus == 1" :order="item"></buyPayOrderItem>
+              <buyShipmentsOrderItem v-if="item.oStatus == 2" :order="item"></buyShipmentsOrderItem>
+              <buyReceiveOrderItem v-if="item.oStatus == 3" :order="item"></buyReceiveOrderItem>
+              <buyEvaluationOrderItem v-if="item.oStatus == 4" :order="item"></buyEvaluationOrderItem>
+          </div>
+        </div>
+        <el-pagination
+          small
+          layout="prev, pager, next"
+          @current-change="changePage"
+          @prev-click="changePage"
+          @next-click="changePage"
+          :page-size="pagination.size"
+          :current-page.sync="pagination.currentPage"
+          :total="pagination.total">
+        </el-pagination>
       </el-tabs>
-      <el-button type="danger" @click="verifyGoodsByGId()">提交订单</el-button>
     </el-card>
-
   </div>
 </template>
 <script>
 import myAxios from "@/utils/myAxios";
+import qs from 'qs'
+import buyPayOrderItem from '@/components/order/BuyPayOrderItem'
+import buyShipmentsOrderItem from '@/components/order/BuyShipmentsOrderItem'
+import buyReceiveOrderItem from '@/components/order/BuyReceiveOrderItem'
+import buyEvaluationOrderItem from '@/components/order/BuyEvaluationOrderItem'
 export default {
+  components:{
+    buyPayOrderItem,
+    buyShipmentsOrderItem,
+    buyReceiveOrderItem,
+    buyEvaluationOrderItem
+  },
   data() {
     return {
-      activeName: 'all',
-      goods:{
-        gId:1
+      type: "0",
+      uId:1,
+      rows:{},
+      pagination:{
+        total: 0,
+        size: 1,
+        currentPage:1
       }
     }
   },
+  created(){
+    
+    this.getOrder()
+  },
   methods:{
-    /**
-     * 获取商品信息
-     */
-    async verifyGoodsByGId() {
-        myAxios
-            .get(`/order/oGoods/verifyGoodsByGId/${this.goods.gId}`)
-            .then(res => {
-                console.log(res,'aa')
-                this.goods = res
-                console.log(this.goods.goodsMedias)
-                if(this.goods.goodsMedias){
-                    console.log(this.goods.goodsMedias)
-                    for (let item of this.goods.goodsMedias) {
-                        console.log(item)
-                        if(item.gmType == 0){
-                            console.log(item)
-                            this.$set(this.goods,'gImg',item.gmUrl)
-                            // this.goods.gImg = item.gmUrl
-                            break
-                        }
-                    }
-                }
-                const query = this.goods
-                this.$router.push({path:'/generateOrder',query})
-            }).catch(err => {
-                console.log(err,'bb');
-                });
-    }
+      changePage(value){
+        // this.pagination.currentPage = value
+        this.getOrder()
+      },
+      changeTab(tab, event){
+        console.log(tab, event);
+        this.type = tab.name
+        this.pagination.currentPage=1
+        this.getOrder()
+      },
+      /**
+       * 获取订单信息
+       */
+      async getOrder() {
+          myAxios
+              .get(`/order/order/getOrder/${this.uId}/${this.type}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .then(res => {
+                  console.log(res)
+                  this.rows = res.rows
+                  this.pagination.total = res.total
+              }).catch(err => {
+                  console.log(err,'bb');
+                  });
+      },
   }
 }
 </script>
@@ -90,5 +121,8 @@ export default {
 }
 .el-tabs__item:hover{
   color: red !important;
+}
+.buyOrder-card-order-item{
+  margin-bottom: 20px;
 }
 </style>

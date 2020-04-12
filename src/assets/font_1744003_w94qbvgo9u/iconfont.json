@@ -1,0 +1,16 @@
+{
+  "id": "1744003",
+  "name": "gomai",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13543858",
+      "name": "联系卖家",
+      "font_class": "lianximaijia1",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    }
+  ]
+}

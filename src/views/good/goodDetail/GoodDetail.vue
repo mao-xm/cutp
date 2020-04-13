@@ -18,7 +18,6 @@
                 <div class="goodDetail-goods-price">￥50.20</div>
                 <div class="goodDetail-goods-detail">商品详情</div>
             </div>
-
             <div class="goodDetail-button">
                  <el-button type="danger" size="small" class="goodDetail-button-talk">联系卖家</el-button>
                  <el-button type="danger" size="small" class="goodDetail-button-buy" @click="verifyGoodsByGId()"> 立即购买</el-button>
@@ -43,7 +42,7 @@ export default {
 
         ],
         goods:{
-            gId:3
+            gId:5
         }
       }
    },

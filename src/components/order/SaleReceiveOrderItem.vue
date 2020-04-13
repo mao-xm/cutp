@@ -4,19 +4,41 @@
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="sale-receive-order-item-card-button">
                 <span class="sale-receive-order-item-card-icon iconfont icon-lianximaijia1">联系买家</span>
-                <el-button type="danger" class="order-item-button" round>提醒收货</el-button>
+                <el-button type="danger" class="order-item-button" round @click="remindReceive()">提醒收货</el-button>
             </div>
         </el-card>
     </div>
 </template>
 <script>
 import basicOrderItem from '@/components/order/BasicOrderItem'
+import myAxios from "@/utils/myAxios";
 export default {
     components:{
         basicOrderItem
     },
     created(){
         this.$set(this.order,'isBuy',false)
+    },
+    methods:{
+        async remindReceive(){
+            this.$confirm('确认提醒发货？')
+            .then(_ => {
+                myAxios
+                .post(`/order/order/remindReceive/${this.order.goodsVo.user.uId}/${this.order.oId}/${this.order.oStatus}`)
+                .then(res => {
+                    if(res == true){
+                        this.$notify.success
+                        ({
+                            title: '成功',
+                            message: '提醒收货成功'
+                        });
+                    }
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+            })
+            .catch(_ => {});
+        }
     },
     props: { 
         order: Object

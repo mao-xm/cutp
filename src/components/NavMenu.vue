@@ -26,7 +26,7 @@ export default {
   data () {
       return {
         navList: [
-          {name: '', navItem: '登录|注册',icon:'iconfont icon-denglu'},
+          {name: '/Login', navItem: '登录|注册',icon:'iconfont icon-denglu'},
           {name: '/Home', navItem: '首页',icon:'iconfont icon-shouye'},
           {name: '/buyOrder', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
           {name: '/mySale', navItem: '我的卖出',icon:'iconfont icon-maichu'},

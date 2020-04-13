@@ -16,12 +16,22 @@ import igDetail from '@/views/integral/integral_good_in/ig_detail'
 import reportPf from '@/views/pf/report_pf'
 import generateOrder from'@/views/buyOrder/generateOrder/Index'
 import orderTemp from'@/views/buyOrder/Temp'
+import Login from '@/views/user/Login'
+import Register from '@/views/user/Lr/Register'
 
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login},
+      {
+        path: '/Register',
+        name: 'Register',
+        component: Register},
     {
       path: '/goodDetail',
       name: 'goodDetail',

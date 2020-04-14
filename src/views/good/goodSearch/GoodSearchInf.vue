@@ -1,5 +1,5 @@
 <template>
-    <div id="goodSearchInf"  @click="clickGoodInf()">
+    <div id="goodSearchInf"  @click="clickGoodInf(item.gid)">
        <el-card class="goodSearchInf-card" v-for="item in recommendGoods" :key="item">
             <img :src="item.goodsMedias.gmUrl" class="goodSearchInf-card-img"/>
             <div class="goodSearchInf-card-name">{{item.gName}} </div>

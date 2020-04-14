@@ -162,7 +162,6 @@ export default {
          console.log(res);
          const mediatype={gmType:1,gmUrl:res};
          this.mediaUrl.push(mediatype);
-
          this.ruleForm.goodVid=res;
       },
       handleExceed(files, fileList) {//图片上传超过数量限制

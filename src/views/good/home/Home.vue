@@ -32,9 +32,9 @@
                 今日推荐
             </div>
             <div id="home-daily-recommend-good">
-                <goodSearchInf v-for="item in 8" :key="item" ></goodSearchInf>
+                <goodSearchInf ></goodSearchInf>
             </div>
-          
+        
          </el-card>
       </div>
       <!-- 底部 -->
@@ -55,8 +55,8 @@ export default {
           {id:11,typeName:"家居",idView:require('../../../assets/goods/housefour.jpg')},
           {id:8,typeName:"美妆",idView:require('../../../assets/goods/kouhong.jpg')},
           {id:1,typeName:"女装",idView:require('../../../assets/goods/PcBg1.jpg')},
-          {id:12,typeName:"玩具",idView:require('../../../assets/goods/toytwo.jpg')},
-          {id:14,typeName:"园艺",idView:require('../../../assets/goods/toyfive.jpg')}
+          {id:12,typeName:"玩具",idView:require('../../../assets/goods/toyfive.jpg')},
+          {id:14,typeName:"园艺",idView:require('../../../assets/goods/penzai2.jpg')}
           ]
         }
         
@@ -71,12 +71,27 @@ export default {
         clickSearchButton(search){
            alert("点击搜索"+search);
            this.$router.push({name:'goodSearch',params:{search}});
-        }
+        },
+
+        //    async geRecommendGoods() {//获取推荐商品
+        //   var that=this;
+        //     myAxios
+        //          .get(`/goods/goods/findRecommendGoods`)
+        //        // .get('http://localhost:10010/api/goods/category2/findAllGoodsCategry')
+        //         .then(res => {
+        //              console.log(res);
+        //         }).catch(err => {
+        //             console.log(err,'bb');
+        //             });
+        // }
 
     },
    components:{
        homeTypeInf,goodSearchInf
-    }
+    },
+    //    created(){
+    //       this.geRecommendGoods();
+    // }
 }
 </script>
 <style scoped>
@@ -144,12 +159,13 @@ export default {
   }
   #home-daily-recommend{
     width: 100%;
-    height: 100%;
-    margin-bottom: 50px;
+    height: 135%;
+    margin-bottom: 40px;
   }
   .home--daily-recommend-card{
     width: 100%;
     margin-top: 15px; 
+
   }
   #home-daily-recommend-title{
     width: 100%;
@@ -161,7 +177,7 @@ export default {
   }
 #home-daily-recommend-good{
     width: 100%;
-    height: 100%;
+    height: 560px;
     margin-top: 20px;
     /* padding-bottom: 20px; */
 }

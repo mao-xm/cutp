@@ -4,7 +4,7 @@
             class="avatar-uploader"
             action="http://localhost:8089/upload/image"
             :show-file-list="false"
-            accept="image/*"
+            accept="image/jpeg"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
             <!-- <video v-if="imageUrl" :src="imageUrl" class="avatar" controls="controls"></video> -->

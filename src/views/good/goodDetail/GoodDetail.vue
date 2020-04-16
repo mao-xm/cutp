@@ -2,24 +2,28 @@
     <div id="goodDetail">
        <el-card class="goodDetail-card">
            <el-row class="goodDetail-user">
-                <el-avatar src="http://www.xinhuanet.com/photo/2020-03/29/1125784084_15854580346431n.jpg" class="goodDetail-userphoto"></el-avatar>
-                <span class="goodDetail-username">用户名</span>
+                <el-avatar :src="user.uAvatar" class="goodDetail-userphoto"></el-avatar>
+                <span class="goodDetail-username">{{user.uName}}</span>
                 <el-button type="danger" round size="small" class="goodDetail-usercheck">查看主页</el-button>
           </el-row>
           <el-divider></el-divider>
           <div class="goodDetail-goods">
                 <!-- <img src="http://www.xinhuanet.com/photo/2020-03/29/1125784084_15854580346431n.jpg" class="goodDetail-goods-img"/> -->
                 <el-carousel :interval="5000" arrow=""  class="goodDetail-goods-img">
-                   <el-carousel-item v-for="item in picList" :key="item" >
-                      <img :src="item.idView" class="goodDetail-goods-pic">
+                   <el-carousel-item v-for="item in goodMedia" :key="item" >
+                      <img :src="item.gmUrl" class="goodDetail-goods-pic">
+                    <!-- <iframe :src="item.gmUrl" frameborder='0'
+     allow='autoplay;encrypted-media' allowfullscreen style='width:100%;height:500px;'>
+     </iframe> -->
                    </el-carousel-item>
                 </el-carousel> 
-                <div class="goodDetail-goods-name">商品名</div>
-                <div class="goodDetail-goods-price">￥50.20</div>
-                <div class="goodDetail-goods-detail">商品详情</div>
+                <div class="goodDetail-goods-name">{{gName}}</div>
+                <div class="goodDetail-goods-price">￥{{gPrice}}</div>
+                <div class="goodDetail-goodsdetail-title">商品详情:</div>
+                <div class="goodDetail-goods-detail">&#12288;&#12288;{{gDetail}}</div>
             </div>
             <div class="goodDetail-button">
-                 <el-button type="danger" size="small" class="goodDetail-button-talk">联系卖家</el-button>
+                 <!-- <el-button type="danger" size="small" class="goodDetail-button-talk">联系卖家</el-button> -->
                  <el-button type="danger" size="small" class="goodDetail-button-buy" @click="verifyGoodsByGId()"> 立即购买</el-button>
             </div>
        </el-card>
@@ -31,19 +35,29 @@ export default {
     name: 'goodDetail',
    data () {
       return {
-        picList: [
-        //   {id:0,idView:require('../../assets/goods/housefour.jpg')},
-        //   {id:1,idView:require('../../assets/goods/kouhong.jpg')},
-        //   {id:2,idView:require('../../assets/goods/PcBg1.jpg')}
+        // picList: [
+        // //   {id:0,idView:require('../../assets/goods/housefour.jpg')},
+        // //   {id:1,idView:require('../../assets/goods/kouhong.jpg')},
+        // //   {id:2,idView:require('../../assets/goods/PcBg1.jpg')}
 
-          {id:0,idView:require('../../../assets/goods/housefour.jpg')},
-          {id:1,idView:require('../../../assets/goods/kouhong.jpg')},
-          {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
+        //   {id:0,idView:require('../../../assets/goods/housefour.jpg')},
+        //   {id:1,idView:require('../../../assets/goods/kouhong.jpg')},
+        //   {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
 
-        ],
+        // ],
         goods:{
             gId:5
-        }
+        },
+        user:{
+            uName:'',
+            uId:'',
+            uAvatar:'',
+        },
+        gName:'',
+        gPrice:'',
+        gDetail:'',
+        goodMedia:[],
+        g_id:this.$route.params.g_id,
       }
    },
    methods:{
@@ -73,7 +87,29 @@ export default {
                 }).catch(err => {
                     console.log(err,'bb');
                     });
-        }
+        },
+     //显示商品详情信息
+        async GoodDetails(g_id) {
+            console.log(this.g_id)
+             const params = {  g_id: this.g_id }
+            myAxios
+                .get(`/goods/goods/findGoodsDetail`,params)
+                .then(res => {
+                        console.log(res,'aa')
+                        this. user=res.user,
+                        this.gName=res.gName,
+                        this. gPrice=res.gPrice,
+                        this.gDetail=res.gDetail
+                        this.goodMedia= res.goodsMedias,
+                            console.log(this.goodMedia)
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+        },
+        
+    },
+      created(){
+          this.GoodDetails(this.g_id);
     }
 }
 </script>
@@ -105,14 +141,15 @@ export default {
     width: 100%;
     height: 300px;
     margin-top:20px;
-    margin-left: 130px;
+    margin-left: 140px;
     position: relative;
 }
 .goodDetail-goods-img{
-    width: 40%;
-    height: 100%;
+    width: 35%;
+    height: 120%;
     position: relative;
     float: left;
+    
 }
 .goodDetail-goods-name{
     width: 50%;
@@ -123,16 +160,26 @@ export default {
 }
 .goodDetail-goods-price{
     width: 50%;
-    font-size: 20px;
-    left: 100px;
+    font-size: 25px;
+    left: 70px;
     color: red;
     position: relative;
     float: left;
 }
+.goodDetail-goodsdetail-title{
+    width: 40%;
+    position: relative;
+     left: 50px;
+    float: left;
+     padding-top: 10px;
+      font-size: 20px;
+    font-weight:540;
+}
 .goodDetail-goods-detail{
-      width: 50%;
-      left: 50px;
-      position: relative;
+      width:35%;
+      margin-left: 70px;
+      /* left: 50px;
+      position: relative; */
       float: left;
       padding-top: 10px;
 

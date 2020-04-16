@@ -3,7 +3,7 @@
       <!-- 轮播图 -->
       <el-carousel :interval="5000" arrow="" height="400px" width="1100px">
         <el-carousel-item v-for="item in picList" :key="item" >
-           <img :src="item.idView" class="home-pic" @click="clickHomePic(item.id,item.typeName)">
+           <img :src="item.idView" class="home-pic" @click="clickHomePic(item.id,item.typeName,flag)">
         </el-carousel-item>
       </el-carousel> 
       <!-- 商品类别+搜索 -->
@@ -17,7 +17,7 @@
                           {{goodSearchInput}}
                 </el-input>
                 <el-button type="danger" round size="small" class="home-search-button" 
-                     @click="clickSearchButton(goodSearchInput)">搜索</el-button>
+                     @click="clickSearchButton(goodSearchInput,flag)">搜索</el-button>
              </el-row>
                 <div id="home-goodtype">
                   <homeTypeInf></homeTypeInf> 
@@ -32,7 +32,7 @@
                 今日推荐
             </div>
             <div id="home-daily-recommend-good">
-                <goodSearchInf ></goodSearchInf>
+                <goodSearchInf  v-for="item in recommendGoods" :key="item" :goods="item" ></goodSearchInf>
             </div>
         
          </el-card>
@@ -45,6 +45,7 @@
 </template>
 <script>
 import homeTypeInf from '@/views/good/home/HomeTypeInf'
+import myAxios from "@/utils/myAxios";
 import goodSearchInf from '@/views/good/goodSearch/GoodSearchInf'
 export default {
   name: 'Home',
@@ -57,41 +58,53 @@ export default {
           {id:1,typeName:"女装",idView:require('../../../assets/goods/PcBg1.jpg')},
           {id:12,typeName:"玩具",idView:require('../../../assets/goods/toyfive.jpg')},
           {id:14,typeName:"园艺",idView:require('../../../assets/goods/penzai2.jpg')}
-          ]
-        }
+          ],
+           recommendGoods:[],
+           flag:'two',
+      }
+       
         
    },
   methods: {
     // 点击轮播图跳入按图片类别搜索的结果页面
-        clickHomePic(typeid,typeName){
-            alert("点击轮播图"+typeid,typeName);
-            console.log(typeid);
-             this.$router.push({name:'goodSearch',params:{typeid,typeName}});
+        clickHomePic(typeid,typeName,flag){
+           // alert("点击轮播图"+typeid,typeName);
+            console.log(typeid+flag);
+             this.$router.push({name:'goodSearch',params:{typeid,typeName,flag:'two'}});
+               
         },
-        clickSearchButton(search){
-           alert("点击搜索"+search);
-           this.$router.push({name:'goodSearch',params:{search}});
+        clickSearchButton(search,flag){
+          // alert("点击搜索"+search);
+           this.$router.push({name:'goodSearch',params:{g_detail:search,flag:'one'}});
+           console.log(g_detail+flag);
         },
 
-        //    async geRecommendGoods() {//获取推荐商品
-        //   var that=this;
-        //     myAxios
-        //          .get(`/goods/goods/findRecommendGoods`)
-        //        // .get('http://localhost:10010/api/goods/category2/findAllGoodsCategry')
-        //         .then(res => {
-        //              console.log(res);
-        //         }).catch(err => {
-        //             console.log(err,'bb');
-        //             });
-        // }
+        async geRecommendGoods() {//获取推荐商品
+          var that=this;
+            myAxios
+                 .get(`/goods/goods/findRecommendGoods`)
+               // .get('http://localhost:10010/api/goods/category2/findAllGoodsCategry')
+                .then(res => {
+                    
+                 that.recommendGoods =res;
+                console.log(that.recommendGoods);
+                  
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+        },
+       
+    
 
     },
    components:{
        homeTypeInf,goodSearchInf
     },
-    //    created(){
-    //       this.geRecommendGoods();
-    // }
+
+    created(){
+          this.geRecommendGoods();
+          
+    }
 }
 </script>
 <style scoped>

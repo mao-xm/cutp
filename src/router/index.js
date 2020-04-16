@@ -18,12 +18,26 @@ import generateOrder from'@/views/buyOrder/generateOrder/Index'
 import orderTemp from'@/views/buyOrder/Temp'
 import Login from '@/views/user/Login'
 import Register from '@/views/user/Lr/Register'
-
+import evModel from '@/views/evaluate/evMyev/evModel'
+import myEvModel from '@/views/evaluate/evMyev/myEvModel'
+import mEvDetail from '@/views/evaluate/mEvDetail'
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path: '/mEvDetail',
+      name: 'mEvDetail',
+      component: mEvDetail},
+     {
+      path: '/evModel',
+      name: 'evModel',
+      component: evModel},
+      {
+        path: '/myEvModel',
+        name: 'myEvModel',
+        component: myEvModel},
     {
       path: '/Login',
       name: 'Login',

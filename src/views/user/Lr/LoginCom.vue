@@ -1,6 +1,7 @@
 <template>
    <div id="LoginCom">
        <div id="LoginCom1">
+        
             <img src="../../../assets/Login/tx.jpg" width="100px" height="100px"><br>
             用户名：<input type="text" id="input1"><br>
             密码：<input type="password" id="input2">

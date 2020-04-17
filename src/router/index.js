@@ -21,6 +21,7 @@ import Register from '@/views/user/Lr/Register'
 import evModel from '@/views/evaluate/evMyev/evModel'
 import myEvModel from '@/views/evaluate/evMyev/myEvModel'
 import mEvDetail from '@/views/evaluate/mEvDetail'
+import returnDetail from'@views/buyOrder/ReturnDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -54,6 +55,10 @@ export default new Router({
         path:'/orderTemp',
         name: 'orderTemp',
         component: orderTemp
+        },
+       {path:'/returnDetail',
+        name: 'returnDetail',
+        component: returnDetail
         },
       {
       path:'/generateOrder',

@@ -1,9 +1,9 @@
 <template>
-    <div id="sale-evaluation-order-item">
-        <el-card class="sale-evaluation-order-item-card">
+    <div id="sale-cancel-order-item">
+        <el-card class="sale-cancel-order-item-card">
             <basicOrderItem :order="order"></basicOrderItem>
-            <div class="sale-evaluation-order-item-card-button">
-                <span class="sale-evaluation-order-item-card-icon iconfont icon-lianximaijia1">联系买家</span>
+            <div class="sale-cancel-order-item-card-button">
+                <span class="sale-cancel-order-item-card-icon iconfont icon-lianximaijia1">联系买家</span>
                 <el-button type="danger" class="order-item-button" round @click="sellDelete()">删除订单</el-button>
             </div>
         </el-card>
@@ -15,6 +15,9 @@ import myAxios from "@/utils/myAxios";
 export default {
     components:{
         basicOrderItem
+    },
+    created(){
+        this.$set(this.order,'isBuy',false)
     },
     methods:{
         async sellDelete(){
@@ -36,16 +39,13 @@ export default {
             .catch(_ => {});
         }
     },
-    created(){
-        this.$set(this.order,'isBuy',false)
-    },
     props: { 
         order: Object
     }
 }
 </script>
 <style scoped>
-.sale-evaluation-order-item-card-icon:hover{
+.sale-cancel-order-item-card-icon:hover{
     color: red;
 }
 .order-item-button{
@@ -57,7 +57,7 @@ export default {
     text-align: center !important;
     line-height: 0.3 !important;
 }
-.sale-evaluation-order-item-card-button{
+.sale-cancel-order-item-card-button{
     margin-top: 5px;
 }
 </style>

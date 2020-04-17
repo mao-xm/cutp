@@ -7,6 +7,12 @@
             <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 2">等待卖家发货</span>
             <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 3">等待买家收货</span>
             <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 4">等待买家评价</span>
+            <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 5">交易成功</span>
+            <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 6 && order.oCancelType == 1">买家取消订单</span>
+            <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 6 && order.oCancelType == 2">卖家取消订单</span>
+            <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 6 && order.oCancelType == 3">买家取消订单，已退款</span>
+            <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 6 && order.oCancelType == 4">卖家取消订单，已退款</span>
+            <span class="basic-order-item-buy-user-type" v-if="order.oStatus == 7">退货退款</span>
         </div>
         <div class="basic-order-item-user" v-else>
             <el-avatar class="basic-order-item-sale-user-avatar" :size="size" :src="order.user.uAvatar"></el-avatar>
@@ -15,6 +21,12 @@
             <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 2">等待卖家发货</span>
             <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 3">等待买家收货</span>
             <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 4">等待买家评价</span>
+            <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 5">交易成功</span>
+            <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 6 && order.oCancelType == 1">买家取消订单</span>
+            <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 6 && order.oCancelType == 2">卖家取消订单</span>
+            <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 6 && order.oCancelType == 3">买家取消订单，已退款</span>
+            <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 6 && order.oCancelType == 4">卖家取消订单，已退款</span>
+            <span class="basic-order-item-sale-user-type" v-if="order.oStatus == 7">退货退款处理中...</span>
         </div>
         <div class="basic-order-item-goods">
             <el-image
@@ -63,10 +75,12 @@ export default {
         height: 50px;
     }
     .basic-order-item-buy-user-type{
-        margin-left: 80%;
+        position: absolute;
+        right:  1%
     }
     .basic-order-item-sale-user-type{
-        margin-left: 75%;
+        position: absolute;
+        right:  1%
     }
     .basic-order-item-buy-user-name{
         margin-left: 10px;

@@ -5,7 +5,7 @@
             <div class="buy-shipments-order-item-card-button">
                 <span class="buy-shipments-order-item-card-icon iconfont icon-lianximaijia1">联系卖家</span>
                 <el-button type="danger" class="order-item-button" round @click="remindShipments()">提醒发货</el-button>
-                <el-button type="danger" class="order-item-button" round>我要退款</el-button>
+                <el-button type="danger" class="order-item-button" round @click="cancelOrder()">取消订单</el-button>
             </div>
         </el-card>
     </div>
@@ -34,6 +34,26 @@ export default {
                             title: '成功',
                             message: '提醒发货成功'
                         });
+                    }
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+            })
+            .catch(_ => {});
+        },
+        /**
+         * 取消订单
+         */
+        async cancelOrder(){
+            this.$confirm('确认取消订单？')
+            .then(_ => {
+                myAxios
+                .post(`/order/order/cancelOrder/${this.order.oId}/${this.order.user.uId}/${3}`)
+                .then(res => {
+                    if(res == true){
+                        const query = {type: 8}
+                        console.log(query)
+                        this.$router.push({path:'/orderTemp',query})
                     }
                 }).catch(err => {
                     console.log(err,'bb');

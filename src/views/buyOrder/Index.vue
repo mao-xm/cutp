@@ -18,6 +18,9 @@
               <buyShipmentsOrderItem v-if="item.oStatus == 2" :order="item"></buyShipmentsOrderItem>
               <buyReceiveOrderItem v-if="item.oStatus == 3" :order="item"></buyReceiveOrderItem>
               <buyEvaluationOrderItem v-if="item.oStatus == 4" :order="item"></buyEvaluationOrderItem>
+              <buyCancelItem v-if="item.oStatus == 6" :order="item"></buyCancelItem>
+              <buyReturnOrderItem v-if="item.oStatus == 7" :order="item"></buyReturnOrderItem>
+              <buyAddEvaluationOrderItem v-if="item.oStatus == 5" :order="item"></buyAddEvaluationOrderItem>
           </div>
         </div>
         <el-pagination
@@ -41,12 +44,18 @@ import buyPayOrderItem from '@/components/order/BuyPayOrderItem'
 import buyShipmentsOrderItem from '@/components/order/BuyShipmentsOrderItem'
 import buyReceiveOrderItem from '@/components/order/BuyReceiveOrderItem'
 import buyEvaluationOrderItem from '@/components/order/BuyEvaluationOrderItem'
+import buyCancelItem from '@/components/order/BuyCancelItem'
+import buyReturnOrderItem from '@/components/order/BuyReturnOrderItem'
+import buyAddEvaluationOrderItem from '@/components/order/BuyAddEvaluationOrderItem'
 export default {
   components:{
     buyPayOrderItem,
     buyShipmentsOrderItem,
     buyReceiveOrderItem,
-    buyEvaluationOrderItem
+    buyEvaluationOrderItem,
+    buyCancelItem,
+    buyReturnOrderItem,
+    buyAddEvaluationOrderItem
   },
   data() {
     return {

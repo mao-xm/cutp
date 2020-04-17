@@ -4,7 +4,7 @@
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="sale-shipments-order-item-card-button">
                 <span class="sale-shipments-order-item-card-icon iconfont icon-lianximaijia1">联系买家</span>
-                <el-button type="danger" class="order-item-button" round>取消订单</el-button>
+                <el-button type="danger" class="order-item-button" round  @click="cancelOrder()">取消订单</el-button>
                 <el-button type="danger" class="order-item-button" round @click="shipments()">发货</el-button>
             </div>
         </el-card>
@@ -28,6 +28,26 @@ export default {
                 .then(res => {
                     if(res == true){
                         const query = {type: 1}
+                        console.log(query)
+                        this.$router.push({path:'/orderTemp',query})
+                    }
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+            })
+            .catch(_ => {});
+        },
+                /**
+         * 取消订单
+         */
+        async cancelOrder(){
+            this.$confirm('确认取消订单？')
+            .then(_ => {
+                myAxios
+                .post(`/order/order/cancelOrder/${this.order.oId}/${this.order.goodsVo.user.uId}/${4}`)
+                .then(res => {
+                    if(res == true){
+                        const query = {type: 8}
                         console.log(query)
                         this.$router.push({path:'/orderTemp',query})
                     }

@@ -4,7 +4,7 @@
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="buy-pay-order-item-card-button">
                 <span class="buy-pay-order-item-card-icon iconfont icon-lianximaijia1">联系卖家</span>
-                <el-button type="danger" class="order-item-button" round>取消订单</el-button>
+                <el-button type="danger" class="order-item-button" round @click="cancelOrder()">取消订单</el-button>
                 <el-button type="danger"  @click="goPay()" class="order-item-button" round>付款</el-button>
             </div>
         </el-card>
@@ -37,6 +37,26 @@ export default {
                 }).catch(err => {
                     console.log(err,'bb');
                 });
+        },
+        /**
+         * 取消订单
+         */
+        async cancelOrder(){
+            this.$confirm('确认取消订单？')
+            .then(_ => {
+                myAxios
+                .post(`/order/order/cancelOrder/${this.order.oId}/${this.order.user.uId}/${1}`)
+                .then(res => {
+                    if(res == true){
+                        const query = {type: 6}
+                        console.log(query)
+                        this.$router.push({path:'/orderTemp',query})
+                    }
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+            })
+            .catch(_ => {});
         }
     },
     props: { 

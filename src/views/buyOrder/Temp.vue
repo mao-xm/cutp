@@ -19,6 +19,18 @@ export default {
             this.message = '订单删除成功' 
         }else if(this.type == 5){
             this.message = '订单删除成功' 
+        }else if(this.type == 6 || this.type == 7){
+            this.message = '订单取消成功' 
+        }else if(this.type == 8 || this.type == 9){
+            this.message = '订单取消成功,已成功退款' 
+        }else if(this.type == 10){
+            this.message = '申请退货退款成功' 
+        }else if(this.type == 11){
+            this.message = '同意退款申请已成功，已退款' 
+        }else if(this.type == 12){
+            this.message = '拒绝退款申请已成功' 
+        }else if(this.type == 13){
+            this.message = '撤销退款申请已成功' 
         }
         else{
             this.message = '错误进入' 
@@ -33,9 +45,9 @@ export default {
                     this.count--
                 } else {
                     clearInterval(this.timer)
-                    if(this.type == 1 || this.type == 3 || this.type == 5){
+                    if(this.type == 1 || this.type == 3 || this.type == 5 || this.type == 7 || this.type == 9|| this.type == 11|| this.type == 12){
                         this.$router.push({path:'/mySale/saleOrderIndex'})
-                    } else if(this.type == 2 || this.type == 4){
+                    } else if(this.type == 2 || this.type == 4 || this.type == 6 || this.type == 8|| this.type == 10|| this.type == 13){
                         this.$router.push({path:'/buyOrder'})
                     }
                     else{

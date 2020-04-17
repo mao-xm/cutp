@@ -1,15 +1,7 @@
 <template>
-    <div id="buy-receive-order-item">
-        <el-card class="buy-receive-order-item-card">
-            <basicOrderItem :order="order"></basicOrderItem>
-            <div class="buy-receive-order-item-card-button">
-                <span class="buy-receive-order-item-card-icon iconfont icon-lianximaijia1">联系卖家</span>
-                <el-button type="danger" class="order-item-button" @click="received()" round>确认收货</el-button>
-                <askReturnButton ></askReturnButton>
-                <!-- <el-button type="danger" class="order-item-button" @click="changeVisible(true)" round>我要退款</el-button> -->
-            </div>
-        </el-card>
-        <!-- <el-dialog title="退货退款" :visible.sync="dialogFormVisible" class="buy-receive-order-item-dialog">
+    <div>
+        <el-button type="danger" class="order-item-button" @click="changeVisible(true)" round>我要退款</el-button>
+        <el-dialog title="退货退款" :visible.sync="dialogFormVisible" class="buy-receive-order-item-dialog">
             <el-form :model="orderReturn" :rules="rules" ref="orderReturn" label-width="110px">
                 <el-form-item prop="orReceived" label="退货退款类型">
                       <el-select v-model="orderReturn.orReceived" placeholder="请选择退货退款类型">
@@ -63,12 +55,11 @@
                     <el-button type="danger" @click="askReturn('orderReturn')">去退款</el-button>
                 </el-form-item>
             </el-form>            
-        </el-dialog> -->
+        </el-dialog>
     </div>
 </template>
 <script>
 import basicOrderItem from '@/components/order/BasicOrderItem'
-import askReturnButton from '@/components/order/button/AskReturnButton'
 import myAxios from "@/utils/myAxios";
 export default {
     data(){
@@ -102,8 +93,7 @@ export default {
         }
     },
     components:{
-        basicOrderItem,
-        askReturnButton
+        basicOrderItem
     },
     methods:{
         beforePicUpload(file){//照片只能是jpg/png，大小小于5m

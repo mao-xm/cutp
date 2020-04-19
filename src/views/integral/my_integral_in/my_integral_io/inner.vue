@@ -10,9 +10,11 @@
         <div class="bottom clearfix">
             <span id="tspan3">{{reason}}</span>
             <span id="tspan4">{{ieCreateTime}}</span>
+            
           <!-- <time class="time">{{ currentDate }}</time>
           <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
+        <el-button type="danger" size="small" class="delete">删除</el-button>
       </div>
     </el-card>
   </el-col>
@@ -33,6 +35,10 @@ export default {
   padding-left:0px !important;
 
 } */
+.delete{
+  margin-left:130px;
+  margin-top:10px;
+}
 #tspan1{
     font-size:20px;
 }

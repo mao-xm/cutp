@@ -21,7 +21,8 @@ import Register from '@/views/user/Lr/Register'
 import evModel from '@/views/evaluate/evMyev/evModel'
 import myEvModel from '@/views/evaluate/evMyev/myEvModel'
 import mEvDetail from '@/views/evaluate/mEvDetail'
-import returnDetail from'@views/buyOrder/ReturnDetail'
+import returnDetail from '@/views/buyOrder/ReturnDetail'
+import orderDetail from'@/views/buyOrder/OrderDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -31,6 +32,11 @@ export default new Router({
       path: '/mEvDetail',
       name: 'mEvDetail',
       component: mEvDetail},
+      {
+        path:'/orderDetail',
+        name: 'orderDetail',
+        component: orderDetail
+        },
      {
       path: '/evModel',
       name: 'evModel',

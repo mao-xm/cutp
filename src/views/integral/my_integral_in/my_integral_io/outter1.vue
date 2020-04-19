@@ -1,7 +1,5 @@
 <template>
    <div id="od"> 
-    <el-row>
-  <el-col :span="8" v-for="(o, index) in 1" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px'}">
       <img :src="url" class="image">
       <div style="padding: 14px;">
@@ -10,15 +8,10 @@
         <div class="bottom clearfix">
             <span id="tspan3">{{reason}}</span>
             <span id="tspan4">{{ieCreateTime}}</span>
-            
-          <!-- <time class="time">{{ currentDate }}</time>
-          <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
         <el-button type="danger" size="small" class="delete">删除</el-button>
       </div>
     </el-card>
-  </el-col>
-</el-row>
 </div>
 </template>
 <script>

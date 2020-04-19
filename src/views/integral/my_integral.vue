@@ -29,10 +29,12 @@
 import myIntegralFirst from '@/views/integral/my_integral_in/my_integral_first'
 import myIntegralSecond from '@/views/integral/my_integral_in/my_integral_second'
 import myIntegralThird from '@/views/integral/my_integral_in/my_integral_third'
+import myAxios from "@/utils/myAxios";
 export default {
   name: 'my_integral',
    data() {
       return {
+        uId:2,
         activeName: 'first',
         circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
 
@@ -41,7 +43,21 @@ export default {
     methods: {
       handleClick(tab, event) {
         //console.log(tab, event);
+      },
+    async getIntegral() {
+          myAxios
+              .get(`/integral/IEchangeController/selectByuId/${this.uId}`)
+              .then(res => {
+                  console.log(res)
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
       }
+  },
+    created:function(){
+       
+       this.getIntegral();
     },
     components:{
       myIntegralFirst:myIntegralFirst,

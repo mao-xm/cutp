@@ -32,6 +32,7 @@
 <script>
 import inner from '@/views/integral/my_integral_in/my_integral_io/inner'
 import outter from '@/views/integral/my_integral_in/my_integral_io/outter'
+import myAxios from "@/utils/myAxios";
 export default {
     name:'my_integral_first',
     components:{
@@ -41,19 +42,7 @@ export default {
     data(){
         return{
         Ainner:[
-        {gName:'吹风机1',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-        {gName:'短袖1',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-        {gName:'口红1',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-        {gName:'镜子1',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-        {gName:'吹风机2',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-        {gName:'短袖2',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-        {gName:'口红2',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-        {gName:'镜子2',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-        {gName:'吹风机3',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-        {gName:'短袖3',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-        {gName:'口红3',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'}
-        // {},
-        // {}
+
         ],
         Outter:[
          {igName:'购物津贴1',ieChangeIntegral:'-'+10,reason:'活动扣积分',ieCreateTime:'2018-01-30',url:'../../../../static/ie/hd.jpg'},
@@ -71,6 +60,8 @@ export default {
          
          
         ],
+        type:1,
+        uId:2,
         pageSize: 1,
         currentPage:1,
         total1:4,
@@ -82,6 +73,16 @@ export default {
 
     },
      methods:{
+        async getIe() {
+          myAxios
+              .get(`/integral/IEchangeController/SelectBytype/${this.type}/${this.uId}/${this.pageSize}/${this.currentPage}`)
+              .then(res => {
+                  console.log(res)
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
+      },
         handleCurrentChange:function(cpage){
             console.log(this.$data.total);
             this.$data.Ainner=[
@@ -133,11 +134,12 @@ export default {
         }
       },
       created:function(){
-           this.$data.total1=Math.ceil((this.$data.Ainner.length+this.$data.Outter.length)/8);
-            var begin=((this.$data.currentPage-1)*4)*(this.$data.pageSize);
-            var end=(this.$data.currentPage*4)*(this.$data.pageSize);
-            this.$data.Ainner= this.$data.Ainner.slice(begin,end);
-            this.$data.Outter= this.$data.Outter.slice(begin,end);
+          this.getIe();
+          // this.$data.total1=Math.ceil((this.$data.Ainner.length+this.$data.Outter.length)/8);
+            // var begin=((this.$data.currentPage-1)*4)*(this.$data.pageSize);
+            // var end=(this.$data.currentPage*4)*(this.$data.pageSize);
+            // this.$data.Ainner= this.$data.Ainner.slice(begin,end);
+            // this.$data.Outter= this.$data.Outter.slice(begin,end);
       }
 }
 </script>

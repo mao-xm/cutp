@@ -22,7 +22,8 @@
 </template>
 <script>
 export default {
-  name: 'in_index',
+  name: 'in_index'
+ 
  
 }
 </script>

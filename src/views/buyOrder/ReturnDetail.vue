@@ -35,8 +35,6 @@
 </template>
 <script>
 import myAxios from "@/utils/myAxios";
-import Viewer from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
 export default {
     created(){
         console.log('aa')

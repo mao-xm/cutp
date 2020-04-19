@@ -24,9 +24,16 @@
             </div>
             <div class="goodDetail-button">
                  <!-- <el-button type="danger" size="small" class="goodDetail-button-talk">联系卖家</el-button> -->
+                  <el-button type="danger" size="small" class="goodDetail-button-show" v-if="buttonShow=='one'" @click="checkGoodVideo()"> 商品视频</el-button>
                  <el-button type="danger" size="small" class="goodDetail-button-buy" @click="verifyGoodsByGId()"> 立即购买</el-button>
             </div>
        </el-card>
+
+        <el-dialog title="商品视频" :visible.sync="dialogFormVisible">
+            <video class="goodDetail-video" controls="controls" autoplay="autoplay" >
+                        <source :src="goodVideo" type="video/mp4" />
+                    </video> 
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -45,6 +52,8 @@ export default {
         //   {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
 
         // ],
+        dialogFormVisible: false,
+        buttonShow:'two',
         goods:{
             gId:5
         },
@@ -57,6 +66,7 @@ export default {
         gPrice:'',
         gDetail:'',
         goodMedia:[],
+        goodVideo:'',
         g_id:this.$route.params.g_id,
       }
    },
@@ -100,13 +110,35 @@ export default {
                         this.gName=res.gName,
                         this. gPrice=res.gPrice,
                         this.gDetail=res.gDetail
-                        this.goodMedia= res.goodsMedias,
-                            console.log(this.goodMedia)
+                  
+                        for (let item of res.goodsMedias) {
+                            console.log(item)
+                            if(item.gmType == 0){
+                                console.log("0")
+                                console.log(item)
+                                this.goodMedia.push(item)
+                                this.buttonShow='two'
+                            }else if(item.gmType == 1){
+                                   console.log("1")
+                                   console.log(item)
+                                   this.goodVideo=item.gmUrl
+                                   this.buttonShow='one' 
+                            }else{
+                                this.buttonShow='two'
+                            }
+                        }
+                   
+
+                           
                 }).catch(err => {
                     console.log(err,'bb');
                     });
         },
         
+        checkGoodVideo(){//点击显示商品视频
+            this.dialogFormVisible = true
+
+        }
     },
       created(){
           this.GoodDetails(this.g_id);
@@ -186,6 +218,11 @@ export default {
 }
 .goodDetail-button{
     margin-left: 800px;
+}
+.goodDetail-video{
+    width: 400px;
+    height: 450px;
+    margin-left: 100px;
 }
 .goodDetail-button-buy{
     margin-left:50px;

@@ -210,6 +210,9 @@ export default {
                                   }else{
                                      this.$message.error('发布失败，请重新操作！');
                                   }
+                                  //this.$router.push({path:'/mySale/publishIndex'})
+                                  location. reload()
+                                  // this.$parent.getUnshelvedGoodsByuId(this.user.uId);
                                    // this.order = res
                                 }).catch(err => {
                                     this.$notify.error

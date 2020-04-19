@@ -1,9 +1,9 @@
 <template>
     <div id="publishIndex">
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick" active-text-color="red">
-            <el-tab-pane label="已发布宝贝" name="first"><myPublished></myPublished></el-tab-pane>
+            <el-tab-pane label="已发布宝贝" name="first"><myPublished ref="myPublished"></myPublished></el-tab-pane>
             <el-tab-pane label="发布" name="second"><publishing></publishing></el-tab-pane>
-            <el-tab-pane label="下架宝贝" name="third"><unshelved></unshelved></el-tab-pane>
+            <el-tab-pane label="下架宝贝" name="third"><unshelved ref="unshelved"></unshelved></el-tab-pane>
        </el-tabs>
     
     </div>
@@ -15,9 +15,24 @@ import unshelved from '@/views/mySale/publish/unshelved/unshelvedIndex'
 export default {
     data() {
     return {
-      activeName: 'first'
+      activeName: 'first',
+      u_id:1,
     }
   },
+   methods:{
+       handleClick(value){
+           console.log(value)
+           if(value.name=='first'){
+                console.log("value000")
+                this.$refs.myPublished.getGoodsByuId(this.u_id)
+           }else if(value.name=='third'){
+                console.log("value111")
+               this.$refs.unshelved.getUnshelvedGoodsByuId(this.u_id)
+           }
+            // this.$refs.child.getGoodsByuId(u_id)
+            // this.$refs.child.getUnshelvedGoodsByuId(u_id)
+       }
+   },
     components:{
         myPublished,publishing,unshelved
     }

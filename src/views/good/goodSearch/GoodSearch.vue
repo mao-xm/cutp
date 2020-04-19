@@ -2,22 +2,36 @@
     <div id="goodSearch">
          <el-card class="goodSearch-card">
              <div id="goodSearch-div">
-                <el-row class="goodSearch-search">
+                <!-- <el-row class="goodSearch-search"> -->
                     <!-- <el-input placeholder="请输入搜索内容"  clearable v-model="goodSearchInput">
                         <i slot="prefix" class="el-input__icon el-icon-search" id="goodSearch-search-pic"></i>
                     </el-input> -->
+                <div id='goodSearch-search'>
                     <el-input placeholder="请输入搜索内容" 
                             prefix-icon="el-icon-search" 
-                            clearable v-model="goodSearchInput"
+                            clearable v-model="g_detail"
                             class="goodSearch-search-input">
-                            {{goodSearchInput}}
+                            {{g_detail}}
                     </el-input>
                     <el-button type="danger" round size="small" class="goodSearch-search-button">搜索</el-button>
-                </el-row>
+                </div>
+                <!-- </el-row> -->
                 <div id="goodSearch-Inf">
                     <goodSearchInf v-for="item in goodByType" :key="item" :goods="item"></goodSearchInf>
                 </div>
              </div>
+            <div id="goodSearch-page">
+                <el-pagination
+                    small
+                    layout="prev, pager, next"
+                    @current-change="changePage"
+                    @prev-click="changePage"
+                    @next-click="changePage"
+                    :page-size="pagination.size"
+                    :current-page.sync="pagination.currentPage"
+                    :total="pagination.total">
+                </el-pagination>
+            </div>
          </el-card>
     </div>
 </template>
@@ -28,10 +42,16 @@ export default {
      name: 'goodSearch',
    data () {
         return {
-            goodSearchInput:this.$route.params.g_detail||this.$route.params.typeName,
+            g_detail:this.$route.params.g_detail||this.$route.params.typeName,
             ca1_id:this.$route.params.typeid,
             flag:this.$route.params.flag,
             goodByType:[],
+
+            pagination:{
+                total: 0,
+                size: 4,
+                currentPage:1
+          }
         }
    },
     methods: {
@@ -39,32 +59,44 @@ export default {
         //     console.log("lll");
         //     alert("拉拉");
         // }
+        changePage(value){
+          // this.pagination.currentPage = value
+           if(this.flag=='one'){
+               this.getGoodsByDetail(this.g_detail)
+           }else if(this.flag=='two'){
+               this.getGoodsByType(this.ca1_id)
+          }else{
+               this.$message.error('操作有误，请重新操作！');
+          }
+       },
         async getGoodsByType(ca1_id) {//按类别查询商品
           var that=this;
-           const params = {  ca1_id: this.ca1_id }
-           console.log(params)
+          // const params = {  ca1_id: this.ca1_id }
+          // console.log(params)
             myAxios
-                 .get(`/goods/goods/findGoodsByType`,params)
+                 .get(`/goods/goods/findGoodsByType/${ca1_id}/${this.pagination.size}/${this.pagination.currentPage}`)
                // .get('http://localhost:10010/api/goods/category2/findAllGoodsCategry')
                 .then(res => {
                     
                 console.log(res);
-                  this.goodByType=res;
+                  this.goodByType=res.rows;
+                  this.pagination.total=res.total;
                 }).catch(err => {
                     console.log(err,'bb');
                     });
         },
 
-        async getGoodsByDetail(goodSearchInput) {//按搜索内容查询商品
+        async getGoodsByDetail(g_detail) {//按搜索内容查询商品
            var that=this;
-           const params = { g_detail: this.goodSearchInput }
-           console.log(params)
+        //   const params = { g_detail: this.goodSearchInput }
+         //  console.log(params)
             myAxios
-                 .get(`/goods/goods/findGoodsByDetail`,params)
+                 .get(`/goods/goods/findGoodsByDetail/${g_detail}/${this.pagination.size}/${this.pagination.currentPage}`)
                  .then(res => {
                     
                  console.log(res);
-                 this.goodByType=res;
+                   this.goodByType=res.rows;
+                   this.pagination.total=res.total;
                 }).catch(err => {
                     console.log(err,'bb');
                     });
@@ -74,9 +106,9 @@ created(){
           console.log('flag'+this.flag);
           if(this.flag=='one'){
               console.log("one");
-              console.log(this.goodSearchInput);
-              this.getGoodsByDetail(this.goodSearchInput);
-              console.log(this.goodSearchInput);
+              console.log(this.g_detail);
+              this.getGoodsByDetail(this.g_detail);
+              console.log(this.g_detail);
           }
           else if(this.flag=='two'){
                console.log("two");
@@ -119,11 +151,19 @@ created(){
     height: 37px;
      width: 8%;
   }
+ #goodSearch-page{
+     /* width: 100%; */
+    margin-left: 45%;
+     float: left;
+     position: relative;
+ }
 #goodSearch-Inf{
      margin-top:30px ;
      width: 100%;
+     flex-wrap: wrap ;
   }
   #goodSearch-div{
+      width: 100%;
       margin-bottom: 30px;
   }
 </style>

@@ -3,9 +3,9 @@
         <el-card class="buy-receive-order-item-card">
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="buy-receive-order-item-card-button">
-                <span class="buy-receive-order-item-card-icon iconfont icon-lianximaijia1">联系卖家</span>
+                <orderDetailButton class="order-item-icon" :order="order"></orderDetailButton>
                 <el-button type="danger" class="order-item-button" @click="received()" round>确认收货</el-button>
-                <askReturnButton ></askReturnButton>
+                <askReturnButton class="order-item-button" :order="order"></askReturnButton>
                 <!-- <el-button type="danger" class="order-item-button" @click="changeVisible(true)" round>我要退款</el-button> -->
             </div>
         </el-card>
@@ -69,6 +69,7 @@
 <script>
 import basicOrderItem from '@/components/order/BasicOrderItem'
 import askReturnButton from '@/components/order/button/AskReturnButton'
+import orderDetailButton from '@/components/order/button/OrderDetailButton'
 import myAxios from "@/utils/myAxios";
 export default {
     data(){
@@ -103,7 +104,8 @@ export default {
     },
     components:{
         basicOrderItem,
-        askReturnButton
+        askReturnButton,
+        orderDetailButton
     },
     methods:{
         beforePicUpload(file){//照片只能是jpg/png，大小小于5m
@@ -243,6 +245,11 @@ export default {
 .order-item-button{
     float: right;
     margin-right: 5px;
+    margin-bottom: 10px;
+}
+.order-item-icon{
+    float: left;
+    margin-left: 5px;
 }
 .el-button{
     height: 15px !important;

@@ -3,7 +3,7 @@
         <el-card class="sale-shipments-order-item-card">
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="sale-shipments-order-item-card-button">
-                <span class="sale-shipments-order-item-card-icon iconfont icon-lianximaijia1">联系买家</span>
+                <orderDetailButton class="order-item-icon" :order="order"></orderDetailButton>
                 <el-button type="danger" class="order-item-button" round  @click="cancelOrder()">取消订单</el-button>
                 <el-button type="danger" class="order-item-button" round @click="shipments()">发货</el-button>
             </div>
@@ -13,9 +13,11 @@
 <script>
 import myAxios from "@/utils/myAxios";
 import basicOrderItem from '@/components/order/BasicOrderItem'
+import orderDetailButton from '@/components/order/button/OrderDetailButton'
 export default {
     components:{
-        basicOrderItem
+        basicOrderItem,
+        orderDetailButton
     },
     methods:{
         
@@ -73,6 +75,11 @@ export default {
 .order-item-button{
     float: right;
     margin-right: 5px;
+    margin-bottom: 10px;
+}
+.order-item-icon{
+    float: left;
+    margin-left: 5px;
 }
 .el-button{
     height: 15px !important;

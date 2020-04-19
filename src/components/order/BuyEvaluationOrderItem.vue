@@ -3,8 +3,9 @@
         <el-card class="buy-evaluation-order-item-card">
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="buy-evaluation-order-item-card-button">
-                <span class="buy-evaluation-order-item-card-icon iconfont icon-lianximaijia1">联系卖家</span>
+                <orderDetailButton class="order-item-icon" :order="order"></orderDetailButton>
                 <el-button type="danger" class="order-item-button" round @click="buyDelete()">删除订单</el-button>
+                <askReturnButton class="order-item-button" :order="order"></askReturnButton>
                 <el-button type="danger" class="order-item-button" round >评价</el-button>
             </div>
         </el-card>
@@ -12,10 +13,14 @@
 </template>
 <script>
 import basicOrderItem from '@/components/order/BasicOrderItem'
+import askReturnButton from '@/components/order/button/AskReturnButton'
+import orderDetailButton from '@/components/order/button/OrderDetailButton'
 import myAxios from "@/utils/myAxios";
 export default {
     components:{
-        basicOrderItem
+        basicOrderItem,
+        askReturnButton,
+        orderDetailButton
     },
     created(){
         this.$set(this.order,'isBuy',true)
@@ -52,6 +57,11 @@ export default {
 .order-item-button{
     float: right;
     margin-right: 5px;
+    margin-bottom: 10px;
+}
+.order-item-icon{
+    float: left;
+    margin-left: 5px;
 }
 .el-button{
     height: 15px !important;

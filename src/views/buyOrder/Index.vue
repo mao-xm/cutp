@@ -2,16 +2,16 @@
   <div class="buyOrder">
     <el-card class="buyOrder-card">
       <div class="buyOrder-search">
-        <el-input placeholder="请输入内容" v-model="input3" class="buyOrder-search-input">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-input placeholder="请输入内容" v-model="gName" class="buyOrder-search-input">
+          <el-button slot="append" icon="el-icon-search" @click="searchOrder()"></el-button>
         </el-input>
       </div>
       <el-tabs v-model="type" @tab-click="changeTab" active-text-color="red" type="card">
         <el-tab-pane label="全部" name="0"></el-tab-pane>
-        <el-tab-pane label="待付款" name="1">待付款</el-tab-pane>
-        <el-tab-pane label="待发货" name="2">待发货</el-tab-pane>
-        <el-tab-pane label="待收货" name="3">待收货</el-tab-pane>
-        <el-tab-pane label="待评价" name="4">待评价</el-tab-pane>
+        <el-tab-pane label="待付款" name="1"></el-tab-pane>
+        <el-tab-pane label="待发货" name="2"></el-tab-pane>
+        <el-tab-pane label="待收货" name="3"></el-tab-pane>
+        <el-tab-pane label="待评价" name="4"></el-tab-pane>
         <div class="buyOrder-card-order-items">
           <div v-for="item in rows" class="buyOrder-card-order-item">
               <buyPayOrderItem v-if="item.oStatus == 1" :order="item"></buyPayOrderItem>
@@ -35,6 +35,7 @@
         </el-pagination>
       </el-tabs>
     </el-card>
+    <div class="buyOrder-bottom"></div>
   </div>
 </template>
 <script>
@@ -62,9 +63,11 @@ export default {
       type: "0",
       uId:1,
       rows:{},
+      gName:'',
+      isSearch:false,
       pagination:{
         total: 0,
-        size: 1,
+        size: 2,
         currentPage:1
       }
     }
@@ -83,13 +86,16 @@ export default {
         this.type = tab.name
         this.pagination.currentPage=1
         this.getOrder()
+        this.isSearch = false
       },
       /**
        * 获取订单信息
        */
-      async getOrder() {
+      async searchOrder() {
+        this.isSearch = true
+        if(this.gName == ''){return}
           myAxios
-              .get(`/order/order/getOrder/${this.uId}/${this.type}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .get(`/order/order/searchOrder/${this.uId}/${this.gName}/${this.pagination.size}/${this.pagination.currentPage}/${true}`)
               .then(res => {
                   console.log(res)
                   this.rows = res.rows
@@ -98,6 +104,17 @@ export default {
                   console.log(err,'bb');
                   });
       },
+      async getOrder(){
+          myAxios
+              .get(`/order/order/getOrder/${this.uId}/${this.type}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .then(res => {
+                  console.log(res)
+                  this.rows = res.rows
+                  this.pagination.total = res.total
+              }).catch(err => {
+                  console.log(err,'bb');
+                  });        
+      }
   }
 }
 </script>
@@ -133,5 +150,8 @@ export default {
 }
 .buyOrder-card-order-item{
   margin-bottom: 20px;
+}
+.buyOrder-bottom{
+  height: 20px;
 }
 </style>

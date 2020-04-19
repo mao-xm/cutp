@@ -2,16 +2,16 @@
   <div class="saleOrder">
     <el-card class="saleOrder-card">
       <div class="saleOrder-search">
-        <el-input placeholder="请输入内容" v-model="input3" class="saleOrder-search-input">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-input placeholder="请输入内容" v-model="gName" class="saleOrder-search-input">
+          <el-button slot="append" icon="el-icon-search" @click="searchOrder()"></el-button>
         </el-input>
       </div>
       <el-tabs v-model="type" @tab-click="changeTab" active-text-color="red" type="card">
         <el-tab-pane label="全部" name="0"></el-tab-pane>
-        <el-tab-pane label="待付款" name="1">待付款</el-tab-pane>
-        <el-tab-pane label="待发货" name="2">待发货</el-tab-pane>
-        <el-tab-pane label="待收货" name="3">待收货</el-tab-pane>
-        <el-tab-pane label="待评价" name="4">待评价</el-tab-pane>
+        <el-tab-pane label="待付款" name="1"></el-tab-pane>
+        <el-tab-pane label="待发货" name="2"></el-tab-pane>
+        <el-tab-pane label="待收货" name="3"></el-tab-pane>
+        <el-tab-pane label="待评价" name="4"></el-tab-pane>
         <div class="saleOrder-card-order-items">
           <div v-for="item in rows" class="saleOrder-card-order-item">
               <salePayOrderItem v-if="item.oStatus == 1" :order="item"></salePayOrderItem>
@@ -35,6 +35,7 @@
         </el-pagination>
       </el-tabs>
     </el-card>
+    <div class="saleOrder-bottom"></div>
   </div>
 </template>
 <script>
@@ -61,10 +62,12 @@ export default {
     return {
       type: "0",
       uId:2,
+      isSearch:false,
+      gName:'',
       rows:{},
       pagination:{
         total: 0,
-        size: 1,
+        size: 2,
         currentPage:1
       }
     }
@@ -83,6 +86,23 @@ export default {
         this.type = tab.name
         this.pagination.currentPage=1
         this.getOrder()
+        this.isSearch = false
+      },
+      /**
+       * 获取订单信息
+       */
+      async searchOrder() {
+        this.isSearch = true
+        if(this.gName == ''){return}
+          myAxios
+              .get(`/order/order/searchOrder/${this.uId}/${this.gName}/${this.pagination.size}/${this.pagination.currentPage}/${false}`)
+              .then(res => {
+                  console.log(res)
+                  this.rows = res.rows
+                  this.pagination.total = res.total
+              }).catch(err => {
+                  console.log(err,'bb');
+                  });
       },
       /**
        * 获取订单信息
@@ -133,5 +153,8 @@ export default {
 }
 .saleOrder-card-order-item{
   margin-bottom: 20px;
+}
+.saleOrder-bottom{
+  height: 50px;
 }
 </style>

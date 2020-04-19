@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-button type="danger" class="order-item-button" @click="changeVisible(true)" round>我要退款</el-button>
+        <el-button type="danger" class="ask-return-button" @click="changeVisible(true)" round>我要退款</el-button>
         <el-dialog title="退货退款" :visible.sync="dialogFormVisible" class="buy-receive-order-item-dialog">
             <el-form :model="orderReturn" :rules="rules" ref="orderReturn" label-width="110px">
                 <el-form-item prop="orReceived" label="退货退款类型">
@@ -92,9 +92,6 @@ export default {
             orderReturnMedias: [],
         }
     },
-    components:{
-        basicOrderItem
-    },
     methods:{
         beforePicUpload(file){//照片只能是jpg/png，大小小于5m
          //if (!/^image\/(jpeg|png)$/.test(file.type)) {
@@ -136,6 +133,7 @@ export default {
       },
       handleAvatarSuccess(res, file,fileList) {//返回pic的url
         this.imgs.push(res);
+        console.log('aa')
         const orderReturnMedia = {ormUrl:res,ormType:0}
         this.orderReturnMedias.push(orderReturnMedia)
       },
@@ -199,24 +197,6 @@ export default {
 
                 });
         },
-        async received(){
-            this.$confirm('确认已经收货？')
-            .then(_ => {
-                var param = {uId: this.order.user.uId,oId: this.order.oId, oStatus: this.order.oStatus }
-                myAxios
-                .post(`/order/order/received`,param)
-                .then(res => {
-                    if(res == true){
-                        const query = {type: 2}
-                        console.log(query)
-                        this.$router.push({path:'/orderTemp',query})
-                    }
-                }).catch(err => {
-                    console.log(err,'bb');
-                    });
-            })
-            .catch(_ => {});
-        }
     },
     created(){
         this.$set(this.order,'isBuy',true)
@@ -227,19 +207,9 @@ export default {
 }
 </script>
 <style scoped>
-.buy-receive-order-item-card-icon:hover{
-    color: red;
-}
-.order-item-button{
-    float: right;
-    margin-right: 5px;
-}
 .el-button{
     height: 15px !important;
     text-align: center !important;
     line-height: 0.3 !important;
-}
-.buy-receive-order-item-card-button{
-    margin-top: 5px;
 }
 </style>

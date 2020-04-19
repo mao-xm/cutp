@@ -3,7 +3,7 @@
         <el-card class="sale-pay-order-item-card">
             <basicOrderItem :order="order"></basicOrderItem>
             <div class="sale-pay-order-item-card-button">
-                <span class="sale-pay-order-item-card-icon iconfont icon-lianximaijia1">联系买家</span>
+                <orderDetailButton class="order-item-icon" :order="order"></orderDetailButton>
                 <el-button type="danger" class="order-item-button" round  @click="cancelOrder()">取消订单</el-button>
                 <el-button type="danger" class="order-item-button" round @click="changeVisible()">修改价格</el-button>
             </div>
@@ -23,9 +23,11 @@
 <script>
 import myAxios from "@/utils/myAxios";
 import basicOrderItem from '@/components/order/BasicOrderItem'
+import orderDetailButton from '@/components/order/button/OrderDetailButton'
 export default {
     components:{
-        basicOrderItem
+        basicOrderItem,
+        orderDetailButton
     },
     data(){
         return{
@@ -111,6 +113,11 @@ export default {
 .order-item-button{
     float: right;
     margin-right: 5px;
+    margin-bottom: 10px;
+}
+.order-item-icon{
+    float: left;
+    margin-left: 5px;
 }
 .el-button{
     height: 15px !important;

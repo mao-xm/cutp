@@ -13,7 +13,7 @@
                             class="goodSearch-search-input">
                             {{g_detail}}
                     </el-input>
-                    <el-button type="danger" round size="small" class="goodSearch-search-button">搜索</el-button>
+                    <el-button type="danger" round size="small" class="goodSearch-search-button"  @click="getGoodsByDetail(g_detail)">搜索</el-button>
                 </div>
                 <!-- </el-row> -->
                 <div id="goodSearch-Inf">

@@ -29,7 +29,7 @@ export default {
           
           pagination:{
                 total: 0,
-                size: 1,
+                size: 3,
                 currentPage:1
           }
          }

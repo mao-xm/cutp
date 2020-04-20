@@ -19,6 +19,7 @@
 </template>
   
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
   name:'ig_card',
   props:['igId','igName','igIntegral','url'],
@@ -38,12 +39,13 @@ export default {
 <style scoped>
 #igSpan1{
     font-size:20px;
-    width:80px;
     display:inline-block;
     text-align:center;
+    width:123px;
+    height:27px;
 }
 #igSpan2{
-    margin-left:50px;
+    margin-left:20px;
 }
 #tspan4{
     margin-left:10px;
@@ -67,7 +69,7 @@ export default {
     float: right;
   }
 
-  .image {
+  img {
     width: 210px;
     display: block;
     height:210px;

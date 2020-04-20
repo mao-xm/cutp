@@ -3,12 +3,14 @@
     <el-card :body-style="{ padding: '0px'}">
       <img :src="url" class="image">
       <div style="padding: 14px;">
-        <span id="tspan1">{{igName}}</span>
+        <span id="tspan1">{{gName}}</span>
         <span id="tspan2">{{ieChangeIntegral}}</span>
         <div class="bottom clearfix">
-            <span id="tspan3">{{reason}}</span>
             <span id="tspan4">{{ieCreateTime}}</span>
+          
         </div>
+        <span id="tspan3">{{reason}}</span>
+          
         <el-button type="danger" size="small" class="delete">删除</el-button>
       </div>
     </el-card>
@@ -17,7 +19,7 @@
 <script>
 export default {
     name:'outter',
-    props:['igName','ieChangeIntegral','reason','ieCreateTime','url'],
+    props:['gName','ieChangeIntegral','reason','ieCreateTime','url'],
     // data(){
     //     return {url:require('../../../../assets/ie/cfj.jpg')}
     // }
@@ -43,6 +45,8 @@ export default {
 }
 #od{
     margin-top:30px;
+    width:220px;
+    margin-left:20px;
 }
  .time {
     font-size: 13px;
@@ -62,7 +66,7 @@ export default {
   .image {
     width: 220px;
     display: block;
-    height:210px;
+    height:150px;
   }
 
   .clearfix:before,

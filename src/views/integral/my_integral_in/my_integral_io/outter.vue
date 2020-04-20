@@ -8,12 +8,14 @@
         <span id="tspan1">{{igName}}</span>
         <span id="tspan2">{{ieChangeIntegral}}</span>
         <div class="bottom clearfix">
-            <span id="tspan3">{{reason}}</span>
             <span id="tspan4">{{ieCreateTime}}</span>
+            
             
           <!-- <time class="time">{{ currentDate }}</time>
           <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
+        <span id="tspan3">{{reason}}</span>
+        
         <el-button type="danger" size="small" class="delete">删除</el-button>
       </div>
     </el-card>
@@ -39,10 +41,7 @@ export default {
     font-size:20px;
 }
 #tspan2{
-    margin-left:50px;
-}
-#tspan4{
-    margin-left:10px;
+    margin-left:20px;
 }
 .el-col-8{
     width:220px;
@@ -69,7 +68,7 @@ export default {
   .image {
     width: 220px;
     display: block;
-    height:210px;
+    height:150px;
   }
 
   .clearfix:before,

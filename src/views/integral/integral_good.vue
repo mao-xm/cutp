@@ -8,18 +8,47 @@
         @blur="bl"
      >
      </el-input>
-      <el-button type="danger" round>搜索</el-button>
-      <div class="lb">优惠卷：</div>
+     <el-button type="danger" size="small"  @click="search()">搜索</el-button>
+     <div v-if="a1">
+     
+      <div class="lb">购物劵：</div>
       <ul>
-          <li v-for="(ig,i) in igArry" :key="i"><igCard :igName='ig.igName'
-           :igIntegral='ig.igIntegral' :url='ig.url' :igId='ig.igId'></igCard></li>
+          <li v-for="(ig,i) in igArry" :key="i"><div v-if="ig.igType=='购物券'"><igCard :igName='ig.igName'
+           :igIntegral='ig.igIntegral' :url='ig.igImg' :igId='ig.igId' ></igCard></div>
+         </li>
       </ul>
-    <!-- <h1>积分商品</h1>
-    <div>
-       用户id:<input v-model="ca1_id" type="text" placeholder="请输入用户id">
-      <button v-on:click="test">登录</button>
-    </div> -->
+      <div class="lb">话费：</div>
+      <ul>
+          <li v-for="(ig,i) in igArry" :key="i"><div v-if="ig.igType=='话费'"><igCard :igName='ig.igName'
+           :igIntegral='ig.igIntegral' :url='ig.igImg' :igId='ig.igId' ></igCard></div>
+         </li>
+      </ul>
+      <div class="lb">玩偶：</div>
+      <ul>
+          <li v-for="(ig,i) in igArry" :key="i"><div v-if="ig.igType=='玩偶'"><igCard :igName='ig.igName'
+           :igIntegral='ig.igIntegral' :url='ig.igImg' :igId='ig.igId' ></igCard></div>
+         </li>
+      </ul>
+      </div>
+         <div id="pag" v-if="a2">
+                <ul>
+                    <li v-for="(ig,i) in rows" :key="i"><div><igCard :igName='ig.igName'
+                    :igIntegral='ig.igIntegral' :url='ig.igImg' :igId='ig.igId' ></igCard></div>
+                  </li>
+                </ul>
+                <el-pagination
+                    small
+                    layout="prev, pager, next"
+                    @current-change="changePage"
+                    @prev-click="changePage"
+                    @next-click="changePage"
+                    :page-size="pagination.size"
+                    :current-page.sync="pagination.currentPage"
+                    :total="pagination.total">
+                </el-pagination>
+          </div>
   </div>
+  
 </template>
 <script>
 import igCard from'@/views/integral/integral_good_in/ig_card'
@@ -31,14 +60,17 @@ export default {
   },
   data(){
     return {
-      // ca1_id:''
+       a1:true,
+       a2:false,
        input1: '',
-       igArry:[
-         {igId:1,igName:'爱康国宾优惠劵',igIntegral:50,url:'../../../static/ig/yhj.png'},
-         {igName:'天猫超市优惠劵',igIntegral:40,url:'../../../static/ig/yhj.png'},
-         {igName:'淘宝店铺优惠劵',igIntegral:56,url:'../../../static/ig/yhj.png'},
-         {igName:'爱康国宾优惠劵',igIntegral:35,url:'../../../static/ig/yhj.png'}
-       ]
+       rows:[],
+       igArry:[],
+       pagination:{
+                total: 0,
+                size: 3,
+                currentPage:1
+          }
+         
       }
   },
   methods:{
@@ -50,17 +82,42 @@ export default {
       var input=document.getElementsByTagName("input")[0];
       input.style.cssText="border:1px solid #C0C4CC"
     },
+    changePage(){
+        
+          this.search();
+   
+       },
     async getClass() {
           myAxios
-              .get(`/integral/IEchangeController/SelectBytype/${this.type}/${this.uId}/${this.pageSize}/${this.currentPage}`)
+              .get(`/integral/IGoods/SelectNew`)
               .then(res => {
+                  this.igArry=res;
                   console.log(res)
                   
               }).catch(err => {
                   console.log(err);
                   });
       },
+      async search() {
+          this.a1=false;
+          this.a2=true;
+          myAxios
+              .get(`/integral/IGoods/SelectByigName/${this.input1}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .then(res => {
+                  this.total=res.total;
+                  this.rows=res.rows;
+                  alert(this.total);
+                  alert(this.rows);
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
+      }
 
+  },
+  created:function(){
+    this.getClass();
+   
   }
 }
 </script>
@@ -70,23 +127,22 @@ export default {
   margin-left:65px;
   font-size:20px;
 }
-ul{
+/* ul{
   display:inline-block;
   position:absolute;
   top:90px;
   left:0px;
 
-} 
+} */
 ul li{
     list-style: none;
     display:inline-block;
-}
+} 
 #integral-goods{
   position:absolute;
   left:200px;
   top:70px;
   width:1000px;
-  height:1000px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .el-input{
@@ -99,7 +155,6 @@ ul li{
   background-color: white;
 } */
 .el-button--danger{
-    color:black;
     background-color: #dd3035;
     border-color:#dd3035;
 

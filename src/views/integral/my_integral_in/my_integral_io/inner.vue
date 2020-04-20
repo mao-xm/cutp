@@ -8,12 +8,13 @@
         <span id="tspan1">{{gName}}</span>
         <span id="tspan2">{{ieChangeIntegral}}</span>
         <div class="bottom clearfix">
-            <span id="tspan3">{{reason}}</span>
+            
             <span id="tspan4">{{ieCreateTime}}</span>
             
           <!-- <time class="time">{{ currentDate }}</time>
           <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
+        <span id="tspan3">{{reason}}</span>
         <el-button type="danger" size="small" class="delete">删除</el-button>
       </div>
     </el-card>
@@ -41,9 +42,7 @@ export default {
 }
 #tspan1{
     font-size:20px;
-}
-#tspan2{
-    margin-left:50px;
+    width:100px;
 }
 #tspan4{
     margin-left:10px;
@@ -54,6 +53,8 @@ export default {
 }
 #td{
     margin-top:30px;
+    width:220px;
+    margin-left:20px;
 }
  .time {
     font-size: 13px;
@@ -71,9 +72,9 @@ export default {
   }
 
   .image {
-    width: 220px;
+    width: 210px;
     display: block;
-    height:210px;
+    height:150px;
   }
 
   .clearfix:before,

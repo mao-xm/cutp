@@ -10,19 +10,20 @@
       </div>
     </el-col> 
     <div id="total">
-      <span id="spa">3737</span>
+      <span id="spa">{{uTotalIntegral}}</span>
     </div>
      </el-row>
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="全部" name="first"><myIntegralFirst></myIntegralFirst></el-tab-pane>
-      <el-tab-pane label="收入" name="second"><myIntegralSecond></myIntegralSecond></el-tab-pane>
-      <el-tab-pane label="支出" name="fourth"><myIntegralThird></myIntegralThird></el-tab-pane>
+      <el-tab-pane label="全部" name="2"><myIntegralFirst ></myIntegralFirst></el-tab-pane>
+      <el-tab-pane label="收入" name="1"><myIntegralSecond ref="myIntegralSecond"></myIntegralSecond></el-tab-pane>
+      <el-tab-pane label="支出" name="3"><myIntegralThird></myIntegralThird></el-tab-pane>
   </el-tabs>
    <!-- <el-tabs v-model="activeName" @tab-click="handleClick" class="el-t">
     <el-tab-pane label="全部" name="first"><myIntegralFirst></myIntegralFirst></el-tab-pane>
     <el-tab-pane label="收入" name="second"><myIntegralSecond></myIntegralSecond></el-tab-pane>
     <el-tab-pane label="支出" name="third"><myIntegralThird></myIntegralThird></el-tab-pane>
   </el-tabs> -->
+  <!-- ref="myIntegralFirst" -->
   </div>
 </template>
 <script>
@@ -34,30 +35,36 @@ export default {
   name: 'my_integral',
    data() {
       return {
-        uId:2,
-        activeName: 'first',
+        uId:1,
+        activeName: '2',
         circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-
+        uTotalIntegral:100
       };
     },
     methods: {
-      handleClick(tab, event) {
-        //console.log(tab, event);
+      handleClick(tab, event){
+        var type = tab.name;
+        if(type==1){
+       this.$refs.myIntegralSecond.getIe1();
+       }
       },
-    async getIntegral() {
+      async getIntegral() {
           myAxios
               .get(`/integral/IEchangeController/selectByuId/${this.uId}`)
               .then(res => {
+                this.uTotalIntegral=res.uTotalIntegral;
+                this.circleUrl=res.uAvatar;
                   console.log(res)
                   
               }).catch(err => {
                   console.log(err);
                   });
-      }
-  },
+      }},
+    
     created:function(){
        
        this.getIntegral();
+      
     },
     components:{
       myIntegralFirst:myIntegralFirst,
@@ -70,8 +77,8 @@ export default {
 #my-integral{
   position:absolute;
   top:70px;
-  left:200px;
-  width:1000px;
+  left:250px;
+  width:900px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .demo-avatar demo-basic{
@@ -113,7 +120,7 @@ export default {
   font-size:25px;
 }
 .el-tabs{
-  width:1000px;
+  width:900px;
   /* margin-left:100px; */
 }
 </style>

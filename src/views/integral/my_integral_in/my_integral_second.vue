@@ -2,24 +2,28 @@
    <div>
         <ul>
            <li v-for="(ie,i) in Ainner" :key="i">
-               <inner :gName="ie.gName" :ieChangeIntegral="ie.ieChangeIntegral"
-                :reason="ie.reason" :ieCreateTime="ie.ieCreateTime" :url="ie.url"></inner>
-          </li>
-       </ul>
-       <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total2"
-            :page-size="pageSize"
-            @current-change="handleCurrentChange" 
-            @size-change="handleSizeChange"
-           class="pagination2" >
-         
+       
+        
+         <div v-if="ie.ieType==2"><inner :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
+        reason="购买商品" :ieCreateTime="ie.ieCreateTime|timefilters" :url="ie.goodsVo.goodsMedias.gmUrl"></inner></div>
+        
+        </li>
+        </ul>
+      <el-pagination
+                    small
+                    layout="prev, pager, next"
+                    @current-change="changePage"
+                    @prev-click="changePage"
+                    @next-click="changePage"
+                    :page-size="pagination.size"
+                    :current-page.sync="pagination.currentPage"
+                    :total="pagination.total">
         </el-pagination>
     </div>
 </template>
 <script>
 import inner from '@/views/integral/my_integral_in/my_integral_io/inner'
+import myAxios from "@/utils/myAxios";
 export default {
     name:'my_integral_second',
     components:{
@@ -27,69 +31,57 @@ export default {
     },
       data(){
         return{
+        type:2,
+        uId:1,
         Ainner:[
-        {gName:'吹风机1',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-        {gName:'短袖1',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-        {gName:'口红1',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-        {gName:'镜子1',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-        {gName:'吹风机2',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-        {gName:'短袖2',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-        {gName:'口红2',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-        {gName:'镜子2',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-        {gName:'吹风机3',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-        {gName:'短袖3',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-        {gName:'口红3',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'}
-        // {},
-        // {}
+        
         ],
-        pageSize: 1,
-        currentPage:1,
-        total2:4
+      pagination:{
+                total: 4,
+                size: 6,
+                currentPage:1
+          }
         }
         },
+        filters: {
+            timefilters(val) {
+                if (val == null || val == "") {
+                    return "暂无时间";
+                } else {
+                    let d = new Date(val);   //val为取到的后台时间
+                    let month =
+                    d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
+                    let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+                    let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+                    let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+                    let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+                let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
+                    return times;
+                }
+                }
+            },
      methods:{
-     handleCurrentChange:function(cpage){
-            this.$data.Ainner=[
-                {gName:'吹风机1',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-                {gName:'短袖1',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-                {gName:'口红1',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-                {gName:'镜子1',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-                {gName:'吹风机2',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-                {gName:'短袖2',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-                {gName:'口红2',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-                {gName:'镜子2',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-                {gName:'吹风机3',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-                {gName:'短袖3',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-                {gName:'口红3',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-                {gName:'镜子3',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-                {gName:'吹风机4',ieChangeIntegral:'+'+100,reason:'购物送积分',ieCreateTime:'2018-06-30',url:'../../../../static/ie/cfj.jpg'},
-                {gName:'短袖4',ieChangeIntegral:'+'+40,reason:'购物送积分',ieCreateTime:'2019-03-08',url:'../../../../static/ie/dx.jpg'},
-                {gName:'口红4',ieChangeIntegral:'+'+60,reason:'购物送积分',ieCreateTime:'2019-09-23',url:'../../../../static/ie/kh.jpg'},
-                {gName:'镜子4',ieChangeIntegral:'+'+80,reason:'购物送积分',ieCreateTime:'2019-02-16',url:'../../../../static/ie/jz.jpg'},
-                ]
-            this.$data.currentPage=cpage;
-            
-            var begin=((this.$data.currentPage-1)*8)*(this.$data.pageSize);
-         
-            var end=(this.$data.currentPage*8)*(this.$data.pageSize);
-             
-             this.$data.Ainner= this.Ainner.slice(begin,end);
-        // {},
-        // {}
-        }, 
-        handleSizeChange:function(psize){
-          this.$data.pageSize = psize;
-          //this.$options.methods.chandedata();
-        }
-},
-      created:function(){
-           this.$data.total2=Math.ceil((this.$data.Ainner.length)/8);
-           var begin=((this.$data.currentPage-1)*8)*(this.$data.pageSize);
-           var end=(this.$data.currentPage*8)*(this.$data.pageSize);
-          this.$data.Ainner= this.$data.Ainner.slice(begin,end);
-    
+      changePage(){
+        
+          this.getIe1();
+   
+       },
+      async getIe1() {
+            console.log("res");
+            const that=this; 
+            myAxios
+              .get(`/integral/IEchangeController/SelectBytype/${this.type}/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .then(res => {
+                   
+                  this.Ainner=res.rows;
+                  this.pagination.total=res.total;
+                  console.log(res)
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
       }
-}
+}}
 </script>
 <style scoped>
  ul{

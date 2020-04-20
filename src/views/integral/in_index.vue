@@ -33,6 +33,7 @@ export default {
   float:left;
   border-right:none;
   top:180px;
+  left:30px;
   position:fixed;
 }
 #integral{

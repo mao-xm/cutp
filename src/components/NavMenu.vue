@@ -53,10 +53,10 @@ export default {
    background-color: white !important;
 } */
 .el-menu1{
-height:30px !important;float:right;width:1143px;}
+height:30px !important;width:1120px;float:right;}
 .el-menu2{
 font-size:10px;height:30px !important;
-line-height:30px !important;width:163px;
+line-height:30px !important;width:160px;
 text-align:center;
 }
 /* .el-menu1:hover{

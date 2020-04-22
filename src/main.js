@@ -12,6 +12,8 @@ import NavMenu from '@/components/NavMenu'
 import '@/assets/iconfont/iconfont.css'
 import '@/assets/iconfontType/iconfont.css'
 import '@/assets/font_1744003_w94qbvgo9u/iconfont.css'
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 // axios.defaults.baseURL = 'http://api.gomai.com/api'
 // 全局注册，之后可在其他组件中通过 this.$axios 发送数据
 Vue.prototype.$axios = axios

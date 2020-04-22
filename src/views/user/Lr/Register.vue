@@ -6,10 +6,10 @@
              确认密码：<input type="password"><br>
              手机号：<input type="text"><br>
              验证码：<input type="text">
-             <button>获取验证码</button>
+             <button @click="sendVerifyCode()">获取验证码</button>
         </div>
         <div id="Register2">
-            <button>注册</button>
+            <button @click="registry()">注册</button>
         </div>
         <div id="Register3">
             <router-link :to="{ name:'Login'}" >已有账户?去登录</router-link>
@@ -17,8 +17,38 @@
     </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
-    
+    methods:{
+        async registry() {//按搜索内容查询商品
+           var param = { uPhone: '15620506205',uPassword:'zhang1999',uName:'王五',confirmUPassword:'zhang1999',code:'467971'}
+            myAxios
+                 .post(`/user/register`,param)
+                 .then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+        },
+        async sendVerifyCode() {//按搜索内容查询商品
+           var uPhone = '15620506205'
+            myAxios
+                 .post(`/user/code/${uPhone}`)
+                 .then(res => {
+                    this.$notify.success({
+                        title: '正确',
+                        message: '验证码为：'+res
+                    });
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
+        }
+    },
+    data(){
+        return{
+
+        }
+    }
 }
 </script>
 <style scoped>

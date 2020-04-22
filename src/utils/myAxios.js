@@ -10,6 +10,7 @@ const service = axios.create({
   // baseURL: "http://localhost:10010/api",
   timeout: 30000 // 请求超时时间
 })
+const redirect_uri = "http://www.gomai.com/Login";
 service.interceptors.request.use(config => {
   config.headers = {
     'Content-Type': 'application/json',
@@ -44,6 +45,14 @@ service.interceptors.response.use(
     }
   },
   error => {
+    if(error.response.status == 401){
+      v.$notify.error({
+        title: '错误',
+        message: '登录状态错误！请重新登录'
+      });
+      window.location.href = redirect_uri;
+      this.$router.push({path:'/Login'})
+    }
     console.log('err' + error) // for debug   
     v.$notify.error({
       title: '错误',

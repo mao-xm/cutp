@@ -15,6 +15,8 @@ export default {
     data(){
         return { activeName: 'first'}
     },
+    methods:{
+    },
     components:{
         LoginCom:LoginCom,
         LoginCom1:LoginCom1

@@ -14,9 +14,9 @@
     </div>
      </el-row>
       <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="全部" name="2"><myIntegralFirst ></myIntegralFirst></el-tab-pane>
+      <el-tab-pane label="全部" name="2"><myIntegralFirst ref="myIntegralFirst"></myIntegralFirst></el-tab-pane>
       <el-tab-pane label="收入" name="1"><myIntegralSecond ref="myIntegralSecond"></myIntegralSecond></el-tab-pane>
-      <el-tab-pane label="支出" name="3"><myIntegralThird></myIntegralThird></el-tab-pane>
+      <el-tab-pane label="支出" name="3"><myIntegralThird  ref="myIntegralThird"></myIntegralThird></el-tab-pane>
   </el-tabs>
    <!-- <el-tabs v-model="activeName" @tab-click="handleClick" class="el-t">
     <el-tab-pane label="全部" name="first"><myIntegralFirst></myIntegralFirst></el-tab-pane>
@@ -46,6 +46,10 @@ export default {
         var type = tab.name;
         if(type==1){
        this.$refs.myIntegralSecond.getIe1();
+       }else if(type==3){
+         this.$refs.myIntegralThird.getIe2();
+       }else{
+         this.$refs.myIntegralFirst.getIe();
        }
       },
       async getIntegral() {

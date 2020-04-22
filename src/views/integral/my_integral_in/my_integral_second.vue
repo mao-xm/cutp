@@ -5,7 +5,7 @@
        
         
          <div v-if="ie.ieType==2"><inner :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
-        reason="购买商品" :ieCreateTime="ie.ieCreateTime|timefilters" :url="ie.goodsVo.goodsMedias.gmUrl"></inner></div>
+        :ieId="ie.ieId"  reason="购买商品" :ieCreateTime="ie.ieCreateTime|timefilters" :url="ie.goodsVo.goodsMedias.gmUrl"></inner></div>
         
         </li>
         </ul>
@@ -75,7 +75,6 @@ export default {
                    
                   this.Ainner=res.rows;
                   this.pagination.total=res.total;
-                  console.log(res)
                   
               }).catch(err => {
                   console.log(err);

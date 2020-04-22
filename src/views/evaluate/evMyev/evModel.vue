@@ -1,5 +1,5 @@
 <template>
-    <div id="evModel">
+    <el-card id="evModel">
         
         <div id="evModel1">
           <div  id="evModel1-1">
@@ -20,20 +20,20 @@
           </div> 
         </div>
         <div id="evModel2">
-        <img src="../../../assets/goods/kouhong.jpg" width="100px" height="100px">
+        <img src="../../../assets/goods/kouhong.jpg" width="80px" height="80px">
           <div id="gp">
             <div id="gName">商品名</div>
             <div id="gPrice">钱</div>
-            <div id="button">
+          </div>
+          <div id="button">
                  <el-button type="danger" plain>查看</el-button>
             </div>
-          </div>
         </div>
         <div id="evModel3">
             <div id="comment">发布评论:</div>
             <el-input class="input"
                 type="textarea"
-                :rows="2"
+                :rows="1"
                 placeholder="请输入你的评论"
                 v-model="textarea">  
             </el-input>
@@ -54,7 +54,7 @@
                 <div id="comTime"> 评轮时间</div>
             </div>
         </div>
-    </div>
+    </el-card>
     
 </template>
 <script>
@@ -67,63 +67,68 @@ export default {
 </script>
 <style scoped>
 #evModel1-1,#evMode4-1{
-    margin-left:20px;
+    /* margin-left:20px; */
     margin-top:20px;
 }
 #evModel{
-    margin-left:270px;
+    box-shadow:0 2px 10px 0 rgba(0,0,0,.1);
+    margin-left:50px;
     margin-top:50px;
-    border:1px solid #ccc;
+    /* border:1px solid #ccc; */
     height:500px;
-    width:702px;
+    width:600px;
 }
 .el-col-12{
     width:120px;
 }
 #evModel1-2{
 margin-left:30px;
- width:400px;
- height:100px;
-margin-top:30px;
+ width:200px;
+ height:50px;
+margin-top:20px;
 }
 #evModel1-3{
- width:80px;
- height:100px;
- margin-top:50px;
+ width:100px;
+ height:50px;
+ margin-top:40px;
 }
 #gPrice{
     margin-top:10px;
+    width:80px;
 }
 
-img,#gp.block,#username,#evModel1-1,#evModel4-1,#evModel4-2,#evModel1-2,#evModel1-3{
+#comment,.input,img,#gp,.block,#username,#evModel1-1,#evModel4-1,#evModel4-2,#evModel1-2,#evModel1-3{
     float:left; 
 }
 #evContent,#ievContent,#evTime,#ievTime{
-    height:50px;
+    height:30px;
 }
 #gp{
-margin-left:170px;
-width:400px;
+margin-left:20px;
+width:80px;
+height:30px;
 padding-top:10px;
 
 }
 #evModel2{
-    border:1px solid #ccc;
-    height:120px;
-    width:700px;
-    margin-top:150px;
+    border:0.1px solid #ccc;
+    height:99px;
+    width:600px;
+    margin-top:100px;
 }
 #button{
-    width:100px;
-    height:100px;
-    margin-left:400px;
+    /* width:100px;
+    height:100px; */
+    float:left;
+    margin-left:280px;
 }
 #gName{
     font-size:20px;
+    width:80px;
 }
 .input{
     margin-top:10px;
-    width:530px;
+    width:200px;
     margin-left:10px;
 }
 .comBut{
@@ -144,7 +149,7 @@ padding-top:10px;
 
 #comTime{
     margin-top:30px;
-    margin-left:400px;
+    margin-left:200px;
 }
 img{
     margin-top:10px;

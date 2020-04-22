@@ -23,15 +23,29 @@ import myEvModel from '@/views/evaluate/evMyev/myEvModel'
 import mEvDetail from '@/views/evaluate/mEvDetail'
 import returnDetail from '@/views/buyOrder/ReturnDetail'
 import orderDetail from'@/views/buyOrder/OrderDetail'
+import MyHomeIndex from'@/views/user/MyHome/MyHomeIndex'
+import AddNewAddress from'@/views/user/MyHome/Address/AddNewAddress'
+import EditNewAddress from'@/views/user/MyHome/Address/EditNewAddress'
 Vue.use(Router)
-
 export default new Router({
   mode:'history',
   routes: [
     {
+      path: '/AddNewAddress',
+      name: 'AddNewAddress',
+      component: AddNewAddress},
+      {
+        path: '/EditNewAddress',
+        name: 'EditNewAddress',
+        component: EditNewAddress},
+    {
       path: '/mEvDetail',
       name: 'mEvDetail',
       component: mEvDetail},
+      {
+        path: '/MyHomeIndex',
+        name: 'MyHomeIndex',
+        component: MyHomeIndex},
       {
         path:'/orderDetail',
         name: 'orderDetail',

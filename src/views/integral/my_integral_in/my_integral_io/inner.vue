@@ -15,7 +15,7 @@
           <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
         <span id="tspan3">{{reason}}</span>
-        <el-button type="danger" size="small" class="delete">删除</el-button>
+        <el-button type="danger" size="small" class="delete" @click="delete1()">删除</el-button>
       </div>
     </el-card>
   </el-col>
@@ -23,12 +23,25 @@
 </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
     name:'inner',
-    props:['gName','ieChangeIntegral','reason','ieCreateTime','url'],
-    // data(){
-    //     return {url:require('../../../../assets/ie/cfj.jpg')}
-    // }
+    props:['ieId','gName','ieChangeIntegral','reason','ieCreateTime','url'],
+    methods:{
+       async delete1() {
+          myAxios
+              .post(`/integral/IEchangeController/deleteByieId/${this.ieId}`)
+              .then(res => {
+                 this.$notify.success({
+                            title: '成功',
+                            message: '删除成功'
+                        });
+                this.$router.push({name:'my_integral'});
+              }).catch(err => {
+                  console.log(err);
+                  });
+      }, 
+    }
 }
 </script>
 <style scoped>

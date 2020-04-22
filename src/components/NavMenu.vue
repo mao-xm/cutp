@@ -31,7 +31,7 @@ export default {
           {name: '/buyOrder', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
           {name: '/mySale', navItem: '我的卖出',icon:'iconfont icon-maichu'},
           {name: '/in_index', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
-          {name: '', navItem: '个人主页',icon:'iconfont icon-icon-'},
+          {name: '/MyHomeIndex', navItem: '个人主页',icon:'iconfont icon-icon-'},
           {name: '/soft_pf', navItem: '反馈',icon:'iconfont icon-fankui'}
         ],
        url: '../assets/logo.png',

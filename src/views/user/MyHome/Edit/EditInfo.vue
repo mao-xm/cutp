@@ -1,6 +1,7 @@
 <template>
     <div id="EdiInfo">
 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    
   <el-form-item label="用户名" prop="name" class="item">
     <el-input type="password" v-model="ruleForm.name" autocomplete="off" class="input"></el-input>
   </el-form-item>
@@ -15,7 +16,7 @@
   </el-form-item>
   <el-form-item label="验证码" prop="code" class="item">
     <el-input v-model.number="ruleForm.code" class="input1"></el-input>
-    <el-button type="danger" @click="getCode()">获取验证码</el-button>
+    <el-button type="danger" @click="getCode()" size="mini">获取验证码</el-button>
   </el-form-item>
    <el-form-item label="性别" prop="sex" class="item">
     <el-input v-model.number="ruleForm.sex" class="input"></el-input>
@@ -32,6 +33,25 @@
    <el-form-item label="爱好" prop="hobby" class="item">
     <el-input v-model.number="ruleForm.hobby" class="input"></el-input>
   </el-form-item>
+  <el-form-item label="上传头像" class="item" prop="goodPic">
+                    <el-upload
+                    action="http://localhost:8089/upload/image"
+                    list-type="picture-card"
+                    :file-list="ruleForm.goodPic"
+                    :before-upload="beforePicUpload"
+                    limit="5"
+                    :on-preview="handlePictureCardPreview"
+                    :on-exceed="handleExceed"
+                    :on-success="handleAvatarSuccess"
+                    :on-remove="handleRemove"
+                    id="upload">
+                        <i class="el-icon-plus"></i>
+                        <div class="el-upload__tip" slot="tip">注：只能上传jpg/png文件，且不超过5M</div>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                        <img width="100%" :src="imgUrl" alt="">
+                    </el-dialog>
+    </el-form-item>
   <el-form-item class="item">
     <el-button type="danger" @click="submitForm('ruleForm')" class="preserve">保存</el-button>
   </el-form-item>
@@ -92,7 +112,7 @@ export default {
 }
 </script>
 <style scoped>
-.input{
+.input,#upload{
   width:60%;
  margin-left:30px;
 }
@@ -110,4 +130,27 @@ export default {
 .preserve{
     margin-left:30px;
 }
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

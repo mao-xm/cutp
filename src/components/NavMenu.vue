@@ -4,6 +4,7 @@
      <!--style="padding-left:58px;font-size:10px;height:20px;" -->
      <!-- style="width:1150px;float:right;height:20px; -->
      <img src="../assets/logo.png" width="50px" height="50px" id="img">
+     <el-button @click="logout()" type="danger" size="mini" id="out">登出</el-button>
      <el-menu
       :default-active="path"
       router
@@ -37,13 +38,23 @@ export default {
        url: '../assets/logo.png',
        path:''
       }
+},
+methods:{
+   logout() {
+            this.$cookies.remove('GM_TOKEN' , '/' , '.gomai.com') 
+            this.$router.replace('/Login');
+   }
 }
 }
 </script>
 <style>
+#out{
+  margin-left:15px;
+  margin-top:2px;
+}
  #img{
   float:left;
-  margin-left:30px;
+  margin-left:5px;
   
 }
 /*#box{

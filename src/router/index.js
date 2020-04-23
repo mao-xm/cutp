@@ -20,16 +20,25 @@ import Login from '@/views/user/Login'
 import Register from '@/views/user/Lr/Register'
 import evModel from '@/views/evaluate/evMyev/evModel'
 import myEvModel from '@/views/evaluate/evMyev/myEvModel'
-import mEvDetail from '@/views/evaluate/mEvDetail'
 import returnDetail from '@/views/buyOrder/ReturnDetail'
 import orderDetail from'@/views/buyOrder/OrderDetail'
 import MyHomeIndex from'@/views/user/MyHome/MyHomeIndex'
 import AddNewAddress from'@/views/user/MyHome/Address/AddNewAddress'
 import EditNewAddress from'@/views/user/MyHome/Address/EditNewAddress'
+import evComment from'@/views/evaluate/evMyev/evComment'
+import mvComment from'@/views/evaluate/evMyev/mvComment'
 Vue.use(Router)
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path: '/evComment',
+      name: 'evComment',
+      component:evComment},
+      {
+        path: '/mvComment',
+        name: 'mvComment',
+        component:mvComment},
     {
       path: '/AddNewAddress',
       name: 'AddNewAddress',
@@ -38,10 +47,6 @@ export default new Router({
         path: '/EditNewAddress',
         name: 'EditNewAddress',
         component: EditNewAddress},
-    {
-      path: '/mEvDetail',
-      name: 'mEvDetail',
-      component: mEvDetail},
       {
         path: '/MyHomeIndex',
         name: 'MyHomeIndex',

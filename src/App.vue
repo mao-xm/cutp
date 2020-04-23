@@ -14,6 +14,9 @@ export default {
 }}
 </script>
 <style>
+#evModel .e-form-item_content{
+  width:0%;
+}
 #MyHomeIndex .el-tabs__item:hover,.el-tabs__item.is-active{
     color:#dd3035;
 }

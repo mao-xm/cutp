@@ -1,25 +1,29 @@
 <template>
     <div id="Login">
         <img src="../../assets/Login/login1.jpg" width="400px" height="470px">
-        <div id="right"><el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="用户名登录" name="first"><LoginCom></LoginCom></el-tab-pane>
-      <el-tab-pane label="手机号登录" name="second"><LoginCom1></LoginCom1></el-tab-pane> 
+        <div id="right">
+          <!-- <el-tabs v-model="activeName" type="card" @tab-click="handleClick"> -->
+        <LoginCom></LoginCom>
+      <!-- <el-tab-pane label="用户名登录" name="first"><LoginCom></LoginCom></el-tab-pane> -->
+      <!-- <el-tab-pane label="手机号登录" name="second"><LoginCom1></LoginCom1></el-tab-pane>  -->
 
-  </el-tabs></div> 
+      <!-- </el-tabs> -->
+  </div> 
     </div>
 </template>
 <script>
  import LoginCom from '@/views/user/Lr/LoginCom'
- import LoginCom1 from '@/views/user/Lr/LoginCom1'
+//  import LoginCom1 from '@/views/user/Lr/LoginCom1'
 export default {
     data(){
-        return { activeName: 'first'}
+        // return { activeName: 'first'}
+        
     },
     methods:{
     },
     components:{
-        LoginCom:LoginCom,
-        LoginCom1:LoginCom1
+        LoginCom:LoginCom
+    //     LoginCom1:LoginCom1
     }
 }
 </script>

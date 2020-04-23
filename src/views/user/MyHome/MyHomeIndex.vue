@@ -26,26 +26,42 @@
         <div id="card">
          
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="tab">
-            <el-tab-pane label="地址管理" name="first" class="first" >
-                <el-button type="danger" id="add" size="small" @click="AddNewAd">添加新地址</el-button>
-                <ul >
+            <el-tab-pane label="地址管理" name="1" class="first" >
+                <ul id="ul1" >
                      <li v-for="(ig,i) in 3" :key="i"><AddressManager></AddressManager></li>
                 </ul>
+              <el-button type="danger" id="add" size="small" @click="AddNewAd">添加新地址</el-button>
             </el-tab-pane>
-            <el-tab-pane label="编辑资料" name="second"><EditInfo></EditInfo></el-tab-pane>
-            <el-tab-pane label="评价" name="third">
-                <ul >
-                     <li v-for="(ig,i) in 1" :key="i"><evModel></evModel></li>
+            <el-tab-pane label="编辑资料" name="2"><EditInfo></EditInfo></el-tab-pane>
+            <el-tab-pane label="评价" name="3">
+                <ul id="ul2">
+                     <li v-for="(ig,i) in 3" :key="i"><evModel></evModel></li>
                 </ul>
             </el-tab-pane>
-            <el-tab-pane label="我的评价" name="fourth"></el-tab-pane>
-        </el-tabs>  
+            <el-tab-pane label="我的评价" name="4">
+                 <ul id="ul3">
+                     <li v-for="(ig,i) in 3" :key="i"><myEvModel></myEvModel></li>
+                </ul></el-tab-pane>
+            </el-tabs>
+            <div v-if="tf">
+            <el-pagination
+                    small
+                    layout="prev, pager, next"
+                    @current-change="changePage"
+                    @prev-click="changePage"
+                    @next-click="changePage"
+                    :page-size="pagination.size"
+                    :current-page.sync="pagination.currentPage"
+                    :total="pagination.total" class="el-pagination">
+            </el-pagination>
+            </div>
         </div>
     </div> 
 </template>
 <script>
 import AddressManager from'@/views/user/MyHome/Address/AddressManager'
 import evModel from'@/views/evaluate/evMyev/evModel'
+import myEvModel from'@/views/evaluate/evMyev/myEvModel'
 import EditInfo from'@/views/user/MyHome/Edit/EditInfo'
 import myAxios from "@/utils/myAxios";
 export default {
@@ -53,21 +69,37 @@ export default {
   data () {
       return {
         circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-        activeName: 'first'
+        activeName:'1',
+        pagination:{
+                total: 10,
+                size: 3,
+                currentPage:1
+          },
+          tf:false
       }
     },
     methods: {
       handleClick(tab, event) {
+         var type= tab.name;
+         if(true)
+         {
+             this.tf=true;
+         }
         console.log(tab, event);
       },
       AddNewAd(){
         this.$router.push({path:'/AddNewAddress'});
-      }
+      },
+       changePage(){
+          
+   
+       },
     },
     components:{
       AddressManager:AddressManager,
       evModel:evModel,
-      EditInfo:EditInfo
+      EditInfo:EditInfo,
+      myEvModel:myEvModel
     }
 }
 </script>
@@ -75,7 +107,7 @@ export default {
 #MyHomeIndex{
     margin:30px auto;
     width:800px;
-    height:1000px;
+    /* height:1000px; */
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .block,#info{
@@ -102,9 +134,9 @@ export default {
     margin-top:7px;
 }
 .tab{
-    margin-left:0px;
+    margin-left:20px;
    padding-top:107px;
-   width:801px;
+   width:782px;
 }
 /* .tab{
   
@@ -118,15 +150,33 @@ export default {
     left:324px;
     border:1px solid #E4E7ED;
 } */
-ul li{
+#ul1 li{
     list-style:none;
-    margin-top:30px;
+    margin-top:50px;
 }
-ul{
-    margin-top:30px;
+#ul1{
+    margin-top:70px;
 }
 #add{
-    margin-left:95px;
+    margin-left:556px;
     margin-top:72px;
+}
+#ul2,#ul3 li{
+    list-style:none;
+}
+#ul3{
+    margin-top:50px;
+}
+#ul3 li{
+    margin-top:50px;
+}
+#ul2{
+    margin-top:50px;
+}
+#ul2 li{
+    margin-top:0px;
+}
+.el-pagination{
+    margin-left:325Spx;
 }
 </style>

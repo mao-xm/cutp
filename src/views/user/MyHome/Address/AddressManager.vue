@@ -26,14 +26,12 @@ export default {
 <style scoped>
 #AddressManager{
     width:600px;
-    margin-left:50px;
-    
+    margin-left:40px;
 }
 .card{
     width:500px;
     height:100px;
-   margin-left:20px;
-   /* border:1px solid #E4E7ED; */
+   margin-left:25px;
 }
 .block{
     float:left;

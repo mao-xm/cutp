@@ -24,6 +24,14 @@
 export default {
     name:'EditNewAddress',
      data() {
+        var checkNumber1 = (rule, value, callback) => {
+         if (isNaN(value)){
+             callback(new Error('请输入数字值'));   
+         }
+         else if(value.length!==11){
+               callback(new Error('收件人电话是11位'));
+         }
+          };
       return {
         ruleForm: {
           name: '',
@@ -36,7 +44,8 @@ export default {
            { required: true, message: '请输入收件人姓名', trigger: 'blur' }
           ],
           number: [
-            { required: true, message: '请输入收件人电话', trigger: 'blur' }
+            { required: true, message: '请输入收件人电话', trigger: 'blur' },
+            {validator:checkNumber1, trigger: 'blur' }
           ],
           Adress: [
             { required: true, message: '请输入收件人地址', trigger: 'blur' }

@@ -16,7 +16,7 @@
                 <el-input v-model.number="ruleForm.uPassword" autocomplete="off" class="input"></el-input>
             </el-form-item>
             <el-form-item  class="item">
-                <el-button type="danger" @click="login()" class="preserve">登录</el-button>
+                <el-button type="danger" @click="submitForm('ruleForm')" class="preserve">登录</el-button>
                  <el-link type="danger" href="/Register" id="link">没有账号?去注册</el-link>
             </el-form-item>
         </el-form>
@@ -49,9 +49,7 @@ export default {
       };
     },
     methods:{
-        async login() {//按搜索内容查询商品
-        // var uName="王五"
-        // var uPassword = "zhang1999"
+        async login() {
             myAxios
                  .post(`/auth/login/${this.ruleForm.uName}/${this.ruleForm.uPassword}`)
                  .then(res => {
@@ -61,6 +59,16 @@ export default {
                     console.log(err,'bb');
                     });
         },
+        submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+                this.login();
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
         async verify() {//按搜索内容查询商品
             myAxios
                  .get(`auth/verify`)

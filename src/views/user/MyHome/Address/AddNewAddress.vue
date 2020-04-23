@@ -6,7 +6,7 @@
                 <el-input  v-model="ruleForm.name" autocomplete="off" class="input"></el-input>
             </el-form-item>
             <el-form-item label="收件人电话" prop="number">
-                <el-input v-model.number="ruleForm.number" autocomplete="off" class="input"></el-input>
+                <el-input v-model="ruleForm.number" autocomplete="off" class="input"></el-input>
             </el-form-item>
             <el-form-item label="收件人地址" prop="Adress">
                 <el-input v-model="ruleForm.Adress" class="input"></el-input>
@@ -24,6 +24,14 @@
 export default {
     name:'AddNewAddress',
      data() {
+         var checkNumber = (rule, value, callback) => {
+         if (isNaN(value)){
+             callback(new Error('请输入数字值'));   
+         }
+         else if(value.length!==11){
+               callback(new Error('收件人电话是11位'));
+         }
+          };
       return {
         ruleForm: {
           name: '',
@@ -36,7 +44,9 @@ export default {
            { required: true, message: '请输入收件人姓名', trigger: 'blur' }
           ],
           number: [
-            { required: true, message: '请输入收件人电话', trigger: 'blur' }
+            { required: true, message: '请输入收件人电话', trigger: 'blur' },
+            //  { min: 11, max: 11, message: '收件人电话是11位', trigger: 'blur' },
+            {validator:checkNumber, trigger: 'blur' }     
           ],
           Adress: [
             { required: true, message: '请输入收件人地址', trigger: 'blur' }

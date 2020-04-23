@@ -81,9 +81,12 @@ export default {
     methods: {
       handleClick(tab, event) {
          var type= tab.name;
-         if(true)
+         if(type=='3'||type=='4')
          {
              this.tf=true;
+         }
+         else{
+             this.tf=false;
          }
         console.log(tab, event);
       },
@@ -177,6 +180,6 @@ export default {
     margin-top:0px;
 }
 .el-pagination{
-    margin-left:325Spx;
+    margin-left:315px;
 }
 </style>

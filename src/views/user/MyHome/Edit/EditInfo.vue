@@ -16,13 +16,18 @@
   </el-form-item>
   <el-form-item label="验证码" prop="code" class="item">
     <el-input v-model.number="ruleForm.code" class="input1"></el-input>
-    <el-button type="danger" @click="getCode()" size="mini">获取验证码</el-button>
+    <el-button type="danger" :disabled="status" @click="sendVerifyCode" size="mini">{{value}}</el-button>
   </el-form-item>
    <el-form-item label="性别" prop="sex" class="item">
-    <el-input v-model.number="ruleForm.sex" class="input"></el-input>
+     <el-radio-group v-model="ruleForm.sex" class="input1">
+      <el-radio label="男"></el-radio>
+      <el-radio label="女"></el-radio>
+    </el-radio-group>
+    <!-- <el-input v-model.number="ruleForm.sex" class="input"></el-input> -->
   </el-form-item>
    <el-form-item label="生日" prop="birth" class="item">
-    <el-input v-model.number="ruleForm.birth" class="input"></el-input>
+     <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.birth" class="input"></el-date-picker>
+    <!-- <el-input v-model.number="ruleForm.birth" class="input"></el-input> -->
   </el-form-item>
   <el-form-item label="身份证号" prop="IdNumber" class="item">
     <el-input v-model.number="ruleForm.IdNumber" class="input"></el-input>
@@ -60,9 +65,44 @@
 </template>
 <script>
 export default {
-    name:'EditInfo',
      data() {
+       var checkTeleNumber = (rule, value, callback) => {
+         if (isNaN(value)){
+             callback(new Error('请输入数字值'));   
+         }
+         else if(value.toString().length!=11){
+              alert( typeof value);
+               callback(new Error('手机号是11位'));
+         }
+          };
+        var checkCode1 = (rule, value, callback) => {
+         if (isNaN(value)){
+             callback(new Error('请输入数字值'));   
+         }
+         else if(value.toString().length!==6){
+               callback(new Error('验证码是6位'));
+         }
+          };
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } 
+          callback();
+        };
+    
+      var validatePass2 = (rule, value, callback) => {
+        if(value === ''){
+            callback(new Error('请再次确认密码'))
+        }
+        else if (value !== this.ruleForm.Pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
+        status:false,
+        value:'获取验证码',
         ruleForm: {
           name: '',
           Pass:'',
@@ -80,22 +120,26 @@ export default {
            { required: true, message: '请输入用户名', trigger: 'blur' }
           ],
           Pass: [
-            { required: true, message: '请输入密码', trigger: 'blur' }
+            // { required: true, message: '请输入密码', trigger: 'blur' },
+             { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { required: true, message: '请确认密码', trigger: 'blur' }
+            // { required: true, message: '请确认密码', trigger: 'blur' },
+             { validator: validatePass2, trigger: 'blur' }
           ],
           teleNumber: [
-            { required: true, message: '请输入手机号', trigger: 'blur' }
+            { required: true, message: '请输入手机号', trigger: 'blur' },
+             {validator:checkTeleNumber, trigger: 'blur' }
           ],
           code: [
-            { required: true, message: '请输入验证码', trigger: 'blur' }
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+             { validator: checkCode1, trigger: 'blur' }
           ],
           sex: [
-            { required: true, message: '请输入性别', trigger: 'blur' }
+            { required: true, message: '请选择性别', trigger: 'change' }
           ],
           birth: [
-            { required: true, message: '请输入出生日期', trigger: 'blur' }
+            { required: true, message: '请选择出生日期', trigger: 'blur' }
           ],
           IdNumber: [
             { required: true, message: '请输入身份证号', trigger: 'blur' }
@@ -109,6 +153,35 @@ export default {
         }
       };
     },
+    methods:{
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+             
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+     sendVerifyCode(){
+        var time=60;
+             var timer=setInterval(() => {
+                time--;
+                if(time>=1){    
+                   this.status=true;
+               
+                this.value="重新发送(" + time + ")";
+                
+                }else if(time==0){
+                    this.status=false;
+                     this.value="获取验证码";
+                     clearInterval(timer);
+                }
+            }
+            ,1000);
+      }
+    }
 }
 </script>
 <style scoped>

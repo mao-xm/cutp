@@ -23,7 +23,7 @@
             </div>
             <div class="return-detail-buttons" v-if="param.isBuy">
                 <el-button type="danger" class="order-item-button" round v-if="orderReturnVo.orStatus == 1 || orderReturnVo.orStatus == 3" @click="backout()">撤销申请</el-button>
-                <el-button type="danger" class="order-item-button" round v-if="orderReturnVo.orStatus == 3">举报</el-button>
+                <el-button type="danger" @click="report" class="order-item-button" round v-if="orderReturnVo.orStatus == 3">举报</el-button>
             </div>
             <div class="return-detail-buttons" v-if="!param.isBuy">
                 <el-button type="danger" class="order-item-button" round v-if="orderReturnVo.orStatus == 1 || orderReturnVo.orStatus == 3" @click="agree()">同意</el-button>
@@ -43,6 +43,15 @@ export default {
         this.getReturnDetail(this.param)
     },
     methods:{
+        report(){
+        this.$router.push({
+          path:'/reportPf',
+          query:{
+            oId:this.param.oId
+          }
+        })
+        }
+        ,
         /**
          * 同意函数
          */

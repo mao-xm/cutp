@@ -266,21 +266,21 @@ export default {
         });
       })},
      sendVerifyCode(){
-        // var time=60;
-        //      var timer=setInterval(() => {
-        //         time--;
-        //         if(time>=1){    
-        //            this.status=true;
+        var time=60;
+             var timer=setInterval(() => {
+                time--;
+                if(time>=1){    
+                   this.status=true;
                
-        //         this.value="重新发送(" + time + ")";
+                this.value="重新发送(" + time + ")";
                 
-        //         }else if(time==0){
-        //             this.status=false;
-        //              this.value="获取验证码";
-        //              clearInterval(timer);
-        //         }
-        //     }
-        //     ,1000);
+                }else if(time==0){
+                    this.status=false;
+                     this.value="获取验证码";
+                     clearInterval(timer);
+                }
+            }
+            ,1000);
              var uPhone = this.ruleForm.teleNumber;
             myAxios
                  .post(`/user/code/${uPhone}`)

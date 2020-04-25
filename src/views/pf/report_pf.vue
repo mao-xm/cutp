@@ -2,13 +2,12 @@
     <div id="report">
         <el-card id="good">
            
-            <img src="../../assets/goods/kouhong.jpg" width="100px" height="100px">
-         
+            <img :src="orderVo.goodsVo.goodsMedias[0].gmUrl" width="100px" height="100px">
            <div id="right">
-               <span id="name">口红</span><br>
-               <span id="price">￥120</span>
-                <div id="describe">很好看的口红哦</div> 
-                 <el-button type="danger" size="small" class="select">查看</el-button> 
+               <span id="name">{{orderVo.goodsVo.gName}}</span><br>
+               <span id="price">￥{{orderVo.goodsVo.gPrice}}</span>
+                <div id="describe">{{orderVo.goodsVo.gDetail}}</div> 
+                 <el-button type="danger" size="small" class="select" @click="selectDetail">查看</el-button> 
            </div>
           
            </el-card>
@@ -73,10 +72,11 @@ export default {
     name:'report_pf',
     data(){
     return{
+      orderVo:{},
       textarea:"",
       imageUrl: '',
       ruleForm: {
-            report:{oId:0,rContent:'',rId:0,rStatus:0,uId:1,},
+            report:{oId:96,rContent:'',rId:0,rStatus:0,uId:1,},
             goodPic:[],
             goodVid :{},
             mediaUrl:[]
@@ -92,6 +92,7 @@ export default {
           }
       },
        methods:{
+
         getOrder(){
          this.ruleForm.report.oId=this.$route.query&&this.$route.query.oId;
          
@@ -155,7 +156,26 @@ export default {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       },
-      async submitRmForm(ruleForm) {//点击提交
+      async getOrderDetail() {
+          console.log('ss')
+          console.log( this.ruleForm.report.oId);
+          myAxios
+              .get(`/order/order/getOrderDetail/${ this.ruleForm.report.oId}`)
+              .then(res => {
+                  this.orderVo=res;
+              }).catch(err => {
+                  console.log(err,'bb');
+                  });
+      },
+      selectDetail(){
+         this.$router.push({
+          path:'/orderDetail',
+          query:{
+            oId:this.ruleForm.report.oId
+          }
+        })
+      },
+        async submitRmForm(ruleForm) {//点击提交
       alert("hhh");
           this.$confirm('确认进行举报反馈？')
             .then(_ => {
@@ -202,8 +222,9 @@ export default {
   },
   created:function(){
     this.getOrder();
-  }
-}
+    this.getOrderDetail();
+   
+}}
 </script>
 <style scoped>
 #div1{

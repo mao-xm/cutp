@@ -6,21 +6,21 @@
                     <el-input  v-model="ruleForm.uName" autocomplete="off" class="input"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="uPassword"  class="item">
-                    <el-input v-model="ruleForm.uPassword" autocomplete="off" class="input"></el-input>
+                    <el-input type="password" v-model="ruleForm.uPassword" autocomplete="off" class="input"></el-input>
                 </el-form-item>
                  <el-form-item label="确认密码" prop="confirmUPassword"  class="item">
-                    <el-input v-model="ruleForm.confirmUPassword" autocomplete="off" class="input"></el-input>
+                    <el-input type="password" v-model="ruleForm.confirmUPassword" autocomplete="off" class="input"></el-input>
                 </el-form-item>
                 <el-form-item label="手机号" prop="uPhone"  class="item" >
-                    <el-input  v-model.number="ruleForm.uPhone" autocomplete="off" class="input"></el-input>
+                    <el-input  v-model="ruleForm.uPhone"  class="input"></el-input>
                 </el-form-item>
                 <el-form-item label="验证码" prop="code"  class="item2">
-                    <el-input  v-model="ruleForm.code" autocomplete="off" class="input1"></el-input>
+                    <el-input  v-model="ruleForm.code"  class="input1"></el-input>
                     <el-button :disabled="status1" id="sVerifyCode" type="danger" size="small"  @click="sendVerifyCode()">{{value1}}</el-button>
                 </el-form-item>
                 <el-form-item  class="item1">
                     <!-- <el-button type="danger" @click="registry()" class="registry">注册</el-button> -->
-                     <el-button type="danger" @click="submitForm('ruleForm')" class="registry">注册</el-button>
+                     <el-button type="danger" @click="submitForm1('ruleForm')" class="registry">注册</el-button>
                     <el-link type="danger" href="/Login" id="link">已有账户?去登录</el-link>
                 </el-form-item>
             </el-form>
@@ -50,6 +50,8 @@ export default {
          }
          else if(value.toString().length!=11){
                callback(new Error('手机号是11位'));
+         }else{
+           callback();
          }
           };
           var checkCode = (rule, value, callback) => {
@@ -58,6 +60,9 @@ export default {
          }
          else if(value.toString().length!==6){
                callback(new Error('验证码是6位'));
+         }
+         else{
+           callback();
          }
           };
         var validatePass = (rule, value, callback) => {
@@ -83,10 +88,11 @@ export default {
         status1:false,
         value1:'获取验证码',
         ruleForm: {
-          uName: '',
+          uPhone:'',
           uPassword:'',
-          confirmUPassword:''
-          
+          uName: '',
+          confirmUPassword:'',
+          code:''  
         },
         rules: {
           uName: [
@@ -113,30 +119,45 @@ export default {
       };
     },
     methods:{
+        
         async registry() {//按搜索内容查询商品
         //    var param = { uPhone: '15620506205',uPassword:'zhang1999',uName:'王五',confirmUPassword:'zhang1999',code:'467971'}
+            this.ruleForm.uPhone=this.ruleForm.uPhone.toString();
+            this.ruleForm.uPassword=this.ruleForm.uPassword.toString();
+            this.ruleForm.confirmUPassword=this.ruleForm.confirmUPassword.toString();
+             this.ruleForm.code=this.ruleForm.code.toString();
             var param = this.ruleForm;
+             console.log(param);
+            this.$confirm('确认注册？')
+            .then(_ => {
            myAxios
                  .post(`/user/register`,param)
                  .then(res => {
+                   if(res==true){
+                        this.$notify.success({
+                            title: '成功',
+                            message: '注册成功'
+                            });
+                       this.$router.push({name:'Login'});}
                     console.log(res);
                 }).catch(err => {
                     console.log(err,'bb');
                     });
-        },
-        submitForm(formName) {
+         })},
+        submitForm1(formName) {
+          alert("a");
         this.$refs[formName].validate((valid) => {
           if (valid) {
+                alert("aa");
                 this.registry();
           } else {
             console.log('error submit!!');
             return false;
           }
         });
-      },
-        async sendVerifyCode() {//按搜索内容查询商品
-        //    var uPhone = '15620506205'
-            // this.status1=true;
+     },
+        async sendVerifyCode() {
+       
             var time=60;
             var timer=setInterval(() => {
                 time--;
@@ -152,7 +173,7 @@ export default {
                 }
             }
             ,1000);
-            var uPhone = this.ruleForm.teleNumber;
+            var uPhone = this.ruleForm.uPhone;
             myAxios
                  .post(`/user/code/${uPhone}`)
                  .then(res => {

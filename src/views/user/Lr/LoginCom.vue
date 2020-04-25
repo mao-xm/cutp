@@ -13,7 +13,7 @@
                 <el-input  v-model="ruleForm.uName" autocomplete="off" class="input"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="uPassword"  class="item">
-                <el-input v-model.number="ruleForm.uPassword" autocomplete="off" class="input"></el-input>
+                <el-input type="password" v-model.number="ruleForm.uPassword" autocomplete="off" class="input"></el-input>
             </el-form-item>
             <el-form-item  class="item">
                 <el-button type="danger" @click="submitForm('ruleForm')" class="preserve">登录</el-button>
@@ -50,15 +50,27 @@ export default {
     },
     methods:{
         async login() {
+             alert(typeof this.ruleForm.uName);
+             var a= this.ruleForm.uPassword.toString()
+            alert(typeof a);
+            this.$confirm('确认登录？')
+            .then(_ => {
             myAxios
-                 .post(`/auth/login/${this.ruleForm.uName}/${this.ruleForm.uPassword}`)
+                 .post(`/auth/login/${this.ruleForm.uName}/${this.ruleForm.uPassword.toString()}`)
                  .then(res => {
+                      if(res==true){
+                        this.$notify.success({
+                            title: '成功',
+                            message: '登录成功'
+                            });
+                         this.$router.push({name:'Home'});
+                            }
                     console.log(res);
                     this.verify()
                 }).catch(err => {
                     console.log(err,'bb');
                     });
-        },
+            })},
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {

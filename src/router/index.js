@@ -27,10 +27,15 @@ import AddNewAddress from'@/views/user/MyHome/Address/AddNewAddress'
 import EditNewAddress from'@/views/user/MyHome/Address/EditNewAddress'
 import evComment from'@/views/evaluate/evMyev/evComment'
 import mvComment from'@/views/evaluate/evMyev/mvComment'
+import eva from'@/views/evaluate/eva'
 Vue.use(Router)
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path: '/eva',
+      name: 'eva',
+      component:eva},
     {
       path: '/evComment',
       name: 'evComment',

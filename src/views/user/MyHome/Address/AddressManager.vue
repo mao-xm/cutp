@@ -1,27 +1,62 @@
 <template>
     <el-card id="AddressManager">
         <div class="card">
-                <div class="block"><el-avatar :size="40" >肖茂</el-avatar></div>
+                <div class="block"><el-avatar :size="40" >{{uaSigner1}}</el-avatar></div>
                 <div id="info">
-                    <span id="name">肖茂</span>
-                    <span id="num">18085722719</span>
-                    <div id="address">天津市西青区宾水西道延长线399号天津工业大学软件园</div>
+                    <span id="name">{{uaSigner}}</span>
+                    <span id="num">{{uaPhone}}</span>
+                    <div id="address">{{uaAddress}}</div>
                 </div>
                 <div id="edit">
-                    <el-button  type="danger" icon="el-icon-edit" circle class="button" size="mini" @click="edit"></el-button>
+                    <el-button  type="danger" icon="el-icon-edit" circle class="button" size="mini" @click="edit(uaId)"></el-button>
+                     <el-button type="danger" icon="el-icon-delete" circle size="mini" @click="delete1(uaId)"></el-button>
                 </div>
         </div>
     </el-card>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
+
+ props:['uaId','uaSigner1','uaSigner','uaAddress','uaPhone'],
  name:'AddressManager',
+
  methods:{
      edit(){
          this.$router.push({path:'/EditNewAddress'})
-     }
- }
-}
+     },
+     async delete1(uaId) {
+         this.$confirm('确认删除？')
+            .then(_ => {
+          myAxios
+              .post(`/user/Address/DelAd/${this.uaId}`)
+              .then(res => {
+                  if(res==true){
+                        this.$notify.success({
+                            title: '成功',
+                            message: '删除成功'
+                            });
+                        location. reload();
+                            }
+                  console.log(res)
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });})
+      },
+      edit(uaId) {
+        this.$router.push({path:'/EditNewAddress',query:{uaId:uaId}});
+      }
+//  },
+//  watch: {
+//        uaId: function(newVal,oldVal){
+//         this.uaId1 = newVal;
+//       }
+//     },
+//     created:function(){
+//       this.seByUaId(this.uaId1);
+//     }
+}}
 </script>
 <style scoped>
 #AddressManager{
@@ -48,6 +83,7 @@ export default {
 }
 #name{
     font-size:16px;
+    width:50px;
 }
 #num{
     font-size:11px;

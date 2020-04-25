@@ -2,20 +2,20 @@
    <div id="MyHomeIndex">
        <div class="MyHomeIndex-circle">
             <div class="block">
-                    <el-avatar :size="60" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="60" :src="this.user.uAvatar"></el-avatar>
             </div>
             <div id="info">
                     <div id="info1">
-                        <span id="name">用户名</span>
-                        <!-- <i class="el-icon-male"></i> -->
-                        <i class="el-icon-female"></i>
+                        <span id="name">{{this.user.uName}}</span>
+                        <i class="el-icon-male" v-if="this.user.uSex"></i>
+                        <i class="el-icon-female" v-if="!this.user.uSex" ></i>
                     </div>
                     <div id="info2">
-                        <span id="age">年龄</span>
-                        <span id="hobby">爱好</span>
+                        <span id="age">{{age}}</span>
+                        <span id="hobby">{{this.user.uLike}}</span>
                     </div>
                     <div id="info3">
-                    <span id="address">所在地址</span>
+                    <span id="address">{{this.user.uSchool}}</span>
                     </div>
             </div>
             
@@ -28,11 +28,14 @@
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="tab">
             <el-tab-pane label="地址管理" name="1" class="first" >
                 <ul id="ul1" >
-                     <li v-for="(ig,i) in 3" :key="i"><AddressManager></AddressManager></li>
+                     <li v-for="(aa,i) in MyAddress" :key="i">
+                         <AddressManager :uaId="aa.uaId" :uaSigner="aa.uaSigner"
+                         :uaSigner1="aa.uaSigner.substr(0,1)" :uaAddress="aa.uaAddress" :uaPhone="aa.uaPhone"></AddressManager>
+                         </li>
                 </ul>
               <el-button type="danger" id="add" size="small" @click="AddNewAd">添加新地址</el-button>
             </el-tab-pane>
-            <el-tab-pane label="编辑资料" name="2"><EditInfo></EditInfo></el-tab-pane>
+            <el-tab-pane label="编辑资料" name="2"><EditInfo ref="EditInfo"></EditInfo></el-tab-pane>
             <el-tab-pane label="评价" name="3">
                 <ul id="ul2">
                      <li v-for="(ig,i) in 3" :key="i"><evModel></evModel></li>
@@ -68,6 +71,11 @@ export default {
   name:'MyHomeIndex',
   data () {
       return {
+        user:{
+        },
+        age:'',
+        uId:1,
+        MyAddress:[],
         circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
         activeName:'1',
         pagination:{
@@ -85,6 +93,9 @@ export default {
          {
              this.tf=true;
          }
+         else if(type==2){
+             this.$refs.EditInfo.getUserInfo1();
+         }
          else{
              this.tf=false;
          }
@@ -97,12 +108,45 @@ export default {
           
    
        },
-    },
+        async getUserInfo() {
+          myAxios
+              .get(`/user/selectByuid/${this.uId}`)
+              .then(res => {
+                   this.user=res;
+                   this.age=(2020-this.user.uBirthday.substr(0,4));
+                //  if(res==true){
+                //         this.$notify.success({
+                //             title: '成功',
+                //             message: '删除成功'
+                //             });
+                //             }
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
+      },
+       async selectMyAddress() {
+          myAxios
+              .get(`/user/Address/SelADs//${this.uId}`)
+              .then(res => {
+                this.MyAddress=res;
+                console.log(res);
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
+      }},
     components:{
       AddressManager:AddressManager,
       evModel:evModel,
       EditInfo:EditInfo,
       myEvModel:myEvModel
+    },
+    created:function(){
+         this.uId=localStorage.getItem("uId");
+        //  alert( this.uId);
+         this.selectMyAddress();
+         this.getUserInfo();
     }
 }
 </script>

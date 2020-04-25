@@ -17,7 +17,7 @@
                     @next-click="changePage"
                     :page-size="pagination.size"
                     :current-page.sync="pagination.currentPage"
-                    :total="pagination.total">
+                    :total="pagination.total" class="pagination2">
         </el-pagination>
     </div>
 </template>

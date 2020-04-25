@@ -4,7 +4,7 @@
            <el-row class="goodDetail-user">
                 <el-avatar :src="user.uAvatar" class="goodDetail-userphoto"></el-avatar>
                 <span class="goodDetail-username">{{user.uName}}</span>
-                <el-button type="danger" round size="small" class="goodDetail-usercheck">查看主页</el-button>
+                <el-button type="danger" round size="small" class="goodDetail-usercheck" @click="toMyHome">查看主页</el-button>
           </el-row>
           <el-divider></el-divider>
           <div class="goodDetail-goods">
@@ -97,6 +97,9 @@ export default {
                 }).catch(err => {
                     console.log(err,'bb');
                     });
+        },
+        toMyHome(){
+           this.$router.push({name:"MyHomeIndex"});
         },
      //显示商品详情信息
         async GoodDetails(g_id) {

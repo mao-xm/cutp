@@ -1,17 +1,17 @@
 <template>
     <div id="report">
-        <div id="good">
+        <el-card id="good">
            
             <img src="../../assets/goods/kouhong.jpg" width="100px" height="100px">
          
            <div id="right">
-               <span id="name">商品名</span><br>
-               <span id="price">价格</span>
-                <div id="describe">商品描述</div> 
+               <span id="name">口红</span><br>
+               <span id="price">￥120</span>
+                <div id="describe">很好看的口红哦</div> 
                  <el-button type="danger" size="small" class="select">查看</el-button> 
            </div>
           
-           </div>
+           </el-card>
       
          
         <div id="div1">请输入举报内容:</div>
@@ -76,7 +76,7 @@ export default {
       textarea:"",
       imageUrl: '',
       ruleForm: {
-            report:{oId:null,rContent:'',rId:null,fId:1,rStatus:0,uId:1,},
+            report:{oId:0,rContent:'',rId:0,rStatus:0,uId:1,},
             goodPic:[],
             goodVid :{},
             mediaUrl:[]
@@ -92,6 +92,10 @@ export default {
           }
       },
        methods:{
+        getOrder(){
+         this.ruleForm.report.oId=this.$route.query&&this.$route.query.oId;
+         
+      },
        beforePicUpload(file){//照片只能是jpg/png，大小小于5m
             console.log(file.type);
           const isJPG = file.type === 'image/jpeg';
@@ -124,7 +128,7 @@ export default {
       },
       handleAvatarSuccess(res, file,fileList) {//返回pic的url
         
-        const mediatype={fmType:0,fmUrl:res};
+        const mediatype={rId:this.ruleForm.report.rId,rmId:0,fmType:0,fmUrl:res};
         this.mediaUrl.push(mediatype);
 
         this.ruleForm.goodPic.push(res);
@@ -132,7 +136,7 @@ export default {
       },
       handleVideoSuccess(res, file) {//返回video的url
         //this.ruleForm.goodVid = URL.createObjectURL(file.raw);
-         const mediatype={fmType:1,fmUrl:res};
+         const mediatype={rId:this.ruleForm.report.rId,rmId:0,fmType:1,fmUrl:res};
          this.mediaUrl.push(mediatype);
          this.ruleForm.goodVid=res;
       },
@@ -195,8 +199,10 @@ export default {
                 });
 
     }
+  },
+  created:function(){
+    this.getOrder();
   }
-
 }
 </script>
 <style scoped>
@@ -219,33 +225,35 @@ export default {
 #good{
     width:600px;
     margin-left:100px;
-    border:1px solid #ccc;
+    /* border:1px solid #ccc; */
 }
 #good::after{
     content:'';
     display:block;
     clear:both;
 }
-img{
+/* img{
     margin-top:10px;
     margin-left:10px;
     float:left;
-}
+} */
 .input{
   height:150px;
 }
 #describe{
-    width:300px;
-    height:30px;
-    border:1px solid #ccc;
+  margin-top:8px;
+    /* width:300px;
+    height:30px; */
+    /* border:1px solid #ccc; */
 }
 #right{
-    margin-top:15px;
-    float:left;
-    margin-left:30px;
+    margin-top:-100px;
+    /* float:left; */
+    margin-left:134px;
 }
 .select{
-    margin-left:400px;
+  /* margin-top:20px; */
+    margin-left:365px;
 }
 #price{
     margin-left:20px;

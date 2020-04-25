@@ -124,7 +124,7 @@ export default {
   font-size:25px;
 }
 .el-tabs{
-  width:900px;
-  /* margin-left:100px; */
+  width:870px;
+  margin-left:30px;
 }
 </style>

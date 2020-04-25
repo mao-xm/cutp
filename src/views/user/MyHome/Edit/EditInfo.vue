@@ -2,20 +2,20 @@
     <div id="EdiInfo">
 <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     
-  <el-form-item label="用户名" prop="name" class="item">
-    <el-input type="password" v-model="ruleForm.name" autocomplete="off" class="input"></el-input>
+  <el-form-item label="用户名" prop="uName" class="item">
+    <el-input v-model="ruleForm.uName" autocomplete="off" class="input"></el-input>
   </el-form-item>
   <el-form-item label="密码" prop="Pass" class="item">
-    <el-input type="password" v-model="ruleForm.Pass" autocomplete="off" class="input"></el-input>
+    <el-input type="password" placeholder="请输入你的密码" v-model="ruleForm.Pass" autocomplete="off" class="input"></el-input>
   </el-form-item>
   <el-form-item label="确认密码" prop="checkPass" class="item">
-    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" class="input"></el-input>
+    <el-input type="password" placeholder="请确认你的密码" v-model="ruleForm.checkPass" autocomplete="off" class="input"></el-input>
   </el-form-item>
   <el-form-item label="手机号" prop="teleNumber" class="item">
     <el-input v-model.number="ruleForm.teleNumber" class="input"></el-input>
   </el-form-item>
   <el-form-item label="验证码" prop="code" class="item">
-    <el-input v-model.number="ruleForm.code" class="input1"></el-input>
+    <el-input placeholder="请输入你的验证码" v-model.number="ruleForm.code" class="input1"></el-input>
     <el-button type="danger" :disabled="status" @click="sendVerifyCode" size="mini">{{value}}</el-button>
   </el-form-item>
    <el-form-item label="性别" prop="sex" class="item">
@@ -30,7 +30,7 @@
     <!-- <el-input v-model.number="ruleForm.birth" class="input"></el-input> -->
   </el-form-item>
   <el-form-item label="身份证号" prop="IdNumber" class="item">
-    <el-input v-model.number="ruleForm.IdNumber" class="input"></el-input>
+    <el-input v-model="ruleForm.IdNumber" class="input"></el-input>
   </el-form-item>
   <el-form-item label="学校" prop="school" class="item">
     <el-input v-model.number="ruleForm.school" class="input"></el-input>
@@ -64,6 +64,7 @@
     </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
      data() {
        var checkTeleNumber = (rule, value, callback) => {
@@ -74,6 +75,9 @@ export default {
               alert( typeof value);
                callback(new Error('手机号是11位'));
          }
+         else{
+           callback();
+         }
           };
         var checkCode1 = (rule, value, callback) => {
          if (isNaN(value)){
@@ -81,18 +85,20 @@ export default {
          }
          else if(value.toString().length!==6){
                callback(new Error('验证码是6位'));
+         }else{
+           callback();
          }
           };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入密码'));
+          callback(new Error('请输入新密码'));
         } 
           callback();
         };
     
       var validatePass2 = (rule, value, callback) => {
         if(value === ''){
-            callback(new Error('请再次确认密码'))
+            callback(new Error('请再次确认你的密码'))
         }
         else if (value !== this.ruleForm.Pass) {
           callback(new Error('两次输入密码不一致!'));
@@ -101,10 +107,16 @@ export default {
         }
       };
       return {
+        uAvatar:'',
+        uId:'',
         status:false,
         value:'获取验证码',
+        user:{
+        },
         ruleForm: {
-          name: '',
+          
+          goodPic:[],
+          uName: '',
           Pass:'',
           checkPass:'',
           teleNumber: '',
@@ -116,15 +128,15 @@ export default {
           hobby:''
         },
         rules: {
-          name: [
+          uName: [
            { required: true, message: '请输入用户名', trigger: 'blur' }
           ],
           Pass: [
-            // { required: true, message: '请输入密码', trigger: 'blur' },
+            { required: true, message: '请输入密码', trigger: 'blur' },
              { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            // { required: true, message: '请确认密码', trigger: 'blur' },
+            { required: true, message: '请确认密码', trigger: 'blur' },
              { validator: validatePass2, trigger: 'blur' }
           ],
           teleNumber: [
@@ -154,34 +166,138 @@ export default {
       };
     },
     methods:{
+       beforePicUpload(file){//照片只能是jpg/png，大小小于5m
+            console.log(file.type);
+          const isJPG = file.type === 'image/jpeg';
+          console.log(isJPG);
+          const isPNG = file.type === 'image/png';
+           console.log(isPNG);
+          const isLt5M = file.size / 1024 / 1024 < 5;
+          if (!isJPG && !isPNG) {
+             console.log(isJPG);
+            this.$message.error('上传的图片只能是 JPG/PNG 格式!');  
+            this.common.errorTip('上传的图片只能是 JPG/PNG 格式!');   
+             console.log(isJPG);
+          }
+          if (!isLt5M) {
+            this.$message.error('上传的图片大小不能超过 5MB!');
+          }
+          console.log(isJPG);
+          return (isJPG || isPNG) && isLt5M;
+      },
+      handleAvatarSuccess(res, file,fileList) {//返回pic的url
+        
+        this.uAvatar=res;
+
+        this.ruleForm.goodPic.push(res);
+
+      },
+     
+      handleExceed(files, fileList) {//图片上传超过数量限制
+        this.$message.error('上传图片不能超过5张!');
+        console.log(file, fileList);
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
+       async getUserInfo1() {
+          myAxios
+              .get(`/user/selectByuid/${this.uId}`)
+              .then(res => {
+                   this.ruleForm.uName=res.uName;
+                   this.ruleForm.teleNumber=res.uPhone;
+                   if(res.uSex==true){
+                    this.ruleForm.sex="男";}
+                    else{
+                      this.ruleForm.sex="女";
+                    }
+                    this.ruleForm.birth=res.uBirthday;
+                    this.ruleForm.IdNumber=res.uIdentity;
+                    this.ruleForm.school=res.uSchool;
+                    this.ruleForm.hobby=res.uLike
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
+      },
+    
       submitForm(formName) {
+         this.$confirm('确认进行修改？')
+            .then(_ => {
         this.$refs[formName].validate((valid) => {
+          
           if (valid) {
-             
+            if(this.ruleForm.sex=="男"){
+            this.ruleForm.sex=true;
+          }
+          else{this.ruleForm.sex=false;}
+             if(this.ruleForm.goodPic != ''){
+               alert("aa");
+           const params={code:this.ruleForm.code,pw:this.ruleForm.Pass,repw:this.ruleForm.checkPass,
+           user:{uAvatar:this.uAvatar,uBirthday:this.ruleForm.birth,uId:this.uId,
+           uIdentity:this.ruleForm.IdNumber,uLike:this.ruleForm.hobby,uName:this.ruleForm.uName,
+           uPhone:this.ruleForm.teleNumber,uSchool:this.ruleForm.school,uSex:this.ruleForm.sex,
+           uStatus:true
+           }}
+             myAxios
+            .post(`/user/Edit`,params)
+              .then(res => {
+                if(res==true){
+                  this.$notify.success({
+                      title: '成功',
+                      message: '编辑成功'
+                    });
+                    location. reload();}
+              }).catch(err => {
+                  this.$notify.error
+                  ({
+                      title: '失败',
+                      message: err
+                  });
+              });}
           } else {
             console.log('error submit!!');
             return false;
           }
         });
-      },
+      })},
      sendVerifyCode(){
-        var time=60;
-             var timer=setInterval(() => {
-                time--;
-                if(time>=1){    
-                   this.status=true;
+        // var time=60;
+        //      var timer=setInterval(() => {
+        //         time--;
+        //         if(time>=1){    
+        //            this.status=true;
                
-                this.value="重新发送(" + time + ")";
+        //         this.value="重新发送(" + time + ")";
                 
-                }else if(time==0){
-                    this.status=false;
-                     this.value="获取验证码";
-                     clearInterval(timer);
-                }
-            }
-            ,1000);
+        //         }else if(time==0){
+        //             this.status=false;
+        //              this.value="获取验证码";
+        //              clearInterval(timer);
+        //         }
+        //     }
+        //     ,1000);
+             var uPhone = this.ruleForm.teleNumber;
+            myAxios
+                 .post(`/user/code/${uPhone}`)
+                 .then(res => {
+                    this.$notify.success({
+                        title: '正确',
+                        message: '验证码为：'+res
+                    });
+                }).catch(err => {
+                    console.log(err,'bb');
+                    });
       }
+    },
+    created:function(){
+      this.uId=localStorage.getItem("uId");
     }
+
 }
 </script>
 <style scoped>

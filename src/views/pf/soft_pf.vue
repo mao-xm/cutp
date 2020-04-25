@@ -62,7 +62,7 @@ export default {
       textarea:"",
       imageUrl: '',
       ruleForm: {
-            feedback:{fContent:'',fId:1,fStatus:0,uId:1,},
+            feedback:{fContent:'',fId:0,fStatus:0,uId:1,},
             goodPic:[],
             goodVid :{},
             mediaUrl:[]
@@ -110,7 +110,7 @@ export default {
       },
       handleAvatarSuccess(res, file,fileList) {//返回pic的url
         
-        const mediatype={fmType:0,fmUrl:res};
+        const mediatype={fId:this.ruleForm.feedback.fId,fmId:0,fmType:0,fmUrl:res};
         this.mediaUrl.push(mediatype);
 
         this.ruleForm.goodPic.push(res);
@@ -118,7 +118,7 @@ export default {
       },
       handleVideoSuccess(res, file) {//返回video的url
         //this.ruleForm.goodVid = URL.createObjectURL(file.raw);
-         const mediatype={fmType:1,fmUrl:res};
+         const mediatype={fId:this.ruleForm.feedback.fId,fmId:0,fmType:1,fmUrl:res};
          this.mediaUrl.push(mediatype);
          this.ruleForm.goodVid=res;
       },
@@ -152,20 +152,11 @@ export default {
                             myAxios
                               .post(`feedback/Feedback/AddFeedback`,params)
                                 .then(res => {
+                                  if(res==true){
                                    this.$notify.success({
                                         title: '成功',
                                         message: '反馈成功'
-                                     });
-                                  // this.ruleForm=res;
-                                  // if(this.ruleForm==true){
-                                  //   this.$message({
-                                  //     message: '反馈成功！',
-                                  //     type: 'success'
-                                  //   });
-                                  // }else{
-                                  //    this.$message.error('反馈失败，请重新操作！');
-                                  // }
-                                  // location. reload()
+                                     });}
                                 }).catch(err => {
                                     this.$notify.error
                                     ({
@@ -203,13 +194,13 @@ export default {
   margin-top:40px;
 }
 #div1{
-  margin-left:200px;
+  margin-left:160px;
 }
 .input{
   height:150px;
 }
 .form{
-  margin-left:160px;
+  margin-left:130px;
 }
  .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
@@ -242,7 +233,7 @@ export default {
 #soft-pf{
   padding-top:20px;
   margin:20px auto;
-  width:1000px;
+  width:800px;
   height:800px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
@@ -250,7 +241,7 @@ export default {
 .el-textarea{
   padding-top:20px;
     height:136px;
-    width:600px;
+    width:500px;
     margin-left:200px;
   } 
 

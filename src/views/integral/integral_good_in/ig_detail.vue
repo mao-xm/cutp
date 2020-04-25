@@ -48,10 +48,11 @@ export default {
           myAxios
               .post(`/integral/IEchangeController/insertIE/${this.uId}/${this.igood.igId}`)
               .then(res => {
-                         this.$notify.success({
+                         if(res==true){
+                        this.$notify.success({
                             title: '成功',
                             message: '兑换成功'
-                        });
+                            });}
                        this.$router.push({name:'my_integral'});
                  
                   

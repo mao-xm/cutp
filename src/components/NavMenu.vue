@@ -41,8 +41,10 @@ export default {
 },
 methods:{
    logout() {
+            this.$confirm('确认登出？')
+            .then(_ => {
             this.$cookies.remove('GM_TOKEN' , '/' , '.gomai.com') 
-            this.$router.replace('/Login');
+            this.$router.replace('/Login');})
    }
 }
 }

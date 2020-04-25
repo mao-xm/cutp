@@ -13,7 +13,7 @@
                         <el-radio-group v-model="order.uaId" size="medium" fill="#dd3035" text-color="#DD3035" >
                             <el-radio v-for="item in addressList"  :label="item.uaId"  :key="item.uaId" class="generate-order-address-radio">{{item.uaAddress}} （{{item.uaSigner}} 收）{{item.uaPhone}}</el-radio>
                         </el-radio-group>
-                        <el-button type="danger">新增地址</el-button>
+                        <el-button type="danger"  @click="AddNewAd1">新增地址</el-button>
                     </el-form-item>
                     <el-form-item class="generate-order-submit">
                         <el-button type="danger" @click="addGenerateOrder('order')">提交订单</el-button>
@@ -130,7 +130,10 @@ export default {
                 done();
             })
             .catch(_ => {});
-        }
+        },
+         AddNewAd1(){
+        this.$router.push({path:'/AddNewAddress'});
+      },
     }
 }
 </script>

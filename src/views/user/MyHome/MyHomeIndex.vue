@@ -94,6 +94,7 @@ export default {
              this.tf=true;
          }
          else if(type==2){
+             this.tf=true;
              this.$refs.EditInfo.getUserInfo1();
          }
          else{

@@ -6,10 +6,10 @@
         :ieId="ie.ieId" reason="兑换积分商品" :ieCreateTime=" ie.ieCreateTime|timefilters " :url="ie.integralGoods.igImg"></outter></div>
         
          <div v-if="ie.ieType==2"><inner :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
-          :ieId="ie.ieId" reason="购买商品" :ieCreateTime="ie.ieCreateTime|timefilters" :url="ie.goodsVo.goodsMedias.gmUrl"></inner></div>
+          :ieId="ie.ieId" reason="购买商品" :ieCreateTime="ie.ieCreateTime|timefilters" :url="ie.goodsVo.goodsMedias[0].gmUrl"></inner></div>
         
          <div v-if="ie.ieType==3"><outter1 :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
-         :ieId="ie.ieId" reason="退货退款" :ieCreateTime="ie.goodsVo.gCreateTime|timefilters" :url="ie.goodsVo.goodsMedias.gmUrl"></outter1></div>
+         :ieId="ie.ieId" reason="退货退款" :ieCreateTime="ie.goodsVo.gCreateTime|timefilters" :url="ie.goodsVo.goodsMedias[0].gmUrl"></outter1></div>
         
         </li>
            

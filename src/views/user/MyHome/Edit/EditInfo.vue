@@ -206,7 +206,7 @@ export default {
       },
        async getUserInfo1() {
           myAxios
-              .get(`/user/selectByuid/${this.uId}`)
+              .get(`/user/selectByuid/${3}`)
               .then(res => {
                    this.ruleForm.uName=res.uName;
                    this.ruleForm.teleNumber=res.uPhone;
@@ -218,7 +218,7 @@ export default {
                     this.ruleForm.birth=res.uBirthday;
                     this.ruleForm.IdNumber=res.uIdentity;
                     this.ruleForm.school=res.uSchool;
-                    this.ruleForm.hobby=res.uLike
+                    this.ruleForm.hobby=res.uLike;
                   
               }).catch(err => {
                   console.log(err);

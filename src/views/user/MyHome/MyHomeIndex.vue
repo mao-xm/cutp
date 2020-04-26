@@ -38,12 +38,12 @@
             <el-tab-pane label="编辑资料" name="2"><EditInfo ref="EditInfo"></EditInfo></el-tab-pane>
             <el-tab-pane label="评价" name="3">
                 <ul id="ul2">
-                     <li v-for="(ig,i) in 3" :key="i"><evModel></evModel></li>
+                     <li v-for="(ig,i) in evaluate" :key="i"><evModel :evaluate="ig"></evModel></li>
                 </ul>
             </el-tab-pane>
             <el-tab-pane label="我的评价" name="4">
                  <ul id="ul3">
-                     <li v-for="(ig,i) in 3" :key="i"><myEvModel></myEvModel></li>
+                     <li v-for="(ig,i) in MyEvaluate" :key="i"><myEvModel :MyEvaluate="ig"></myEvModel></li>
                 </ul></el-tab-pane>
             </el-tabs>
             <div v-if="tf">
@@ -71,10 +71,13 @@ export default {
   name:'MyHomeIndex',
   data () {
       return {
+          type:'',
+        evaluate:[],
+        MyEvaluate:[],
         user:{
         },
         age:'',
-        uId:1,
+        uId:'',
         MyAddress:[],
         circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
         activeName:'1',
@@ -88,17 +91,23 @@ export default {
     },
     methods: {
       handleClick(tab, event) {
-         var type= tab.name;
-         if(type=='3'||type=='4')
+         this.type= tab.name;
+         if(this.type==1)
          {
-             this.tf=true;
+             this.selectMyAddress();
+             this.tf=false;
          }
-         else if(type==2){
-             this.tf=true;
+         else if(this.type==2){
              this.$refs.EditInfo.getUserInfo1();
+              this.tf=false;
+         }
+         else if(this.type==3){
+             this.tf=true;
+             this.eva();
          }
          else{
-             this.tf=false;
+             this.tf=true;
+             this.MyEva();
          }
         console.log(tab, event);
       },
@@ -106,7 +115,14 @@ export default {
         this.$router.push({path:'/AddNewAddress'});
       },
        changePage(){
-          
+        //    alert("aa");
+          if(this.type==3){
+               this.eva();
+          }
+          if(this.type==4){
+             
+               this.MyEva();
+          }
    
        },
         async getUserInfo() {
@@ -128,11 +144,36 @@ export default {
       },
        async selectMyAddress() {
           myAxios
-              .get(`/user/Address/SelADs//${this.uId}`)
+              .get(`/user/Address/SelADs/${this.uId}`)
               .then(res => {
                 this.MyAddress=res;
                 console.log(res);
                   
+              }).catch(err => {
+                  console.log(err);
+                  });
+      },
+       async eva(){
+           alert(this.uId);
+            alert(this.uId);
+          myAxios
+              .get(`/comment/OrderComment/SecletSellByuId/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .then(res => {
+                this.pagination.total=res.total;
+                this.evaluate=res.rows;
+                console.log(res);
+                  
+              }).catch(err => {
+                  console.log(err);
+                  });
+      },
+      async MyEva(){
+          myAxios
+              .get(`/comment/OrderComment/selectByUId/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .then(res => {//this.uId
+                this.pagination.total=res.total;
+                this.MyEvaluate=res.rows;
+                console.log(res);
               }).catch(err => {
                   console.log(err);
                   });
@@ -144,7 +185,7 @@ export default {
       myEvModel:myEvModel
     },
     created:function(){
-         this.uId=localStorage.getItem("uId");
+        this.uId=localStorage.getItem("uId");
         //  alert( this.uId);
          this.selectMyAddress();
          this.getUserInfo();

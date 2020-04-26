@@ -5,30 +5,27 @@
           <div  id="evModel1-1">
             
                 <div class="demo-basic--circle">
-                    <div class="block1"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
-                    <div id="username1">用户名</div> 
+                    <div class="block1"><el-avatar :size="50" :src="evaluate.user.uAvatar"></el-avatar></div>
+                    <div id="username1">{{evaluate.user.uName}}</div> 
                 </div>
           </div> 
           <div id="evModel1-2">
-              <span id="evTime" >2018-08-07</span><br>
-               <span id="evContent">这件紫色的衣服真是太好看了</span>
+              <span id="evTime" >{{evaluate.oEvaluationTime}}</span><br>
+               <span id="evContent">{{evaluate.oEvaluation}}</span>
                
           </div>
           <div id="evImg">
               <ul>
-                  <li v-for="(ig,i) in 5" :key="i">
-                      <img src="../../../assets/goods/kouhong.jpg" width="80px" height="80px">
+                  <li v-for="(ig,i) in evaluate.orderEvaluationMedia" :key="i">
+                      <img :src="ig.oemUrl" width="80px" height="80px">
                   </li>
               </ul>
           </div>
           <div id="review">追评:</div>
-           <div id="evModel1-3" v-for="(ig,i) in 2" :key="i">
-               <span class="ievTime">2018-08-07</span><br>
-               <span class="ievContent">特别好看，颜色没有色差，包装也好，客服还特别温柔哈哈</span>
-               
-          </div>
+               <span class="ievTime">{{evaluate.oEvaluationAddTime}}</span><br>
+               <span class="ievContent">{{evaluate.oEvaluationAdd}}</span>   
           <div id="viewComment">
-          <el-button type="danger" size="small" @click="vComment">查看评论</el-button>
+          <el-button type="danger" size="small" @click="vComment(evaluate)">查看评论</el-button>
           </div>
           
         </div>
@@ -67,6 +64,7 @@
 <script>
 // import evModelIn from '@/views/evaluate/evMyev/evModelIn'
 export default {
+    props:['evaluate'],
     data(){
         return{
              circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
@@ -84,8 +82,10 @@ export default {
 // //     evModelIn:evModelIn
 // // },
  methods: {
-     vComment(){
-         this.$router.push({path:'/evComment'});
+     vComment(evaluate){
+         this.$router.push({path:'/evComment',query:{evaluate:evaluate}});
+        //  this.$router.push({name:'evComment',params:{k1:commentVos}});
+        //   this.$router.push({path:'/evComment',query:{commentVos:commentVos.join(",")}});
      }
     //   submitForm(formName) {
     //     this.$refs[formName].validate((valid) => {

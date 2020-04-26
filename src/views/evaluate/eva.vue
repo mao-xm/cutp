@@ -38,6 +38,7 @@
     </div>
 </template>
 <script>
+import myAxios from "@/utils/myAxios";
 export default {
    name:'eva',
     data(){
@@ -45,13 +46,34 @@ export default {
       textarea:"",
       imageUrl: '',
       ruleForm: {
-            evaluate:{oId:null,eContent:'',rId:null,fId:1,rStatus:0,uId:1,},
-            goodPic:[],
+            evaluate:{oId:101,eContent:'',uId:1,}, },
+            order:{
+              gId: 0,
+              oBuyDelete: 0,
+              oCancelReason: "string",
+              oCancelType: 0,
+              oCreateTime: "2020-04-26T11:49:15.295Z",
+              oEvaluation: "很完美的东西",
+              oEvaluationAdd: "string",
+              oEvaluationAddTime: "2020-04-26T11:49:15.295Z",
+              oEvaluationTime: "2020-04-26T11:49:15.295Z",
+              oId: '',
+              oPayTime: "2020-04-26T11:49:15.295Z",
+              oReceiveTime: "2020-04-26T11:49:15.295Z",
+              oRemindReceive: "2020-04-26T11:49:15.295Z",
+              oRemindShipments: "2020-04-26T11:49:15.295Z",
+              oSellDelete: 0,
+              oShipmentsTime: "2020-04-26T11:49:15.295Z",
+              oStatus: 0,
+              oTradeNo: "string",
+              uId: 0,
+              uaId: 0},
+                      goodPic:[],
             mediaUrl:[]
-         },
+        ,
           rules: {
-            'report.rContent': [
-              { required: true, message: '请输入举报内容', trigger: 'blur' }
+            'evaluate.eContent': [
+              { required: true, message: '请输入评价内容', trigger: 'blur' }
             ]
           },
          
@@ -60,6 +82,9 @@ export default {
           }
       },
        methods:{
+          getOrder(){
+         this.order.oId=this.$route.query.oId
+         },
        beforePicUpload(file){//照片只能是jpg/png，大小小于5m
             console.log(file.type);
           const isJPG = file.type === 'image/jpeg';
@@ -81,7 +106,7 @@ export default {
       },
       handleAvatarSuccess(res, file,fileList) {//返回pic的url
         
-        const mediatype={fmType:0,fmUrl:res};
+        const mediatype={oemType:0,oemUrl:res};
         this.mediaUrl.push(mediatype);
 
         this.ruleForm.goodPic.push(res);
@@ -105,10 +130,11 @@ export default {
                 this.$refs[ruleForm].validate((valid) => {
                     if (valid) { 
                          if(this.ruleForm.goodPic != ''){
-                            const params = {report:this.ruleForm.report,
-                                          reportMedia:this.mediaUrl}
+                           this.order.oEvaluation=this.ruleForm.evaluate.eContent;
+                    const params = {order:this.order,
+                                              orderEvaluationMedia:this.mediaUrl}
                             myAxios
-                              .post(`/feedback/Feedback/AddReport`,params)
+                              .post(`/comment/OrderComment/InsertOC`,params)
                                 .then(res => {
                                  this.$notify.success({
                                  title: '成功',
@@ -132,7 +158,10 @@ export default {
 
                 });
 
-    }}
+    }},
+    created:function(){
+      this.getOrder();
+    }
 }
 </script>
 <style scoped>

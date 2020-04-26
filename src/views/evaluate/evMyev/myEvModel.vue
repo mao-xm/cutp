@@ -2,42 +2,61 @@
     <div id="myEvModel">
         <el-card>
             <div id="myEvModel1">
-                <span id="myEvModel1-1">2018-08-07</span><br>
-                <span id="myEvModel1-2">特别好看，颜色没有色差，包装也好，客服还特别温柔哈哈</span>
+                <span id="myEvModel1-1">{{MyEvaluate.oEvaluationTime}}</span><br>
+                <span id="myEvModel1-2">{{MyEvaluate.oEvaluation}}</span>
                 <div id="myEvModel1-3">
                  <ul>
-                   <li v-for="(ig,i) in 5" :key="i"><img src="../../../../src/assets/Login/toux.jpg" width="80px" height="80px" class="img"></li>
+                   <li v-for="(ig,i) in MyEvaluate.orderEvaluationMedia" :key="i"><img :src="ig.oemUrl" width="80px" height="80px" class="img"></li>
                 </ul>
                 </div>
             </div>
             <div id="myEvModel2">
                 <el-card>
-                <img src="../../../assets/goods/kouhong.jpg" width="100px" height="100px" id="img3">
+                <img :src="MyEvaluate.goodsVo.goodsMedias[0].gmUrl" width="100px" height="100px" id="img3">
                 <div id="gp1">
-                    <div id="gName1">口红</div>
-                    <div id="gPrice1">￥120</div>
+                    <div id="gName1">{{MyEvaluate.goodsVo.gName}}</div>
+                    <div id="gPrice1">￥{{MyEvaluate.goodsVo.gPrice}}</div>
                     
                 </div>
                 <div id="button1">
-                    <el-button type="danger" size="small">查看</el-button>
+                    <el-button type="danger" size="small" @click="selectDetail(MyEvaluate.oId)">查看</el-button>
                     </div>
                 </el-card>
             </div>
             <div id="myEvModel3">
                 <div id="button2">
-                 <el-button type="danger" size="small" @click="mReview">追评</el-button>
+                 <el-button type="danger" size="small" @click="mReview(MyEvaluate)" v-if="MyEvaluate.oStatus==5">追评</el-button>
+                 <el-button type="danger" size="small" @click="mReview1(MyEvaluate)" v-if="MyEvaluate.oStatus!=5">查看</el-button>
                 </div>
             </div>
         </el-card>
     </div>
 </template>
 <script>
+
 export default {
     name:'mvComment',
+    props:['MyEvaluate'],
+    data(){
+        return {value:'追评',flag:false}
+    },
     methods:{
-        mReview(){
-            this.$router.push({path:'/mvComment'});
+         selectDetail(oId){
+         this.$router.push({
+          path:'/orderDetail',
+          query:{
+            oId:oId
+          }
+        })
+      },
+        mReview(MyEvaluate){
+            this.flag=true;
+            this.$router.push({path:'/mvComment',query:{ MyEvaluate:MyEvaluate,flag:this.flag}});
+        },
+        mReview1(MyEvaluate){
+            this.$router.push({path:'/mvComment',query:{ MyEvaluate:MyEvaluate,flag:this.flag}});
         }
+
     }
 }
 </script>

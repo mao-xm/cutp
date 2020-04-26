@@ -6,7 +6,7 @@
                 <orderDetailButton class="order-item-icon" :order="order"></orderDetailButton>
                 <el-button type="danger" class="order-item-button" round @click="buyDelete()">删除订单</el-button>
                 <askReturnButton class="order-item-button" :order="order"></askReturnButton>
-                <el-button type="danger" class="order-item-button" round >评价</el-button>
+                <el-button type="danger" class="order-item-button" round @click="eva(order.oId)" >评价</el-button>
             </div>
         </el-card>
     </div>
@@ -26,6 +26,14 @@ export default {
         this.$set(this.order,'isBuy',true)
     },
     methods:{
+        eva(oId){
+           this.$router.push({
+          path:'/eva',
+          query:{
+            oId:oId
+          }
+        })
+        },
         async buyDelete(){
             this.$confirm('确认删除该订单？')
             .then(_ => {

@@ -4,7 +4,7 @@
      <!--style="padding-left:58px;font-size:10px;height:20px;" -->
      <!-- style="width:1150px;float:right;height:20px; -->
      <img src="../assets/logo.png" width="50px" height="50px" id="img">
-     <el-button @click="logout()" type="danger" size="mini" id="out">登出</el-button>
+     <i @click="logout()"  id="out" class="el-icon-switch-button"><span id="out1">登出</span></i>
      <el-menu
       :default-active="path"
       router
@@ -51,8 +51,13 @@ methods:{
 </script>
 <style>
 #out{
-  margin-left:15px;
-  margin-top:2px;
+ 
+  margin-left:28px;
+  margin-top:7px;
+}
+#out1{
+  margin-left:4px;
+  font-size:10px;
 }
  #img{
   float:left;

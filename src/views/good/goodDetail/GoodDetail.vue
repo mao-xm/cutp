@@ -55,7 +55,7 @@ export default {
         dialogFormVisible: false,
         buttonShow:'two',
         goods:{
-            gId:5
+            gId:this.$route.params.g_id
         },
         user:{
             uName:'',

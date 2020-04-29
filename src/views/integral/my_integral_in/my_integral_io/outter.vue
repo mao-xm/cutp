@@ -6,7 +6,7 @@
       <img :src="url" class="image">
       <div style="padding: 14px;">
         <span id="tspan1">{{igName}}</span>
-        <span id="tspan2">{{ieChangeIntegral}}</span>
+        <span id="tspan2">-{{ieChangeIntegral}}</span>
         <div class="bottom clearfix">
             <span id="tspan4">{{ieCreateTime}}</span>
             

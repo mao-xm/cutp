@@ -33,11 +33,9 @@ export default {
         var checkNumber1 = (rule, value, callback) => {
          if (isNaN(value)){
              callback(new Error('请输入数字值'));
-             clearValidate(rule);   
          }
-         else if(value.length!==11){
+         else if(value.toString().length!=11){
                callback(new Error('收件人电话是11位'));
-               clearValidate(rule);
          }else{
            callback();
            

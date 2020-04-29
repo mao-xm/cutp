@@ -45,7 +45,7 @@ export default {
                 uaId: ''
             },
             addressList:[],
-            uId:1,
+            uId:localStorage.getItem("uId"),
             rules: {
                uaId: [
                     { required: true, message: '请选择地址', trigger: 'change' }

@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       type: "0",
-      uId:2,
+      uId:localStorage.getItem("uId"),
       isSearch:false,
       gName:'',
       rows:{},

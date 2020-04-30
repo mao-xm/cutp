@@ -145,10 +145,8 @@ export default {
                     });
          })},
         submitForm1(formName) {
-          alert("a");
         this.$refs[formName].validate((valid) => {
           if (valid) {
-                alert("aa");
                 this.registry();
           } else {
             console.log('error submit!!');

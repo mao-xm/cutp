@@ -50,9 +50,9 @@ export default {
     },
     methods:{
         async login() {
-             alert(typeof this.ruleForm.uName);
+            
              var a= this.ruleForm.uPassword.toString()
-            alert(typeof a);
+            
             this.$confirm('确认登录？')
             .then(_ => {
             myAxios

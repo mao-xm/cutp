@@ -74,7 +74,7 @@ export default {
           //  aa:[],
           },
          options:[],
-         user:{uId:1},
+         user:{uId:localStorage.getItem("uId")},
          flag:false,
          goodStatus:0,
          //goodsDate: new Date(),

@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       type: "0",
-      uId:1,
+      uId:localStorage.getItem("uId"),
       rows:{},
       gName:'',
       isSearch:false,
@@ -73,15 +73,16 @@ export default {
     }
   },
   created(){
-    
     this.getOrder()
   },
   methods:{
       changePage(value){
         // this.pagination.currentPage = value
+        console.log('ww',this.uId)
         this.getOrder()
       },
       changeTab(tab, event){
+        console.log('ww',this.uId)
         console.log(tab, event);
         this.type = tab.name
         this.pagination.currentPage=1

@@ -20,7 +20,7 @@ import myAxios from "@/utils/myAxios";
 export default {
        data(){
         return{
-             u_id:1,
+             u_id:localStorage.getItem("uId"),
             flagDeleteUnshelve:false,
             flagDeleteGoods:false,
         }
@@ -40,7 +40,7 @@ export default {
        clickDeleteUnshelvedGoods(gid){//根据gid对下架商品重新上架
            console.log(gid)
          //  console.log(this.unshelvedgoods.gId)
-           this.$confirm('确定重新下架此宝贝么？')
+           this.$confirm('确定重新上架此宝贝么？')
             .then(_ => {
                         if(this.unshelvedgoods.gId!=''){
                               console.log(gid)

@@ -16,7 +16,7 @@ export default {
     data() {
     return {
       activeName: 'first',
-      u_id:1,
+      u_id:localStorage.getItem("uId"),
     }
   },
    methods:{

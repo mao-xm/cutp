@@ -37,7 +37,7 @@ import myAxios from "@/utils/myAxios";
 export default {
     data(){
         return{
-             u_id:1,
+             u_id:localStorage.getItem("uId"),
            dialogFormVisible: false,
              form:{},
              //gid:publishgoods.gId,

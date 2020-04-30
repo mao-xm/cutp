@@ -24,7 +24,7 @@ export default {
     name:'unshelved',
     data(){
        return{
-          u_id:1,
+          u_id:localStorage.getItem("uId"),
           userUnshelvedGoods:[],
            pagination:{
                 total: 0,

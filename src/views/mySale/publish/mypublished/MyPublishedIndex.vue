@@ -24,7 +24,7 @@ export default {
     name:'myPublished',
     data(){
        return{
-          u_id:1,
+          u_id:localStorage.getItem("uId"),
           userPublishGoods:[],
           
           pagination:{

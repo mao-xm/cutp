@@ -71,10 +71,8 @@ components:{
       }
     },
     created:function(){
-        alert("aa");
         this.MyEvaluate=this.$route.query.MyEvaluate;
          this.flag=this.$route.query.flag;
-        alert(this.MyEvaluate.oId);
     }
 }
 </script>

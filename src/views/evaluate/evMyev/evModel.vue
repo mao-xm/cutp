@@ -10,7 +10,7 @@
                 </div>
           </div> 
           <div id="evModel1-2">
-              <span id="evTime" >{{evaluate.oEvaluationTime}}</span><br>
+              <span id="evTime" >{{evaluate.oEvaluationTime|timefilters}}</span><br>
                <span id="evContent">{{evaluate.oEvaluation}}</span>
                
           </div>
@@ -22,7 +22,7 @@
               </ul>
           </div>
           <div id="review">追评:</div>
-               <span class="ievTime">{{evaluate.oEvaluationAddTime}}</span><br>
+               <span class="ievTime">{{evaluate.oEvaluationAddTime|timefilters}}</span><br>
                <span class="ievContent">{{evaluate.oEvaluationAdd}}</span>   
           <div id="viewComment">
           <el-button type="danger" size="small" @click="vComment(evaluate)">查看评论</el-button>
@@ -81,6 +81,23 @@ export default {
 // // components:{
 // //     evModelIn:evModelIn
 // // },
+filters: {
+    timefilters(val) {
+      if (val == null || val == "") {
+        return "暂无时间";
+      } else {
+        let d = new Date(val);   //val为取到的后台时间
+        let month =
+          d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
+        let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+        let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+        let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+        let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+       let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
+        return times;
+      }
+    }
+  },
  methods: {
      vComment(evaluate){
          this.$router.push({path:'/evComment',query:{evaluate:evaluate}});
@@ -141,7 +158,9 @@ ul,#evImg{
 #evModel1-3,#ievTime{
     margin-top:10px;
 }
-
+.ievTime,.ievContent{
+  margin-left:60px;  
+}
  #evContent,.ievContent{
     width:450px;
 }

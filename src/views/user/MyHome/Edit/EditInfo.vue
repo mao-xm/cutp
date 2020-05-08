@@ -39,7 +39,17 @@
     <el-input v-model.number="ruleForm.hobby" class="input"></el-input>
   </el-form-item>
   <el-form-item label="上传头像" class="item" prop="goodPic">
-                    <el-upload
+       <el-upload
+            id="upload"
+            class="avatar-uploader"
+            action="http://localhost:8089/upload/image"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
+                    <!-- <el-upload
                     action="http://localhost:8089/upload/image"
                     list-type="picture-card"
                     :file-list="ruleForm.goodPic"
@@ -49,13 +59,14 @@
                     :on-exceed="handleExceed"
                     :on-success="handleAvatarSuccess"
                     :on-remove="handleRemove"
-                    id="upload">
-                        <i class="el-icon-plus"></i>
+                    id="upload"> -->
+                    <!-- <img v-if="imageUrl" :src="imageUrl" id="img"> -->
+                        <!-- <i class="el-icon-plus"></i>
                         <div class="el-upload__tip" slot="tip">注：只能上传jpg/png文件，且不超过5M</div>
-                    </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="imgUrl" alt="">
-                    </el-dialog>
+                    </el-upload> -->
+                    <!-- <el-dialog :visible.sync="dialogVisible">
+                       <img width="100%" src="imgUrl" alt="">  :src="imgUrl"
+                    </el-dialog> -->
     </el-form-item>
   <el-form-item class="item">
     <el-button type="danger" @click="submitForm('ruleForm')" class="preserve">保存</el-button>
@@ -107,7 +118,8 @@ export default {
         }
       };
       return {
-        uAvatar:'',
+        imageUrl:'',
+        // uAvatar:'',
         uId:'',
         status:false,
         value:'获取验证码',
@@ -115,7 +127,7 @@ export default {
         },
         ruleForm: {
           
-          goodPic:[],
+          // goodPic:[],
           uName: '',
           Pass:'',
           checkPass:'',
@@ -186,10 +198,11 @@ export default {
           return (isJPG || isPNG) && isLt5M;
       },
       handleAvatarSuccess(res, file,fileList) {//返回pic的url
-        
-        this.uAvatar=res;
+      this.imageUrl=res;
+        // this.ruleForm.goodPic=[];
+        // this.uAvatar=res;
 
-        this.ruleForm.goodPic.push(res);
+        // this.ruleForm.goodPic.push(res);
 
       },
      
@@ -206,8 +219,8 @@ export default {
       },
        async getUserInfo1() {
           myAxios
-              .get(`/user/selectByuid/${3}`)
-              .then(res => {
+              .get(`/user/selectByuid/${this.uId}`)
+              .then(res => {//3
                    this.ruleForm.uName=res.uName;
                    this.ruleForm.teleNumber=res.uPhone;
                    if(res.uSex==true){
@@ -219,6 +232,7 @@ export default {
                     this.ruleForm.IdNumber=res.uIdentity;
                     this.ruleForm.school=res.uSchool;
                     this.ruleForm.hobby=res.uLike;
+                    this.imageUrl=res.uAvatar;
                   
               }).catch(err => {
                   console.log(err);
@@ -236,9 +250,8 @@ export default {
           }
           else{this.ruleForm.sex=false;}
              if(this.ruleForm.goodPic != ''){
-               alert("aa");
            const params={code:this.ruleForm.code,pw:this.ruleForm.Pass,repw:this.ruleForm.checkPass,
-           user:{uAvatar:this.uAvatar,uBirthday:this.ruleForm.birth,uId:this.uId,
+           user:{uAvatar:this.imageUrl,uBirthday:this.ruleForm.birth,uId:this.uId,
            uIdentity:this.ruleForm.IdNumber,uLike:this.ruleForm.hobby,uName:this.ruleForm.uName,
            uPhone:this.ruleForm.teleNumber,uSchool:this.ruleForm.school,uSex:this.ruleForm.sex,
            uStatus:true
@@ -301,9 +314,12 @@ export default {
 }
 </script>
 <style scoped>
-.input,#upload{
+.input{
   width:60%;
  margin-left:30px;
+}
+#upload{
+  margin-left:30px;
 }
 .input1{
   width:39%; 
@@ -319,7 +335,30 @@ export default {
 .preserve{
     margin-left:30px;
 }
-.avatar-uploader .el-upload {
+/* .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar{
+    width: 178px;
+    height: 178px;
+    display: block;
+  } */
+   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;

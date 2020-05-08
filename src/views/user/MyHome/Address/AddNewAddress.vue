@@ -9,13 +9,20 @@
                 <el-input v-model="ruleForm.number" autocomplete="off" class="input"></el-input>
             </el-form-item>
           
-              <el-form-item label="收件人地址" prop="Adress">
-                    <el-select v-model="ruleForm.Adress" placeholder="请选择地址" class="inputs">
+              <el-form-item label="收件人地址" prop="value">
+                    <!-- <el-select v-model="ruleForm.Adress" placeholder="请选择地址" class="inputs">
                       <el-option label="天津市" value="天津市"></el-option>
                       <el-option label="湖南省" value="湖南省"></el-option>
                       <el-option label="贵州省" value="贵州省"></el-option>
                       <el-option label="广西省" value="广西省"></el-option>
-                    </el-select>
+                    </el-select> -->
+                    <el-cascader
+                        placeholder="请选择地址" 
+                        class="inputs"
+                        v-model="ruleForm.value"
+                        :options="options"
+                        @change="handleChange">
+                   </el-cascader>
               </el-form-item>
                 <!-- <el-input v-model="ruleForm.Adress" class="input"></el-input> -->
        
@@ -44,10 +51,86 @@ export default {
          }
           };
       return {
+        options: [{
+          value: '天津市',
+          label: '天津市',
+          children: [{
+            value: '西青区',
+            label: '西青区',
+            children: [{
+              value: '精武镇',
+              label: '精武镇'
+            }, {
+              value: '中北镇',
+              label: '中北镇'
+            }]
+          }, {
+            value: '和平区',
+            label: '和平区',
+            children: [{
+              value: '新华街道',
+              label: '新华街道'
+            }, {
+              value: '巴塔街道',
+              label: '巴塔街道'
+            }]
+          }]
+        }, {
+          value: '贵州省',
+          label: '贵州省',
+          children: [{
+            value: '毕节市',
+            label: '毕节市',
+            children: [{
+              value: '织金县',
+              label: '织金县'
+            }, {
+              value: '黔西县',
+              label: '黔西县'
+            }]
+          }, {
+            value: '贵阳市',
+            label: '贵阳市',
+            children: [{
+              value: '南明区',
+              label: '南明区'
+            }, {
+              value: '花溪区',
+              label: '花溪区'
+            }]
+          }]
+          },{
+          value: '湖南省',
+          label: '湖南省',
+          children: [{
+            value: '长沙市',
+            label: '长沙市',
+            children: [{
+              value: '芙蓉区',
+              label: '芙蓉区'
+            }, {
+              value: '雨花区',
+              label: '雨花区'
+            }]
+          }, {
+            value: '湘潭市',
+            label: '湘潭市',
+            children: [{
+              value: '雨湖区',
+              label: '雨湖区'
+            }, {
+              value: '岳塘区',
+              label: '岳塘区'
+            }]
+          }]
+          }
+
+         ],
+      
         ruleForm: {
           name: '',
           number:'',
-          Adress:'',
+          value:[],
           DetailAdress: ''
         },
         userA:{
@@ -66,7 +149,7 @@ export default {
             //  { min: 11, max: 11, message: '收件人电话是11位', trigger: 'blur' },
             {validator:checkNumber, trigger: 'blur' }     
           ],
-          Adress: [
+          value: [
             // { required: true, message: '请输入收件人地址', trigger: 'blur' }
             { required: true, message: '请选择收件人地址', trigger: 'change' }
           ],
@@ -92,7 +175,7 @@ export default {
           this.userA.uId= localStorage.getItem("uId");
           this.userA.uaSigner=this.ruleForm.name;
           this.userA.uaPhone=this.ruleForm.number.toString();
-          this.userA.uaAddress=this.ruleForm.Adress+this.ruleForm.DetailAdress;
+          this.userA.uaAddress=this.ruleForm.value.join(" ")+" "+this.ruleForm.DetailAdress;
           const params=this.userA;
          this.$confirm('确认添加？')
             .then(_ => {
@@ -132,7 +215,7 @@ export default {
 .inputs{
   margin-top:20px;
   margin-left:30px;
-  width:300px;
+  width:492px;
 }
 .preserve{
   margin-top:20px;

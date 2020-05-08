@@ -14,6 +14,9 @@ export default {
 }}
 </script>
 <style>
+/* #EdiInfo element.style{
+  margin-left:130px ;
+} */
 #evModel .e-form-item_content{
   width:0%;
 }

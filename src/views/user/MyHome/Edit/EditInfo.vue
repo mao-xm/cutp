@@ -91,12 +91,18 @@ export default {
          }
           };
         var checkCode1 = (rule, value, callback) => {
-         if (isNaN(value)){
+          if( this.oldPhone!=this.ruleForm.teleNumber){
+           if (value === '') {
+          callback(new Error('请输入验证码'));
+         } 
+         else if (isNaN(value)){
              callback(new Error('请输入数字值'));   
          }
          else if(value.toString().length!==6){
                callback(new Error('验证码是6位'));
          }else{
+           callback();
+         }}else{
            callback();
          }
           };
@@ -118,6 +124,7 @@ export default {
         }
       };
       return {
+        oldPhone:'',
         imageUrl:'',
         // uAvatar:'',
         uId:'',
@@ -156,7 +163,7 @@ export default {
              {validator:checkTeleNumber, trigger: 'blur' }
           ],
           code: [
-            { required: true, message: '请输入验证码', trigger: 'blur' },
+            // { required: true, message: '请输入验证码', trigger: 'blur' },
              { validator: checkCode1, trigger: 'blur' }
           ],
           sex: [
@@ -222,6 +229,7 @@ export default {
               .get(`/user/selectByuid/${this.uId}`)
               .then(res => {//3
                    this.ruleForm.uName=res.uName;
+                   this.oldPhone=res.uPhone;
                    this.ruleForm.teleNumber=res.uPhone;
                    if(res.uSex==true){
                     this.ruleForm.sex="男";}

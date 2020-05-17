@@ -19,8 +19,8 @@
               <saleReceiveOrderItem v-if="item.oStatus == 3" :order="item"></saleReceiveOrderItem>
               <saleEvaluationOrderItem v-if="item.oStatus == 4" :order="item"></saleEvaluationOrderItem>
               <saleCancelItem v-if="item.oStatus == 6" :order="item"></saleCancelItem>
-              <saleReturnOrderItem v-if="item.oStatus == 7" :order="item"></saleReturnOrderItem>
-              <saleAddEvaluationOrderItem v-if="item.oStatus == 5" :order="item"></saleAddEvaluationOrderItem>
+              <saleReturnOrderItem v-if="item.oStatus == 7||item.oStatus == 8" :order="item"></saleReturnOrderItem>
+              <saleAddEvaluationOrderItem v-if="item.oStatus == 5||item.oStatus == 9" :order="item"></saleAddEvaluationOrderItem>
           </div>
         </div>
         <el-pagination
@@ -67,7 +67,7 @@ export default {
       rows:{},
       pagination:{
         total: 0,
-        size: 2,
+        size: 5,
         currentPage:1
       }
     }

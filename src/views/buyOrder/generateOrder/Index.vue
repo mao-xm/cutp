@@ -8,11 +8,13 @@
             </div>
             <div class="generate-order-address">
                 <div class="generate-order-address-title">选择收货地址</div>
-                <el-form :model="order" :rules="rules" ref="order"   :inline="true"  class="generate-order-address-form">
+                <el-form :model="order" :rules="rules" ref="order"   class="generate-order-address-form">
                     <el-form-item prop="uaId">
                         <el-radio-group v-model="order.uaId" size="medium" fill="#dd3035" text-color="#DD3035" >
                             <el-radio v-for="item in addressList"  :label="item.uaId"  :key="item.uaId" class="generate-order-address-radio">{{item.uaAddress}} （{{item.uaSigner}} 收）{{item.uaPhone}}</el-radio>
                         </el-radio-group>
+                    </el-form-item>
+                    <el-form-item class="generate-order-add-address">
                         <el-button type="danger"  @click="AddNewAd1">新增地址</el-button>
                     </el-form-item>
                     <el-form-item class="generate-order-submit">
@@ -79,8 +81,11 @@ export default {
         async addGenerateOrder(formName) {
             this.$confirm('确认提交订单？')
             .then(_ => {
+                console.log('dd')
                 this.$refs[formName].validate((valid) => {
+                    console.log('abb')
                     if (valid) {
+                        console.log('vv')
                         if((this.order.uaId != 0 || this.order.uaId != '') && (this.goods.gId != 0 || this.goods.gId != '')&& (this.uId != 0 || this.uId != '')){
                             const params = { gId: this.goods.gId , uId: this.uId , uaId: this.order.uaId}
                             myAxios
@@ -185,10 +190,14 @@ export default {
     margin-bottom: 0px !important;
 }
 .generate-order-submit{
-    float: right;
+    float: left;
+    margin-top: 50px;
     margin-bottom: 20px !important;
 }
-
+.generate-order-add-address{
+    float: right; 
+    margin-right: 50px;
+}
 .generate-order-address /deep/ .el-radio__input.is-checked+.el-radio__label {
   color: #DD3035 !important;
 }

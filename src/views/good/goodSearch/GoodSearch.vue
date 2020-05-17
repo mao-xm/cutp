@@ -105,7 +105,7 @@ export default {
 created(){
           console.log('flag'+this.flag);
           if(this.flag=='one'){
-              console.log("one");
+            //  console.log("one");
               console.log(this.g_detail);
               this.getGoodsByDetail(this.g_detail);
               console.log(this.g_detail);
@@ -116,6 +116,7 @@ created(){
           }
           else{
                this.$message.error('操作有误，请重新操作！');
+
           }
     },
    components:{

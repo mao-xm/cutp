@@ -49,7 +49,7 @@ export default {
 
             pagination:{
                 total: 0,
-                size: 4,
+                size: 12,
                 currentPage:1
           }
         }

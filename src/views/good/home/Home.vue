@@ -85,10 +85,13 @@ export default {
                  .get(`/goods/goods/findRecommendGoods`)
                // .get('http://localhost:10010/api/goods/category2/findAllGoodsCategry')
                 .then(res => {
-                    
-                 that.recommendGoods =res;
-                console.log(that.recommendGoods);
-                  
+                    if(res!=null){
+                        that.recommendGoods =res;
+                        console.log(that.recommendGoods);
+                    }
+                    else{
+                        this.$message.error('查询有误，请重新操作！');
+                    }
                 }).catch(err => {
                     console.log(err,'bb');
                     });

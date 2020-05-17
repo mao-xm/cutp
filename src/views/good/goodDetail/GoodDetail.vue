@@ -109,11 +109,12 @@ export default {
                 .get(`/goods/goods/findGoodsDetail`,params)
                 .then(res => {
                         console.log(res,'aa')
-                        this. user=res.user,
+                       
+                  if(res!=null){
+                       this. user=res.user,
                         this.gName=res.gName,
                         this. gPrice=res.gPrice,
                         this.gDetail=res.gDetail
-                  
                         for (let item of res.goodsMedias) {
                             console.log(item)
                             if(item.gmType == 0){
@@ -130,8 +131,9 @@ export default {
                                 this.buttonShow='two'
                             }
                         }
-                   
-
+                    }else{
+                        this.$message.error('查询有误，请重新操作！');
+                     }
                            
                 }).catch(err => {
                     console.log(err,'bb');

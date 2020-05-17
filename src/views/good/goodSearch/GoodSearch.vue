@@ -156,7 +156,9 @@ created(){
      /* width: 100%; */
     margin-left: 45%;
      float: left;
+     width:100%;
      position: relative;
+     margin-bottom: 5px;
  }
 #goodSearch-Inf{
      margin-top:30px ;

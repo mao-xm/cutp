@@ -25,7 +25,7 @@
             <div class="goodDetail-button">
                  <!-- <el-button type="danger" size="small" class="goodDetail-button-talk">联系卖家</el-button> -->
                   <el-button type="danger" size="small" class="goodDetail-button-show" v-if="buttonShow=='one'" @click="checkGoodVideo()"> 商品视频</el-button>
-                 <el-button type="danger" size="small" class="goodDetail-button-buy" @click="verifyGoodsByGId()"> 立即购买</el-button>
+                 <el-button  :disabled="user.uId == uId" type="danger" size="small" class="goodDetail-button-buy" @click="verifyGoodsByGId()"> 立即购买</el-button>
             </div>
        </el-card>
 
@@ -52,6 +52,7 @@ export default {
         //   {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
 
         // ],
+        uId:localStorage.getItem("uId"),
         flag:false,
         dialogFormVisible: false,
         buttonShow:'two',
@@ -77,7 +78,7 @@ export default {
         */
         async verifyGoodsByGId() {
             myAxios
-                .get(`/order/oGoods/verifyGoodsByGId/${this.goods.gId}`)
+                .get(`/order/oGoods/verifyGoodsByGId/${this.goods.gId}/${this.uId}`)
                 .then(res => {
                     console.log(res,'aa')
                     this.goods = res

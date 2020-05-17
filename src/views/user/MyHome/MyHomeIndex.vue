@@ -178,7 +178,9 @@ export default {
       myEvModel:myEvModel
     },
     created:function(){
-        this.uId=localStorage.getItem("uId");
+        this.uId=this.$route.query&&this.$route.query.uId;
+        if(this.uId==null){
+        this.uId=localStorage.getItem("uId");}
         this.flag=this.$route.query&&this.$route.query.flag;
          this.selectMyAddress();
          this.getUserInfo();

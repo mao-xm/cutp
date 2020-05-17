@@ -103,7 +103,8 @@ export default {
             this.$router.push({
           path:'/MyHomeIndex',
           query:{
-            flag:this.flag
+            flag:this.flag,
+            uId:this.user.uId
           }
         })
            //this.$router.push({name:"MyHomeIndex"});

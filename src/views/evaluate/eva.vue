@@ -124,7 +124,6 @@ export default {
         this.dialogVisible = true;
       },
       async submitRmForm(ruleForm) {//点击提交
-      alert("hhh");
           this.$confirm('确认进行评价？')
             .then(_ => {
                 this.$refs[ruleForm].validate((valid) => {

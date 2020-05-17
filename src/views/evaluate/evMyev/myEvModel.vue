@@ -2,7 +2,7 @@
     <div id="myEvModel">
         <el-card>
             <div id="myEvModel1">
-                <span id="myEvModel1-1">{{MyEvaluate.oEvaluationTime}}</span><br>
+                <span id="myEvModel1-1">{{MyEvaluate.oEvaluationTime|timefilters}}</span><br>
                 <span id="myEvModel1-2">{{MyEvaluate.oEvaluation}}</span>
                 <div id="myEvModel1-3">
                  <ul>
@@ -40,6 +40,23 @@ export default {
     data(){
         return {value:'追评',flag:false}
     },
+    filters: {
+    timefilters(val) {
+      if (val == null || val == "") {
+        return "暂无时间";
+      } else {
+        let d = new Date(val);   //val为取到的后台时间
+        let month =
+          d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
+        let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+        let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+        let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+        let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+       let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
+        return times;
+      }
+    }
+  },
     methods:{
          selectDetail(oId){
          this.$router.push({

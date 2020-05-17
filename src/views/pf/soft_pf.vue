@@ -138,9 +138,8 @@ export default {
         this.dialogVisible = true;
       },
       async submitFmForm(ruleForm) {//点击提交
-      alert("hhh");
-      console.log(this.mediaUrl.fmUrl);
-      alert(this.ruleForm.feedback.fContent);
+      
+     
           this.$confirm('确认进行软件反馈？')
             .then(_ => {
                 this.$refs[ruleForm].validate((valid) => {
@@ -176,7 +175,11 @@ export default {
                 });
 
     }
-  }}
+  },
+  created:function(){
+    this.ruleForm.feedback.uId=localStorage.getItem("uId");
+  }
+  }
   
 </script>
 <style scoped>

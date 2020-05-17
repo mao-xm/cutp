@@ -27,6 +27,7 @@ export default {
  },
  methods:{
      getOrder(){
+         this.uId=localStorage.getItem("uId");
          this.$data.igood.igId=this.$route.query&&this.$route.query.id
          
      },

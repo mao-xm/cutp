@@ -52,6 +52,7 @@ export default {
         //   {id:2,idView:require('../../../assets/goods/PcBg1.jpg')}
 
         // ],
+        flag:false,
         dialogFormVisible: false,
         buttonShow:'two',
         goods:{
@@ -99,7 +100,14 @@ export default {
                     });
         },
         toMyHome(){
-           this.$router.push({name:"MyHomeIndex"});
+            this.$router.push({
+          path:'/MyHomeIndex',
+          query:{
+            flag:this.flag,
+            uId:this.user.uId
+          }
+        })
+           //this.$router.push({name:"MyHomeIndex"});
         },
      //显示商品详情信息
         async GoodDetails(g_id) {

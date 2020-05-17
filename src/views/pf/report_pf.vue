@@ -94,6 +94,7 @@ export default {
        methods:{
 
         getOrder(){
+          this.ruleForm.report.uId=localStorage.getItem("uId");
          this.ruleForm.report.oId=this.$route.query&&this.$route.query.oId;
          
       },

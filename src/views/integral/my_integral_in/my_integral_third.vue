@@ -5,7 +5,7 @@
         <div v-if="ie.ieType==1"><outter :igName="ie.integralGoods.igName" :ieChangeIntegral="ie.ieChangeIntegral"
         :ieId="ie.ieId"  reason="兑换积分商品" :ieCreateTime=" ie.ieCreateTime|timefilters " :url="ie.integralGoods.igImg"></outter></div>
          <div v-if="ie.ieType==3"><outter1 :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
-        :ieId="ie.ieId"  reason="退货退款" :ieCreateTime="ie.goodsVo.gCreateTime|timefilters" :url="ie.goodsVo.goodsMedias.gmUrl"></outter1></div>
+        :ieId="ie.ieId"  reason="退货退款" :ieCreateTime="ie.goodsVo.gCreateTime|timefilters" :url="ie.goodsVo.goodsMedias[0].gmUrl"></outter1></div>
         
         </li>
            
@@ -86,6 +86,7 @@ export default {
             },
        
       created:function(){
+          this.uId=localStorage.getItem("uId");
          this.getIe2();
     
       }

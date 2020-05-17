@@ -7,13 +7,20 @@
             <el-form-item label="收件人电话" prop="number">
                 <el-input v-model.number="ruleForm.number" autocomplete="off" class="input"></el-input>
             </el-form-item>
-            <el-form-item label="收件人地址" prop="Adress">
-                    <el-select v-model="ruleForm.Adress" placeholder="请选择地址" class="inputs">
+            <el-form-item label="收件人地址" prop="value">
+                    <!-- <el-select v-model="ruleForm.Adress" placeholder="请选择地址" class="inputs">
                       <el-option label="天津市" value="天津市"></el-option>
                       <el-option label="湖南省" value="湖南省"></el-option>
                       <el-option label="贵州省" value="贵州省"></el-option>
                       <el-option label="广西省" value="广西省"></el-option>
-                    </el-select>
+                    </el-select> -->
+                     <el-cascader
+                        placeholder="请选择地址" 
+                        class="inputs"
+                        v-model="ruleForm.value"
+                        :options="options"
+                        @change="handleChange">
+                   </el-cascader>
               </el-form-item>
             <el-form-item label="详细地址" prop="DetailAdress">
                 <el-input v-model="ruleForm.DetailAdress" class="input"></el-input>
@@ -42,10 +49,85 @@ export default {
          }
           };
       return {
+         options: [{
+          value: '天津市',
+          label: '天津市',
+          children: [{
+            value: '西青区',
+            label: '西青区',
+            children: [{
+              value: '精武镇',
+              label: '精武镇'
+            }, {
+              value: '中北镇',
+              label: '中北镇'
+            }]
+          }, {
+            value: '和平区',
+            label: '和平区',
+            children: [{
+              value: '新华街道',
+              label: '新华街道'
+            }, {
+              value: '巴塔街道',
+              label: '巴塔街道'
+            }]
+          }]
+        }, {
+          value: '贵州省',
+          label: '贵州省',
+          children: [{
+            value: '毕节市',
+            label: '毕节市',
+            children: [{
+              value: '织金县',
+              label: '织金县'
+            }, {
+              value: '黔西县',
+              label: '黔西县'
+            }]
+          }, {
+            value: '贵阳市',
+            label: '贵阳市',
+            children: [{
+              value: '南明区',
+              label: '南明区'
+            }, {
+              value: '花溪区',
+              label: '花溪区'
+            }]
+          }]
+          },{
+          value: '湖南省',
+          label: '湖南省',
+          children: [{
+            value: '长沙市',
+            label: '长沙市',
+            children: [{
+              value: '芙蓉区',
+              label: '芙蓉区'
+            }, {
+              value: '雨花区',
+              label: '雨花区'
+            }]
+          }, {
+            value: '湘潭市',
+            label: '湘潭市',
+            children: [{
+              value: '雨湖区',
+              label: '雨湖区'
+            }, {
+              value: '岳塘区',
+              label: '岳塘区'
+            }]
+          }]
+          }
+
+         ],
         ruleForm: {
           name: '',
           number:'',
-          Adress:'',
+          value:[],
           DetailAdress: ''
         },
         userAdd:{
@@ -63,7 +145,7 @@ export default {
             { required: true, message: '请输入收件人电话', trigger: 'blur' },
             {validator:checkNumber1, trigger: 'blur' }
           ],
-          Adress: [
+          value: [
             { required: true, message: '请选择收件人地址', trigger: 'change' }
           ],
           DetailAdress: [
@@ -93,7 +175,7 @@ export default {
      },
      async editAddress() {
        this.userAdd.uId=localStorage.getItem("uId");
-        this.userAdd.uaAddress=this.ruleForm.Adress+this.ruleForm.DetailAdress;
+        this.userAdd.uaAddress=this.ruleForm.value.join(" ")+" "+this.ruleForm.DetailAdress;
         this.userAdd.uaPhone=this.ruleForm.number.toString();
         this.userAdd.uaSigner=this.ruleForm.name;
         const params=this.userAdd;
@@ -120,8 +202,8 @@ export default {
               .then(res => {
                   this.ruleForm.name=res.uaSigner;
                   this.ruleForm.number=res.uaPhone;
-                  this.ruleForm.Adress=res.uaAddress.substr(0,3);
-                  this.ruleForm.DetailAdress=res.uaAddress.substr(3);
+                  this.ruleForm.value=res.uaAddress.substr(0,11).split(" ");
+                  this.ruleForm.DetailAdress=res.uaAddress.substr(12);
                   console.log(res)
                   
               }).catch(err => {
@@ -150,7 +232,7 @@ export default {
 .inputs{
   margin-top:20px;
   margin-left:30px;
-  width:300px;
+  width:492px;
 }
 .input{
   margin-top:20px;

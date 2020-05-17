@@ -41,7 +41,7 @@
                      <li v-for="(ig,i) in evaluate" :key="i"><evModel :evaluate="ig"></evModel></li>
                 </ul>
             </el-tab-pane>
-            <el-tab-pane label="我的评价" name="4">
+            <el-tab-pane label="我的评价" name="4" v-if="flag!=false">
                  <ul id="ul3">
                      <li v-for="(ig,i) in MyEvaluate" :key="i"><myEvModel :MyEvaluate="ig"></myEvModel></li>
                 </ul></el-tab-pane>
@@ -71,6 +71,7 @@ export default {
   name:'MyHomeIndex',
   data () {
       return {
+          flag:true,
           type:'',
         evaluate:[],
         MyEvaluate:[],
@@ -115,7 +116,6 @@ export default {
         this.$router.push({path:'/AddNewAddress'});
       },
        changePage(){
-        //    alert("aa");
           if(this.type==3){
                this.eva();
           }
@@ -131,12 +131,6 @@ export default {
               .then(res => {
                    this.user=res;
                    this.age=(2020-this.user.uBirthday.substr(0,4));
-                //  if(res==true){
-                //         this.$notify.success({
-                //             title: '成功',
-                //             message: '删除成功'
-                //             });
-                //             }
                   
               }).catch(err => {
                   console.log(err);
@@ -154,11 +148,10 @@ export default {
                   });
       },
        async eva(){
-           alert(this.uId);
-            alert(this.uId);
+           
           myAxios
               .get(`/comment/OrderComment/SecletSellByuId/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
-              .then(res => {
+              .then(res => {//2
                 this.pagination.total=res.total;
                 this.evaluate=res.rows;
                 console.log(res);
@@ -170,7 +163,7 @@ export default {
       async MyEva(){
           myAxios
               .get(`/comment/OrderComment/selectByUId/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
-              .then(res => {//this.uId
+              .then(res => {//1
                 this.pagination.total=res.total;
                 this.MyEvaluate=res.rows;
                 console.log(res);
@@ -185,8 +178,10 @@ export default {
       myEvModel:myEvModel
     },
     created:function(){
-        this.uId=localStorage.getItem("uId");
-        //  alert( this.uId);
+        this.uId=this.$route.query&&this.$route.query.uId;
+        if(this.uId==null){
+        this.uId=localStorage.getItem("uId");}
+        this.flag=this.$route.query&&this.$route.query.flag;
          this.selectMyAddress();
          this.getUserInfo();
     }

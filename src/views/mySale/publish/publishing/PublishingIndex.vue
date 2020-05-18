@@ -206,6 +206,7 @@ export default {
                                     this.$message({
                                       message: '发布成功！',
                                       type: 'success'
+                                      
                                     });
                                   }else{
                                      this.$message.error('发布失败，请重新操作！');

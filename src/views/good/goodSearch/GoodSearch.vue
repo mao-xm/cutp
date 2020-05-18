@@ -49,7 +49,7 @@ export default {
 
             pagination:{
                 total: 0,
-                size: 4,
+                size: 12,
                 currentPage:1
           }
         }
@@ -105,7 +105,7 @@ export default {
 created(){
           console.log('flag'+this.flag);
           if(this.flag=='one'){
-              console.log("one");
+            //  console.log("one");
               console.log(this.g_detail);
               this.getGoodsByDetail(this.g_detail);
               console.log(this.g_detail);
@@ -116,6 +116,7 @@ created(){
           }
           else{
                this.$message.error('操作有误，请重新操作！');
+
           }
     },
    components:{
@@ -155,7 +156,9 @@ created(){
      /* width: 100%; */
     margin-left: 45%;
      float: left;
+     width:100%;
      position: relative;
+     margin-bottom: 5px;
  }
 #goodSearch-Inf{
      margin-top:30px ;

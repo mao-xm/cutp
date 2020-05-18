@@ -6,9 +6,10 @@
                 <span class="order-detail-card-span" v-if="orderVo.oStatus == 2">待发货订单详情</span>
                 <span class="order-detail-card-span" v-if="orderVo.oStatus == 3">待收货订单详情</span>
                 <span class="order-detail-card-span" v-if="orderVo.oStatus == 4">待评价订单详情</span>
-                <span class="order-detail-card-span" v-if="orderVo.oStatus == 5">交易关闭</span>
+                <span class="order-detail-card-span" v-if="orderVo.oStatus == 5 || orderVo.oStatus == 9">交易成功</span>
                 <span class="order-detail-card-span" v-if="orderVo.oStatus == 6">已取消订单详情</span>
                 <span class="order-detail-card-span" v-if="orderVo.oStatus == 7">退货退款订单详情</span>
+                <span class="order-detail-card-span" v-if="orderVo.oStatus == 8">退货退款订单详情</span>
             </div>
             <el-card class="order-detail-goods">
                 <div slot="header" class="clearfix">
@@ -45,7 +46,7 @@
                     <p v-if="orderVo.oReceiveTime != ''&& orderVo.oReceiveTime != null">收货时间：{{orderVo.oReceiveTime}}</p>
                     <p v-if="orderVo.oEvaluationTime != ''&& orderVo.oEvaluationTime != null">评价时间：{{orderVo.oEvaluationTime}}</p>
                     <p v-if="orderVo.oEvaluationAddTime != ''&& orderVo.oEvaluationAddTime != null">追评时间：{{orderVo.oEvaluationAddTime}}</p>
-                    <p v-if="orderVo.oTradeNo != ''">支付宝交易号：{{orderVo.oTradeNo}}</p>                  
+                    <p v-if="orderVo.oTradeNo != ''&& orderVo.oTradeNo != null">支付宝交易号：{{orderVo.oTradeNo}}</p>                  
                 </div>
             </el-card>
             <div class="order-detail-bottom"></div>

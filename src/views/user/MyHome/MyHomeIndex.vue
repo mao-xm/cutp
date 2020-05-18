@@ -26,7 +26,7 @@
         <div id="card">
          
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="tab">
-            <el-tab-pane label="地址管理" name="1" class="first" >
+            <el-tab-pane label="地址管理" name="1" class="first" v-if="flag!=false" >
                 <ul id="ul1" >
                      <li v-for="(aa,i) in MyAddress" :key="i">
                          <AddressManager :uaId="aa.uaId" :uaSigner="aa.uaSigner"
@@ -35,7 +35,7 @@
                 </ul>
               <el-button type="danger" id="add" size="small" @click="AddNewAd">添加新地址</el-button>
             </el-tab-pane>
-            <el-tab-pane label="编辑资料" name="2"><EditInfo ref="EditInfo"></EditInfo></el-tab-pane>
+            <el-tab-pane label="编辑资料" name="2" v-if="flag!=false"><EditInfo ref="EditInfo"></EditInfo></el-tab-pane>
             <el-tab-pane label="评价" name="3">
                 <ul id="ul2">
                      <li v-for="(ig,i) in evaluate" :key="i"><evModel :evaluate="ig"></evModel></li>
@@ -179,9 +179,11 @@ export default {
     },
     created:function(){
         this.uId=this.$route.query&&this.$route.query.uId;
-        if(this.uId==null){
+        if(this.uId!=localStorage.getItem("uId")&&this.uId!==null){
+          this.flag=this.$route.query&&this.$route.query.flag;
+        }
+        else if(this.uId==null){
         this.uId=localStorage.getItem("uId");}
-        this.flag=this.$route.query&&this.$route.query.flag;
          this.selectMyAddress();
          this.getUserInfo();
     }

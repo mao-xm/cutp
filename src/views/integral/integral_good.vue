@@ -148,6 +148,7 @@ ul li{
 .el-input{
   width:400px;
   left:250px;
+  top:20px;
 }
 /* .el-button:focus, .el-button:hover {
   color:#dd3035;
@@ -161,6 +162,7 @@ ul li{
   }
 .el-button{
   position:relative;
-  left:250px;
+  top:20px;
+  left:260px;
 }
 </style>

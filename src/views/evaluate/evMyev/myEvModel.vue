@@ -10,6 +10,11 @@
                 </ul>
                 </div>
             </div>
+             <div id="myEvModel11">
+                 <span id="myEvModel1-13">追评:</span><br>
+                <span id="myEvModel1-11">{{MyEvaluate.oEvaluationAddTime|timefilters}}</span><br>
+                <span id="myEvModel1-22">{{MyEvaluate.oEvaluationAdd}}</span>
+            </div>
             <div id="myEvModel2">
                 <el-card>
                 <img :src="MyEvaluate.goodsVo.goodsMedias[0].gmUrl" width="100px" height="100px" id="img3">
@@ -19,8 +24,11 @@
                     
                 </div>
                 <div id="button1">
+                    
                     <el-button type="danger" size="small" @click="selectDetail(MyEvaluate.oId)">查看</el-button>
+                    <div id="bottom"></div>
                     </div>
+                
                 </el-card>
             </div>
             <div id="myEvModel3">
@@ -78,6 +86,10 @@ export default {
 }
 </script>
 <style scoped>
+#myEvModel1-13{
+    font-size:14px;
+    color:#dd3035;
+}
 #myEvModel{
     /* margin-left:270px; */
     /* margin-top:10px; */
@@ -85,7 +97,7 @@ export default {
     width:600px;
     margin-left:41px;
 }
-#myEvModel1{
+#myEvModel1,#myEvModel11{
     /* margin-top:10px; */
     /* width:400px;
     height:50px;
@@ -94,19 +106,24 @@ export default {
     /* font-size:12px; */
     margin-left:60px;
 }
-#myEvModel1-1{
+#myEvModel1-1,#myEvModel1-11{
     font-size:12px;
 }
-#myEvModel1-2{
+#myEvModel1-2,#myEvModel1-22{
     width:450px;
     /*height:30px;
     margin-left:570px; */
 }
 #myEvModel2{
-    /* height:120px; */
+    /* height:200px; */
+    margin-top:20px;
     width:450px;
     /* margin-top:20px; */
     margin-left:57px;
+}
+#bottom{
+    /* width:450px; */
+    height:10px;
 }
 #myEvModel1-3{
    height:100px;

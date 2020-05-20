@@ -9,10 +9,10 @@
      >
      </el-input>
      <el-button type="danger" size="small"  @click="search()">搜索</el-button>
-     <div v-if="a1">
+     <div v-if="a1" id="div1">
      
       <div class="lb">购物劵：</div>
-      <ul>
+      <ul id="ul1">
           <li v-for="(ig,i) in igArry" :key="i"><div v-if="ig.igType=='购物券'"><igCard :igName='ig.igName'
            :igIntegral='ig.igIntegral' :url='ig.igImg' :igId='ig.igId' ></igCard></div>
          </li>
@@ -31,7 +31,7 @@
       </ul>
       </div>
          <div id="pag" v-if="a2">
-                <ul>
+                <ul id="ul">
                     <li v-for="(ig,i) in rows" :key="i"><div><igCard :igName='ig.igName'
                     :igIntegral='ig.igIntegral' :url='ig.igImg' :igId='ig.igId' ></igCard></div>
                   </li>
@@ -44,7 +44,7 @@
                     @next-click="changePage"
                     :page-size="pagination.size"
                     :current-page.sync="pagination.currentPage"
-                    :total="pagination.total">
+                    :total="pagination.total" id="pagination">
                 </el-pagination>
           </div>
   </div>
@@ -104,10 +104,8 @@ export default {
           myAxios
               .get(`/integral/IGoods/SelectByigName/${this.input1}/${this.pagination.size}/${this.pagination.currentPage}`)
               .then(res => {
-                  this.total=res.total;
+                  this.pagination.total=res.total;
                   this.rows=res.rows;
-                  alert(this.total);
-                  alert(this.rows);
                   
               }).catch(err => {
                   console.log(err);
@@ -122,6 +120,15 @@ export default {
 }
 </script>
 <style scoped>
+#pag,#div1{
+  margin-left:50px;
+}
+#pagination{
+  margin-left:350px;
+}
+#ul{
+  margin-top:50px;
+}
 .lb{
   margin-top:30px;
   margin-left:65px;
@@ -142,7 +149,7 @@ ul li{
   position:absolute;
   left:200px;
   top:70px;
-  width:1000px;
+  width:900px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .el-input{

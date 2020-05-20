@@ -78,7 +78,7 @@ export default {
       ruleForm: {
             report:{oId:96,rContent:'',rId:0,rStatus:0,uId:1,},
             goodPic:[],
-            goodVid :{},
+            goodVid:{},
             mediaUrl:[]
          },
           rules: {
@@ -177,7 +177,6 @@ export default {
         })
       },
         async submitRmForm(ruleForm) {//点击提交
-      alert("hhh");
           this.$confirm('确认进行举报反馈？')
             .then(_ => {
                 this.$refs[ruleForm].validate((valid) => {
@@ -186,12 +185,13 @@ export default {
                             const params = {report:this.ruleForm.report,
                                           reportMedia:this.mediaUrl}
                             myAxios
-                              .post(`/feedback/Feedback/AddReport`,params)
+                              .post(`/feedback/Report/AddReport`,params)
                                 .then(res => {
                                  this.$notify.success({
                                  title: '成功',
                                  message: '举报成功'
                                  });
+                                 this.$refs['ruleForm'].resetFields();
                                   // if(this.ruleForm){
                                   //   this.$message({
                                   //     message: '举报成功！',

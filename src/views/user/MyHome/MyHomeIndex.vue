@@ -34,6 +34,7 @@
                          </li>
                 </ul>
               <el-button type="danger" id="add" size="small" @click="AddNewAd">添加新地址</el-button>
+              <div id="add1"></div>
             </el-tab-pane>
             <el-tab-pane label="编辑资料" name="2" v-if="flag!=false"><EditInfo ref="EditInfo"></EditInfo></el-tab-pane>
             <el-tab-pane label="评价" name="3">
@@ -106,7 +107,7 @@ export default {
              this.tf=true;
              this.eva();
          }
-         else{
+         else if(this.type==4){
              this.tf=true;
              this.MyEva();
          }
@@ -162,7 +163,7 @@ export default {
       },
       async MyEva(){
           myAxios
-              .get(`/comment/OrderComment/selectByUId/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .get(`/comment/OrderComment/selectByUId/${1}/${this.pagination.size}/${this.pagination.currentPage}`)
               .then(res => {//1
                 this.pagination.total=res.total;
                 this.MyEvaluate=res.rows;
@@ -179,7 +180,7 @@ export default {
     },
     created:function(){
         this.uId=this.$route.query&&this.$route.query.uId;
-        if(this.uId!=localStorage.getItem("uId")&&this.uId!==null){
+        if(this.uId!=localStorage.getItem("uId")&&this.uId!=null){
           this.flag=this.$route.query&&this.$route.query.flag;
         }
         else if(this.uId==null){
@@ -193,7 +194,7 @@ export default {
 #MyHomeIndex{
     margin:30px auto;
     width:800px;
-    /* height:1000px; */
+    /* height:1000px;  */
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .block,#info{
@@ -245,7 +246,10 @@ export default {
 }
 #add{
     margin-left:556px;
-    margin-top:72px;
+    margin-top:30px;
+}
+#add1{
+   height:20px; 
 }
 #ul2,#ul3 li{
     list-style:none;

@@ -64,7 +64,7 @@ export default {
       ruleForm: {
             feedback:{fContent:'',fId:0,fStatus:0,uId:1,},
             goodPic:[],
-            goodVid :{},
+            goodVid:{},
             mediaUrl:[]
          },
           rules: {
@@ -156,6 +156,7 @@ export default {
                                         title: '成功',
                                         message: '反馈成功'
                                      });}
+                                   this.$refs['ruleForm'].resetFields();   
                                 }).catch(err => {
                                     this.$notify.error
                                     ({
@@ -237,7 +238,7 @@ export default {
   padding-top:20px;
   margin:20px auto;
   width:800px;
-  height:800px;
+  height:1000px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 

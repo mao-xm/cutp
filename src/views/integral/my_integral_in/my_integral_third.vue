@@ -86,7 +86,7 @@ export default {
             },
        
       created:function(){
-          //this.uId=localStorage.getItem("uId");
+         this.uId=localStorage.getItem("uId");
          this.getIe2();
     
       }

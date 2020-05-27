@@ -3,14 +3,14 @@
         <div id="left">
            <img :src='igood.igImg'>
            <el-input-number v-model="num" @change="handleChange" :min="1"
-            :max="10" label="描述文字" class="number">
+            :max="igStore" label="描述文字" class="number">
            </el-input-number>
         </div>
         <div id="right">
            <div id="right1">{{igood.igName}}</div>
            <div id="right2">{{igood.igIntegral}}</div>
            <div  id="right3">{{igood.igDescribe}}</div>
-           <el-button type="danger" size="small"  @click="exchange()">兑换</el-button>
+           <el-button :disabled="status1" type="danger" size="small"  @click="exchange()">兑换</el-button>
         </div>
     </div>
 </template>
@@ -20,9 +20,11 @@ export default {
  name:'ig_detail',
  data(){
     return {
+           igStore:'',
             igood:{},
             num:1,
-            uId:1
+            uId:1,
+            status1:false
             }
  },
  methods:{
@@ -39,6 +41,10 @@ export default {
               .get(`/integral/IGoods/SelectByigId/${this.$data.igood.igId}`)
               .then(res => {
                   this.igood=res;
+                  if(res.igStore==0){
+                      this.status1=true;
+                  }
+                 this.igStore=res.igStore;
                   console.log(res)
                   
               }).catch(err => {
@@ -47,7 +53,7 @@ export default {
       },
       async exchange() {
           myAxios
-              .post(`/integral/IEchangeController/insertIE/${this.uId}/${this.igood.igId}`)
+              .post(`/integral/IEchangeController/insertIE/${this.uId}/${this.igood.igId}/${this.num}`)
               .then(res => {
                          if(res==true){
                         this.$notify.success({

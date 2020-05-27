@@ -1,5 +1,5 @@
 <template>
-   <div id="od"> 
+   <div id="od1"> 
     <el-row>
   <el-col :span="8" v-for="(o, index) in 1" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px'}">
@@ -58,10 +58,12 @@ export default {
 }
 .el-col-8{
     width:220px;
-    margin-left:20px;
+    /* margin-left:20px; */
 }
-#od{
-    margin-top:30px;
+#od1{
+     margin-top:30px; 
+     /* margin-left:20px;  */
+     /* margin-left:10px;  */
 }
  .time {
     font-size: 13px;

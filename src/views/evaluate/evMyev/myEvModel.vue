@@ -24,7 +24,6 @@
                     
                 </div>
                 <div id="button1">
-                    
                     <el-button type="danger" size="small" @click="selectDetail(MyEvaluate.oId)">查看</el-button>
                     <div id="bottom"></div>
                     </div>
@@ -126,7 +125,7 @@ export default {
     height:10px;
 }
 #myEvModel1-3{
-   height:100px;
+   /* height:100px; */
    margin-top:10px;
 }
 ul li{

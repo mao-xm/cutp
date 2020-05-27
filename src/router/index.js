@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/good/Home/Home'
 import my_integral from '@/views/integral/my_integral'
+// import my_integral from '@/views/user/Logi'
 import integral_good from '@/views/integral/integral_good'
 import in_index from '@/views/integral/in_index'
 import soft_pf from '@/views/pf/soft_pf'
@@ -28,10 +29,15 @@ import EditNewAddress from'@/views/user/MyHome/Address/EditNewAddress'
 import evComment from'@/views/evaluate/evMyev/evComment'
 import mvComment from'@/views/evaluate/evMyev/mvComment'
 import eva from'@/views/evaluate/eva'
+import Logi from'@/views/user/Logi'
 Vue.use(Router)
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path: '/Logi',
+      name: 'Logi',
+      component:Logi},
     {
       path: '/eva',
       name: 'eva',
@@ -141,15 +147,15 @@ export default new Router({
       path: '/in_index', 
       name: 'in_index',
       component: in_index ,
-      redirect:'my_integral',
+      redirect:'/in_index/my_integral',
       children:[
         {
-          path: '/my_integral', 
+          path: '/in_index/my_integral', 
           name: 'my_integral',
           component: my_integral 
         },
         {
-          path: '/integral_good', 
+          path: '/in_index/integral_good', 
           name: 'integral_good',
           component: integral_good 
         }

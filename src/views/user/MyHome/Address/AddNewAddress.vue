@@ -175,7 +175,7 @@ export default {
           this.userA.uId= localStorage.getItem("uId");
           this.userA.uaSigner=this.ruleForm.name;
           this.userA.uaPhone=this.ruleForm.number.toString();
-          this.userA.uaAddress=this.ruleForm.value.join(" ")+" "+this.ruleForm.DetailAdress;
+          this.userA.uaAddress=this.ruleForm.value.join(" ")+","+this.ruleForm.DetailAdress;
           const params=this.userA;
          this.$confirm('确认添加？')
             .then(_ => {

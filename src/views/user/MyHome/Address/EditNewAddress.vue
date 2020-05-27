@@ -17,7 +17,7 @@
                      <el-cascader
                         placeholder="请选择地址" 
                         class="inputs"
-                        v-model="ruleForm.value"
+                        v-model="ruleForm.value1"
                         :options="options"
                         @change="handleChange">
                    </el-cascader>
@@ -127,7 +127,7 @@ export default {
         ruleForm: {
           name: '',
           number:'',
-          value:[],
+          value1:[],
           DetailAdress: ''
         },
         userAdd:{
@@ -145,7 +145,7 @@ export default {
             { required: true, message: '请输入收件人电话', trigger: 'blur' },
             {validator:checkNumber1, trigger: 'blur' }
           ],
-          value: [
+          value1: [
             { required: true, message: '请选择收件人地址', trigger: 'change' }
           ],
           DetailAdress: [
@@ -202,8 +202,11 @@ export default {
               .then(res => {
                   this.ruleForm.name=res.uaSigner;
                   this.ruleForm.number=res.uaPhone;
-                  this.ruleForm.value=res.uaAddress.substr(0,11).split(" ");
-                  this.ruleForm.DetailAdress=res.uaAddress.substr(12);
+                  //this.ruleForm.value=res.uaAddress.substr(0,11).split(" ");
+                   var aa=res.uaAddress.split(",");
+                   this.ruleForm.value1=aa[0].split(" ");
+                  //this.ruleForm.DetailAdress=res.uaAddress.substr(12);
+                  this.ruleForm.DetailAdress=aa[1];
                   console.log(res)
                   
               }).catch(err => {

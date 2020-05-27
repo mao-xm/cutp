@@ -62,12 +62,12 @@ export default {
 }
 .el-col-8{
     width:220px;
-    margin-left:20px;
+    /* margin-left:20px; */
 }
 #td{
     margin-top:30px;
     width:220px;
-    margin-left:20px;
+    /* margin-left:20px;  */
 }
  .time {
     font-size: 13px;

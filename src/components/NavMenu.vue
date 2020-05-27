@@ -28,10 +28,12 @@ export default {
       return {
         navList: [
           {name: '/Login', navItem: '登录|注册',icon:'iconfont icon-denglu'},
+          // {name: '/Logi', navItem: '首页',icon:'iconfont icon-shouye'},
           {name: '/Home', navItem: '首页',icon:'iconfont icon-shouye'},
           {name: '/buyOrder', navItem: '我的购买',icon:'iconfont icon-yigoumai'},
           {name: '/mySale', navItem: '我的卖出',icon:'iconfont icon-maichu'},
-          {name: '/in_index', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
+           {name: '/in_index', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
+          //  {name: '/Logi', navItem: '积分商城',icon:'iconfont icon-ziyuan'},
           {name: '/MyHomeIndex', navItem: '个人主页',icon:'iconfont icon-icon-'},
           {name: '/soft_pf', navItem: '反馈',icon:'iconfont icon-fankui'}
         ],

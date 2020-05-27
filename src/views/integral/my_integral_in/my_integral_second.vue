@@ -4,7 +4,7 @@
            <li v-for="(ie,i) in Ainner" :key="i">
        
         
-         <div v-if="ie.ieType==2"><inner :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
+         <div v-if="ie.ieType==2" id="inner1"><inner :gName="ie.goodsVo.gName" :ieChangeIntegral="ie.ieChangeIntegral"
         :ieId="ie.ieId"  reason="购买商品" :ieCreateTime="ie.ieCreateTime|timefilters" :url="ie.goodsVo.goodsMedias[0].gmUrl"></inner></div>
         
         </li>
@@ -88,8 +88,8 @@ created:function(){
 </script>
 <style scoped>
  ul{
-  padding-left:10px !important;
-
+  /* padding-left:10px !important; */
+ margin-left:5px;
 } 
 ul li{
     list-style: none;
@@ -97,5 +97,8 @@ ul li{
 }
 .pagination2{
      margin-left:350px;
+}
+#inner1{
+    margin-left:20px;
 }
 </style>

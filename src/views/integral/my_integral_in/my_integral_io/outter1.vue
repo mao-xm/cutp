@@ -58,7 +58,7 @@ export default {
 #od{
     margin-top:30px;
     width:220px;
-    margin-left:20px;
+    /* margin-left:20px; */
 }
  .time {
     font-size: 13px;

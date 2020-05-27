@@ -63,7 +63,7 @@ export default {
                             title: '成功',
                             message: '登录成功'
                             });
-                         this.$router.push({name:'Home'});
+                        this.$router.push({name:'Home'});
                             }
                     console.log(res);
                     this.verify()

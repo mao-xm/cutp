@@ -4,7 +4,7 @@
         <el-row class="mySale-row">
             <el-col  class="mySale-colone">
                 <el-menu router="true"
-                    default-active="2"
+                    default-active="/mySale/publishIndex"
                     class="mySale-menu">
                     <el-menu-item index="/mySale/publishIndex">
                         <i class="el-icon-menu"></i>

@@ -17,20 +17,15 @@
                     <div id="info3">
                     <span id="address">{{this.user.uSchool}}</span>
                     </div>
-            </div>
-            
+            </div>  
         </div> 
-     
-            
-      
         <div id="card">
-         
         <el-tabs v-model="activeName" type="card" @tab-click="handleClick" class="tab">
             <el-tab-pane label="地址管理" name="1" class="first" v-if="flag!=false" >
                 <ul id="ul1" >
                      <li v-for="(aa,i) in MyAddress" :key="i">
                          <AddressManager :uaId="aa.uaId" :uaSigner="aa.uaSigner"
-                         :uaSigner1="aa.uaSigner.substr(0,1)" :uaAddress="aa.uaAddress" :uaPhone="aa.uaPhone"></AddressManager>
+                         :uaSigner1="aa.uaSigner.substr(0,1)" :uaAddress="aa.uaAddress.replace(/,/g,' ')" :uaPhone="aa.uaPhone"></AddressManager>
                          </li>
                 </ul>
               <el-button type="danger" id="add" size="small" @click="AddNewAd">添加新地址</el-button>
@@ -141,7 +136,16 @@ export default {
           myAxios
               .get(`/user/Address/SelADs/${this.uId}`)
               .then(res => {
-                this.MyAddress=res;
+                  this.MyAddress=res;
+                //   var aa="贵州省 毕节市 黔西县,水西中学"
+                //   var bb=aa.replace(/,/g,'');
+                //   alert(bb);
+                  //this.MyAddress.uaAddress= this.MyAddress.uaAddress.replace(/,/g," ");
+                //this.MyAddress.uaAddress=res.uaAddress.join(" ");
+                // alert(this.MyAddress[0]);
+               // var aa = res.uaAddress.split(",");
+                //    this.ruleForm.value= aa[0].split(" ");
+                //   this.ruleForm.DetailAdress=aa[1];
                 console.log(res);
                   
               }).catch(err => {
@@ -163,7 +167,7 @@ export default {
       },
       async MyEva(){
           myAxios
-              .get(`/comment/OrderComment/selectByUId/${1}/${this.pagination.size}/${this.pagination.currentPage}`)
+              .get(`/comment/OrderComment/selectByUId/${this.uId}/${this.pagination.size}/${this.pagination.currentPage}`)
               .then(res => {//1
                 this.pagination.total=res.total;
                 this.MyEvaluate=res.rows;

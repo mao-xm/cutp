@@ -81,7 +81,7 @@ export default {
          this.$router.push({
           path:'/orderDetail',
           query:{
-            oId:this.oId
+            oId:this.evaluate.oId
           }
         })
       },

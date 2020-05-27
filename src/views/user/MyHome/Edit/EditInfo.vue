@@ -14,7 +14,7 @@
   <el-form-item label="手机号" prop="teleNumber" class="item">
     <el-input v-model.number="ruleForm.teleNumber" class="input"></el-input>
   </el-form-item>
-  <el-form-item label="验证码" prop="code" class="item">
+  <el-form-item label="验证码" prop="code" class="item" v-if="show">
     <el-input placeholder="请输入你的验证码" v-model.number="ruleForm.code" class="input1"></el-input>
     <el-button type="danger" :disabled="status" @click="sendVerifyCode" size="mini">{{value}}</el-button>
   </el-form-item>
@@ -79,6 +79,12 @@ import myAxios from "@/utils/myAxios";
 export default {
      data() {
        var checkTeleNumber = (rule, value, callback) => {
+          if(this.oldPhone!=value){
+            this.show=true;
+          }
+          else{
+            this.show=false;
+          }
          if (isNaN(value)){
              callback(new Error('请输入数字值'));   
          }
@@ -102,7 +108,8 @@ export default {
                callback(new Error('验证码是6位'));
          }else{
            callback();
-         }}else{
+         }
+        }else{
            callback();
          }
           };
@@ -124,6 +131,7 @@ export default {
         }
       };
       return {
+        show:false,
         oldPhone:'',
         imageUrl:'',
         // uAvatar:'',

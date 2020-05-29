@@ -33,11 +33,18 @@ export default {
           myAxios
               .post(`/integral/IEchangeController/deleteByieId/${this.ieId}`)
               .then(res => {
+                 if(res==true){
                  this.$notify.success({
                             title: '成功',
                             message: '删除成功'
                         });
-                 this.$router.push({name:'my_integral'});
+                      location.reload();
+                        }
+                //  this.$notify.success({
+                //             title: '成功',
+                //             message: '删除成功'
+                //         });
+                //  this.$router.push({name:'my_integral'});
               }).catch(err => {
                   console.log(err);
                   });

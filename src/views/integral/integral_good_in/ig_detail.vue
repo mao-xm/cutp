@@ -59,8 +59,9 @@ export default {
                         this.$notify.success({
                             title: '成功',
                             message: '兑换成功'
-                            });}
-                       this.$router.push({name:'my_integral'});
+                            });
+                             location.reload();}
+                    //    this.$router.push({name:'my_integral'});
                  
                   
               }).catch(err => {

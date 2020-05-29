@@ -7,7 +7,7 @@
             <el-form-item label="收件人电话" prop="number">
                 <el-input v-model.number="ruleForm.number" autocomplete="off" class="input"></el-input>
             </el-form-item>
-            <el-form-item label="收件人地址" prop="value">
+            <el-form-item label="收件人地址" prop="value1">
                     <!-- <el-select v-model="ruleForm.Adress" placeholder="请选择地址" class="inputs">
                       <el-option label="天津市" value="天津市"></el-option>
                       <el-option label="湖南省" value="湖南省"></el-option>
@@ -175,7 +175,7 @@ export default {
      },
      async editAddress() {
        this.userAdd.uId=localStorage.getItem("uId");
-        this.userAdd.uaAddress=this.ruleForm.value.join(" ")+" "+this.ruleForm.DetailAdress;
+        this.userAdd.uaAddress=this.ruleForm.value1.join(" ")+","+this.ruleForm.DetailAdress;
         this.userAdd.uaPhone=this.ruleForm.number.toString();
         this.userAdd.uaSigner=this.ruleForm.name;
         const params=this.userAdd;

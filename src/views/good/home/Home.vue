@@ -106,11 +106,9 @@ export default {
     },
 
     created(){
-          // this.geRecommendGoods();
+          this.geRecommendGoods();
           console.log("this.picList");
           console.log(this.picList);
-
-          
     }
 }
 </script>

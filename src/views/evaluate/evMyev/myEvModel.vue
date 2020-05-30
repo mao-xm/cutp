@@ -10,7 +10,7 @@
                 </ul>
                 </div>
             </div>
-             <div id="myEvModel11">
+             <div id="myEvModel11"  v-if="madd">
                  <span id="myEvModel1-13">追评:</span><br>
                 <span id="myEvModel1-11">{{MyEvaluate.oEvaluationAddTime|timefilters}}</span><br>
                 <span id="myEvModel1-22">{{MyEvaluate.oEvaluationAdd}}</span>
@@ -32,7 +32,8 @@
             </div>
             <div id="myEvModel3">
                 <div id="button2">
-                 <el-button type="danger" size="small" @click="mReview(MyEvaluate)" v-if="MyEvaluate.oStatus==5">追评</el-button>
+                <el-button type="danger" size="small" @click="mReview(MyEvaluate)" v-if="add(MyEvaluate.oStatus)">追评</el-button>
+                 <!-- <el-button type="danger" size="small" @click="mReview(MyEvaluate)" v-if="MyEvaluate.oStatus==5">追评</el-button> -->
                  <el-button type="danger" size="small" @click="mReview1(MyEvaluate)" v-if="MyEvaluate.oStatus!=5">查看</el-button>
                 </div>
             </div>
@@ -45,7 +46,7 @@ export default {
     name:'mvComment',
     props:['MyEvaluate'],
     data(){
-        return {value:'追评',flag:false}
+        return {value:'追评',flag:false,madd:true}
     },
     filters: {
     timefilters(val) {
@@ -65,6 +66,16 @@ export default {
     }
   },
     methods:{
+        add(oStatus){
+         if(oStatus==5){
+             this.madd=false;
+             return true;
+
+         }
+         else{
+             return false;
+         }
+        },
          selectDetail(oId){
          this.$router.push({
           path:'/orderDetail',

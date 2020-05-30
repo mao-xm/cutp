@@ -14,7 +14,7 @@
                 <el-form-item label="手机号" prop="uPhone"  class="item" >
                     <el-input  v-model="ruleForm.uPhone"  class="input"></el-input>
                 </el-form-item>
-                <el-form-item label="验证码" prop="code"  class="item2">
+                <el-form-item label="验证码" prop="code"  class="item2" >
                     <el-input  v-model="ruleForm.code"  class="input1"></el-input>
                     <el-button :disabled="status1" id="sVerifyCode" type="danger" size="small"  @click="sendVerifyCode()">{{value1}}</el-button>
                 </el-form-item>
@@ -46,12 +46,15 @@ export default {
         
          var checkUphone = (rule, value, callback) => {
          if (isNaN(value)){
-             callback(new Error('请输入数字值'));   
+             callback(new Error('请输入数字值'));
+             this.status1=true;   
          }
          else if(value.toString().length!=11){
                callback(new Error('手机号是11位'));
+               this.status1=true; 
          }else{
            callback();
+           this.status1=false; 
          }
           };
           var checkCode = (rule, value, callback) => {
@@ -65,6 +68,7 @@ export default {
            callback();
          }
           };
+        
         var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));

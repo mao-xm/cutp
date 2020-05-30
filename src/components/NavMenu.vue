@@ -46,7 +46,11 @@ methods:{
             this.$confirm('确认登出？')
             .then(_ => {
             this.$cookies.remove('GM_TOKEN' , '/' , '.gomai.com') 
-            this.$router.replace('/Login');})
+            this.$router.replace('/Login');
+            this.$notify.success({
+                            title: '成功',
+                            message: '登出成功'
+                            });})
    }
 }
 }
